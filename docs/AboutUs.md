@@ -9,6 +9,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
+### Jovan Yo
+
+<img src="images/suspectblue.png" width="200px">
+
+[[github](https://github.com/suspectblue)]
+[[portfolio](team/suspectblue.md)]
+
+* Role: Backend Developer
+* Responsibilities: Adding functionality
 
 ### Adwin Ang
 
