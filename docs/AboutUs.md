@@ -9,6 +9,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
+
+### Adwin Ang
+
+<img src="images/angyongxiangadwin.png" width="200px" alt="Photo of Ang Yong Xiang Adwin">
+
+[[github](http://github.com/adwinang)]
+[[portfolio](team/angYongXiangAdwin.md)]
+
 ### Kara Rei
 
 <img src="images/kararei.png" width="200px">
