@@ -1,3 +1,5 @@
+## Project team
+
 ---
   layout: default.md
   title: "About Us"
@@ -33,5 +35,13 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/kararei)]
 [[portfolio](team/kararei.md)]
 
-* Role: Developer
-* Responsibilities: UI
+
+### Zyon Wee
+
+<img src="images/zyonwee.png" width="200px">
+
+[[github](https://github.com/zyonwee)]
+[[portfolio](team/zyonwee.md)]
+
+* Role: Software Architect
+* Responsibilities: Adding functionality
