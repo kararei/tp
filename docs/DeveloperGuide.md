@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,38 +274,58 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Travel agents who manage multiple clients and trip arrangements
+* Users who frequently coordinate with various service providers (hotels, tour guides, transportation)
+* Users who need to track detailed client preferences and trip specifics
+* Users who need to quickly add and retrieve information during client calls
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+TravelHub streamlines the travel planning workflow by enabling rapid client and service provider management, efficient trip organization, and detailed note-keeping in a single application. The system allows travel professionals to:
+
+* Maintain a comprehensive database of clients and service providers with appropriate tagging
+* Create and manage trip itineraries with accommodation details and activities
+* Track special client requests and preferences through a flexible notes system
+* Quickly retrieve client information during consultations
+* Manage upcoming trips chronologically to prioritize immediate arrangements
+
+**Scope boundaries**:
+* Focuses on contact and trip management, not financial transactions or booking confirmations
+* Designed for individual travel agents or small agencies (not enterprise-scale operations)
+* Optimized for managing up to several hundred contacts and trips
+* Not intended for end-client usage or self-service booking
+* Will not generate travel documents or automatically communicate with service providers
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​      | I want to …​                                                  | So that I can…​                                                          |
-|----------|--------------|---------------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user     | see usage instructions                                        | refer to instructions when I forget how to use the App                   |
-| `* * *`  | travel agent | add a new contact                                             | manage customer and service information effectively                      |
-| `* * *`  | travel agent | delete a contact                                              | remove outdated or invalid contacts from the system                      |
-| `* * *`  | travel agent | add a new trip                                                | consolidate all trip-related information in one place                    |
-| `* * *`  | travel agent | delete a trip                                                 | remove outdated or irrelevant trips from the system                      |
-| `* * *`  | travel agent | mark a trip as ongoing                                        | track and manage active trips efficiently                                |
-| `* * *`  | travel agent | mark a trip as completed                                      | keep track of trips that no longer require management                    |
-| `* * *`  | travel agent | tag contacts                                                  | clearly differentiate between customers and services                     |
-| `* * *`  | travel agent | search for contacts and trips                                 | quickly locate the information I need                                    |
-| `* * *`  | travel agent | export customer and service information                       | share data with colleagues easily                                        |
-| `* * *`  | travel agent | add notes to customer profiles or trips                       | track special requests or important details                              |
-| `* *`    | travel agent | restrict adding service contacts as trip members              | ensure only valid customer contacts are added to trips                   |
-| `* *`    | travel agent | restrict adding customer contacts as trip location businesses | ensure only valid service contacts are added as trip location businesses |
-| `*`      | travel agent | sort contacts by name                                         | locate a contact easily                                                  |
-### Use cases
-
 (For all use cases below, the **System** is the `Travel Agency Management System` and the **Actor** is the `Travel Agent`, unless specified otherwise)
+
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
+|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
+| `* * *` | travel agent | add contacts along with comprehensive details | profile and contact them |
+| `* * *` | travel agent | delete contacts | remove invalid or non-existent contacts |
+| `* * *` | travel agent | add trips with information like dates, customers, accommodation and itineraries | check all the consolidated information for a trip |
+| `* * *` | travel agent | delete trips | remove outdated or irrelevant information |
+| `* * *` | travel agent | tag contacts | know whether they are a customer or service |
+| `* * *` | travel agent | add notes to customer profiles or trips | keep track of special requests or important details |
+| `* *`   | travel agent | update contact information | keep up-to-date information when their details change |
+| `* *`   | travel agent | mark trips as ongoing | keep track and manage active trips |
+| `* *`   | travel agent | mark trips as completed | keep track of trips that no longer require management |
+| `* *`   | travel agent | search for contacts and trips | quickly locate the information I need |
+| `* *`   | travel agent | be reminded on any upcoming trips | stay informed of the scheduling details |
+| `* *`   | travel agent | mark trips as flexible and change the date of the trip | accommodate flexibility in plans |
+| `* *`   | travel agent | receive feedback from customers after trips | improve my services and address any concerns |
+| `* *`   | travel agent | refer to all possible commands | refer to instructions when I forget how to use the app |
+| `* *`   | travel agent | sort the customer and service list by date | view the information in a organised manner |
+| `*`     | potential travel agent | see the app populated with sample customer profiles and trips | understand how the data is organized and what I can achieve with the system  |
+| `*`     | new travel agent | clear the sample data with a single command  | start with a clean slate for my customer data and trip records |
+| `*`     | travel agent |  export customer and service information | share them with my colleagues |
+| `*`     | long-time travel agent | archive completed trips and inactive customer profiles | keep my workspace uncluttered and focused on current travel plans |
+| `*`     | clumsy travel agent | undo my previous action | quickly correct mistakes |
+
+### Use cases
 
 **Use case: See Usage Instructions**
 
@@ -564,17 +584,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Compatability: Should work on any _Mainstream OS_ as long as it has Java `17` or above installed.
+2.  Performance: Should be able to hold up to 1000 contacts and trips without a noticeable sluggishness in performance for typical usage.
+3.  Performance: Should respond within three seconds for any command executed.
+4.  Usability: A user who has above average typing speed for regular text can enter the commands faster than by using a mouse.
+5.  Usability: A user with basic understanding of the english language can utilise this application.
+6.  Reliability: The application should automatically save all contact and trip data after each operation to prevent data loss.
+7.  Data Security: All travel agent and customer data must remain on the local machine and not be transmitted to external services.
+8.  Maintainability: All code must adhere to the coding standard to ensure readability and facilitate future scalability.
+
+
 
 *{More to be added}*
 
+
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+This section defines key terms used in the user guide to ensure clarity and understanding.
 
+| **Term**                | **Definition**                                                                                                                                 |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**                 | Command Line Interface. A text-based interface where users interact with the application by typing commands.                                   |
+| **GUI**                 | Graphical User Interface. A visual interface where users interact with the application through graphical elements like buttons and menus.       |
+| **Mainstream OS**       | Operating systems that are widely used, such as Windows, Linux, Unix, and macOS.                                                               |
+| **Private Contact Detail** | A contact detail (e.g., phone number, email) that is not meant to be shared with others and is considered sensitive or personal.               |
+| **JSON**                | JavaScript Object Notation. A lightweight data format used for storing and transferring data in a human-readable format.                       |
+| **API**                 | Application Programming Interface. A set of rules and protocols that allow different software components to communicate with each other.        |
+| **OOP**                 | Object-Oriented Programming. A programming paradigm based on the concept of "objects," which can contain data and code to manipulate that data.|
+| **Undo/Redo**           | A feature that allows users to reverse (undo) or reapply (redo) their previous actions in the application.                                      |
+| **Model**               | A component in the application that manages the data and business logic.                                                                       |
+| **UI**                  | User Interface. The part of the application that users interact with, including screens, buttons, and other visual elements.                   |
+| **Storage**             | A component in the application responsible for saving and retrieving data, such as contact information and user preferences.                   |
+| **Command**             | An instruction given by the user to the application to perform a specific action, such as adding or deleting a contact.                        |
+| **Parser**              | A component that interprets user input and converts it into commands that the application can execute.                                         |
+| **ObservableList**      | A list that allows external components to observe changes to its contents, typically used in the UI to automatically update when data changes.  |
+| **UserPref**            | User Preferences. Settings or configurations that the user can customize, such as the application's appearance or behavior.                    |
+| **Customer Contact** | A contact tagged as "Customer," representing an individual who is a client of the travel agency.                                                |
+| **Service Contact** | A contact tagged as "Service," representing a business or service provider (e.g., hotels, resorts).                                            |
+| **Trip** | A planned journey or vacation, including details such as dates, customers, accommodations, and itineraries.                                  |
+| **Ongoing Trip** | A trip that is currently active and being managed by the travel agent.                                                                         |
+| **Completed Trip** | A trip that has been concluded and no longer requires active management.                                                                      |
+| **Note** | Additional information or details added to a customer profile or trip, such as special requests or important reminders.                                 |
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -629,3 +680,4 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+  

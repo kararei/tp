@@ -1,3 +1,5 @@
+## Project team
+
 ---
   layout: default.md
   title: "About Us"
@@ -11,51 +13,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Dexter Leng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dexterleng.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/dexterleng)]
+[[portfolio](team/dexterleng.md)]
 
-* Role: Project Advisor
+* Role: Backend Developer
+* Responsibilities: Adding functionality
 
-### Jane Doe
+### Jovan Yo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/suspectblue.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/suspectblue)]
+[[portfolio](team/suspectblue.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Backend Developer
+* Responsibilities: Adding functionality
 
-### Johnny Doe
+### Adwin Ang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/angyongxiangadwin.png" width="200px" alt="Photo of Ang Yong Xiang Adwin">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/adwinang)]
+[[portfolio](team/angYongXiangAdwin.md)]
 
-* Role: Developer
-* Responsibilities: Data
+### Kara Rei
 
-### Jean Doe
+<img src="images/kararei.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](https://github.com/kararei)]
+[[portfolio](team/kararei.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+### Zyon Wee
 
-### James Doe
+<img src="images/zyonwee.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](https://github.com/zyonwee)]
+[[portfolio](team/zyonwee.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Software Architect
+* Responsibilities: Adding functionality
