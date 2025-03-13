@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -289,14 +289,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| `* * *` | travel agent | add contacts along with comprehensive details | profile and contact them |
+| `* * *` | travel agent | delete contacts | remove invalid or non-existent contacts |
+| `* * *` | travel agent | add trips with information like dates, customers, accommodation and itineraries | check all the consolidated information for a trip |
+| `* * *` | travel agent | delete trips | remove outdated or irrelevant information |
+| `* * *` | travel agent | tag contacts | know whether they are a customer or service |
+| `* * *` | travel agent | add notes to customer profiles or trips | keep track of special requests or important details |
+| `* *`   | travel agent | update contact information | keep up-to-date information when their details change |
+| `* *`   | travel agent | mark trips as ongoing | keep track and manage active trips |
+| `* *`   | travel agent | mark trips as completed | keep track of trips that no longer require management |
+| `* *`   | travel agent | search for contacts and trips | quickly locate the information I need |
+| `* *`   | travel agent | be reminded on any upcoming trips | stay informed of the scheduling details |
+| `* *`   | travel agent | mark trips as flexible and change the date of the trip | accommodate flexibility in plans |
+| `* *`   | travel agent | receive feedback from customers after trips | improve my services and address any concerns |
+| `* *`   | travel agent | refer to all possible commands | refer to instructions when I forget how to use the app |
+| `* *`   | travel agent | sort the customer and service list by date | view the information in a organised manner |
+| `*`     | potential travel agent | see the app populated with sample customer profiles and trips | understand how the data is organized and what I can achieve with the system  |
+| `*`     | new travel agent | clear the sample data with a single command  | start with a clean slate for my customer data and trip records |
+| `*`     | travel agent |  export customer and service information | share them with my colleagues |
+| `*`     | long-time travel agent | archive completed trips and inactive customer profiles | keep my workspace uncluttered and focused on current travel plans |
+| `*`     | clumsy travel agent | undo my previous action | quickly correct mistakes |
 
 ### Use cases
 
