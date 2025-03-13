@@ -274,14 +274,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Travel agents who manage multiple clients and trip arrangements
+* Users who frequently coordinate with various service providers (hotels, tour guides, transportation)
+* Users who need to track detailed client preferences and trip specifics
+* Users who need to quickly add and retrieve information during client calls
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+TravelHub streamlines the travel planning workflow by enabling rapid client and service provider management, efficient trip organization, and detailed note-keeping in a single application. The system allows travel professionals to:
+
+* Maintain a comprehensive database of clients and service providers with appropriate tagging
+* Create and manage trip itineraries with accommodation details and activities
+* Track special client requests and preferences through a flexible notes system
+* Quickly retrieve client information during consultations
+* Manage upcoming trips chronologically to prioritize immediate arrangements
+
+**Scope boundaries**:
+* Focuses on contact and trip management, not financial transactions or booking confirmations
+* Designed for individual travel agents or small agencies (not enterprise-scale operations)
+* Optimized for managing up to several hundred contacts and trips
+* Not intended for end-client usage or self-service booking
+* Will not generate travel documents or automatically communicate with service providers
 
 ### User stories
 
