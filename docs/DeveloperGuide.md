@@ -335,11 +335,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+This section defines key terms used in the user guide to ensure clarity and understanding.
 
+| **Term**                | **Definition**                                                                                                                                 |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**                 | Command Line Interface. A text-based interface where users interact with the application by typing commands.                                   |
+| **GUI**                 | Graphical User Interface. A visual interface where users interact with the application through graphical elements like buttons and menus.       |
+| **Mainstream OS**       | Operating systems that are widely used, such as Windows, Linux, Unix, and macOS.                                                               |
+| **Private Contact Detail** | A contact detail (e.g., phone number, email) that is not meant to be shared with others and is considered sensitive or personal.               |
+| **JSON**                | JavaScript Object Notation. A lightweight data format used for storing and transferring data in a human-readable format.                       |
+| **API**                 | Application Programming Interface. A set of rules and protocols that allow different software components to communicate with each other.        |
+| **OOP**                 | Object-Oriented Programming. A programming paradigm based on the concept of "objects," which can contain data and code to manipulate that data.|
+| **Undo/Redo**           | A feature that allows users to reverse (undo) or reapply (redo) their previous actions in the application.                                      |
+| **Model**               | A component in the application that manages the data and business logic.                                                                       |
+| **UI**                  | User Interface. The part of the application that users interact with, including screens, buttons, and other visual elements.                   |
+| **Storage**             | A component in the application responsible for saving and retrieving data, such as contact information and user preferences.                   |
+| **Command**             | An instruction given by the user to the application to perform a specific action, such as adding or deleting a contact.                        |
+| **Parser**              | A component that interprets user input and converts it into commands that the application can execute.                                         |
+| **ObservableList**      | A list that allows external components to observe changes to its contents, typically used in the UI to automatically update when data changes.  |
+| **UserPref**            | User Preferences. Settings or configurations that the user can customize, such as the application's appearance or behavior.                    |
+| **Customer Contact** | A contact tagged as "Customer," representing an individual who is a client of the travel agency.                                                |
+| **Service Contact** | A contact tagged as "Service," representing a business or service provider (e.g., hotels, resorts).                                            |
+| **Trip** | A planned journey or vacation, including details such as dates, customers, accommodations, and itineraries.                                  |
+| **Ongoing Trip** | A trip that is currently active and being managed by the travel agent.                                                                         |
+| **Completed Trip** | A trip that has been concluded and no longer requires active management.                                                                      |
+| **Note** | Additional information or details added to a customer profile or trip, such as special requests or important reminders.                                 |
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -395,25 +419,3 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
   
-  
-### Glossary
-
-This section defines key terms used in the user guide to ensure clarity and understanding.
-
-| **Term**                | **Definition**                                                                                                                                 |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**                 | Command Line Interface. A text-based interface where users interact with the application by typing commands.                                   |
-| **GUI**                 | Graphical User Interface. A visual interface where users interact with the application through graphical elements like buttons and menus.       |
-| **Mainstream OS**       | Operating systems that are widely used, such as Windows, Linux, Unix, and macOS.                                                               |
-| **Private Contact Detail** | A contact detail (e.g., phone number, email) that is not meant to be shared with others and is considered sensitive or personal.               |
-| **JSON**                | JavaScript Object Notation. A lightweight data format used for storing and transferring data in a human-readable format.                       |
-| **API**                 | Application Programming Interface. A set of rules and protocols that allow different software components to communicate with each other.        |
-| **OOP**                 | Object-Oriented Programming. A programming paradigm based on the concept of "objects," which can contain data and code to manipulate that data.|
-| **Undo/Redo**           | A feature that allows users to reverse (undo) or reapply (redo) their previous actions in the application.                                      |
-| **Model**               | A component in the application that manages the data and business logic.                                                                       |
-| **UI**                  | User Interface. The part of the application that users interact with, including screens, buttons, and other visual elements.                   |
-| **Storage**             | A component in the application responsible for saving and retrieving data, such as contact information and user preferences.                   |
-| **Command**             | An instruction given by the user to the application to perform a specific action, such as adding or deleting a contact.                        |
-| **Parser**              | A component that interprets user input and converts it into commands that the application can execute.                                         |
-| **ObservableList**      | A list that allows external components to observe changes to its contents, typically used in the UI to automatically update when data changes.  |
-| **UserPref**            | User Preferences. Settings or configurations that the user can customize, such as the application's appearance or behavior.                    |
