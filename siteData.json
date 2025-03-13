@@ -5,13 +5,14 @@
       "src": "AboutUs.md",
       "title": "About Us",
       "headings": {
-        "about-us": "About Us",
         "project-team": "Project team",
-        "john-doe": "John Doe",
-        "jane-doe": "Jane Doe",
-        "johnny-doe": "Johnny Doe",
-        "jean-doe": "Jean Doe",
-        "james-doe": "James Doe"
+        "about-us": "About Us",
+        "project-team-2": "Project team",
+        "dexter-leng": "Dexter Leng",
+        "jovan-yo": "Jovan Yo",
+        "adwin-ang": "Adwin Ang",
+        "kara-rei": "Kara Rei",
+        "zyon-wee": "Zyon Wee"
       },
       "headingKeywords": {}
     },
@@ -131,15 +132,46 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "travelhub": "TravelHub"
       },
       "headingKeywords": {}
     },
     {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
+      "src": "team/angYongXiangAdwin.md",
+      "headings": {},
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/dexterleng.md",
+      "title": "Dexter Leng's Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-travelhub": "Project: TravelHub",
+        "to-be-updated": "To be updated!"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/kararei.md",
+      "title": "Kara Rei's Project Portfolio Page",
+      "headings": {
+        "project-travelhub": "Project: TravelHub",
+        "to-be-updated": "To be updated!"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/suspectblue.md",
+      "title": "Jovan Yo's Project Portfolio Page",
+      "headings": {
+        "project-travelhub": "Project: TravelHub"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/zyonwee.md",
+      "title": "Zyon Wee's Project Portfolio Page",
+      "headings": {
+        "project-travelhub": "Project: TravelHub"
       },
       "headingKeywords": {}
     }
