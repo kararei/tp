@@ -77,18 +77,22 @@ public class CommandTestUtil {
 
     public static final String VALID_TRIP_NAME_PARIS_2025 = "PARIS 2025";
     public static final String TRIP_NAME_DESC_PARIS_2025 = " " + PREFIX_NAME + VALID_TRIP_NAME_PARIS_2025;
+    public static final String INVALID_TRIP_NAME_DESC = " " + PREFIX_NAME + "PARIS &&&";
 
     public static final String VALID_ACCOMMODATION_HOTEL_81 = "Hotel 81";
     public static final String ACCOMMODATION_DESC_HOTEL_81 = " " + PREFIX_ACCOMMODATION
             + VALID_ACCOMMODATION_HOTEL_81;
+    public static final String INVALID_ACCOMMODATION_DESC = " " + PREFIX_ACCOMMODATION;
 
     public static final String VALID_ITINERARY_EAT_BAGUETTES = "Eat baguettes";
     public static final String ITINERARY_DESC_EAT_BAGUETTES = " " + PREFIX_ITINERARY
             + VALID_ITINERARY_EAT_BAGUETTES;
+    public static final String INVALID_ITINERARY_DESC = " " + PREFIX_ITINERARY;
 
     public static final String VALID_TRIP_DATE_2025 = "01/01/2025";
     public static final String TRIP_DATE_DESC_2025 = " " + PREFIX_DATE
             + VALID_TRIP_DATE_2025;
+    public static final String INVALID_TRIP_DATE_DESC = " " + PREFIX_DATE + "1/1/202";
 
     public static final String TRIP_CUSTOMER_DESC_AMY = " " + PREFIX_CUSTOMER_NAME + VALID_NAME_AMY;
     public static final String TRIP_CUSTOMER_DESC_BOB = " " + PREFIX_CUSTOMER_NAME + VALID_NAME_BOB;
