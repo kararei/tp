@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.trip.Trip;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -126,6 +127,18 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    // TODO: implement this
+    @Override
+    public boolean hasTrip(Trip trip) {
+        return false;
+    }
+
+    // TODO: implement this
+    @Override
+    public void addTrip(Trip person) {
+
     }
 
     @Override
