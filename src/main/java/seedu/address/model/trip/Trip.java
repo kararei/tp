@@ -2,7 +2,6 @@ package seedu.address.model.trip;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,7 +24,8 @@ public class Trip {
     /**
      * Every field must be present and not null.
      */
-    public Trip(TripName name, Accommodation accommodation, Itinerary itinerary, TripDate date, Set<Name> customerNames) {
+    public Trip(TripName name, Accommodation accommodation, Itinerary itinerary, TripDate date,
+                Set<Name> customerNames) {
         requireAllNonNull(name, accommodation, itinerary, date, customerNames);
         this.name = name;
         this.accommodation = accommodation;
@@ -69,9 +69,14 @@ public class Trip {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Trip trip = (Trip) o;
-        return Objects.equals(name, trip.name) && Objects.equals(accommodation, trip.accommodation) && Objects.equals(itinerary, trip.itinerary) && Objects.equals(date, trip.date) && Objects.equals(customerNames, trip.customerNames);
+        return Objects.equals(name, trip.name) && Objects.equals(accommodation, trip.accommodation)
+                && Objects.equals(itinerary, trip.itinerary)
+                && Objects.equals(date, trip.date)
+                && Objects.equals(customerNames, trip.customerNames);
     }
 
     @Override
