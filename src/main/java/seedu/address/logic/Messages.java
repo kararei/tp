@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.trip.Trip;
 
 /**
  * Container for user visible messages.
@@ -45,6 +46,24 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code trip} for display to the user.
+     */
+    public static String format(Trip trip) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(trip.getName())
+                .append("; Accommodation: ")
+                .append(trip.getAccommodation())
+                .append("; Itinerary: ")
+                .append(trip.getItinerary())
+                .append("; Date: ")
+                .append(trip.getDate())
+                .append("; Customers: ");
+        builder.append(trip.getCustomerNames().stream().map(customer -> customer.fullName)
+                .collect(Collectors.joining(", ")));
         return builder.toString();
     }
 
