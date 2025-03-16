@@ -56,21 +56,34 @@ public class TripBuilder {
         return this;
     }
 
+
+    /**
+     * Sets the {@code Accommodation} of the {@code Trip} that we are building.
+     */
     public TripBuilder withAccommodation(String accommodation) {
         this.accommodation = new Accommodation(accommodation);
         return this;
     }
 
+    /**
+     * Sets the {@code Itinerary} of the {@code Trip} that we are building.
+     */
     public TripBuilder withItinerary(String itinerary) {
         this.itinerary = new Itinerary(itinerary);
         return this;
     }
 
+    /**
+     * Sets the {@code TripDate} of the {@code Trip} that we are building.
+     */
     public TripBuilder withDate(String date) {
         this.date = new TripDate(date);
         return this;
     }
 
+    /**
+     * Sets the customer names of the {@code Trip} that we are building.
+     */
     public TripBuilder withCustomerNames(String... customerNames) {
         Set<Name> customerNameSet = new HashSet<>();
         for (String customerName : customerNames) {
