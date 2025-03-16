@@ -14,6 +14,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.trip.Accommodation;
+import seedu.address.model.trip.Itinerary;
+import seedu.address.model.trip.TripDate;
+import seedu.address.model.trip.TripName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -120,5 +124,65 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code TripName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static TripName parseTripName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!TripName.isValidName(trimmedName)) {
+            throw new ParseException(TripName.MESSAGE_CONSTRAINTS);
+        }
+        return new TripName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String itinerary} into a {@code Itinerary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code itinerary} is invalid.
+     */
+    public static Itinerary parseItinerary(String itinerary) throws ParseException {
+        requireNonNull(itinerary);
+        String trimmedItinerary = itinerary.trim();
+        if (!Itinerary.isValidItinerary(trimmedItinerary)) {
+            throw new ParseException(Itinerary.MESSAGE_CONSTRAINTS);
+        }
+        return new Itinerary(trimmedItinerary);
+    }
+
+    /**
+     * Parses a {@code String accommodation} into a {@code Accommodation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code accommodation} is invalid.
+     */
+    public static Accommodation parseAccommodation(String accommodation) throws ParseException {
+        requireNonNull(accommodation);
+        String trimmedAccommodation = accommodation.trim();
+        if (!Accommodation.isValidAccommodation(trimmedAccommodation)) {
+            throw new ParseException(Accommodation.MESSAGE_CONSTRAINTS);
+        }
+        return new Accommodation(trimmedAccommodation);
+    }
+
+    /**
+     * Parses a {@code String tripDate} into a {@code TripDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tripDate} is invalid.
+     */
+    public static TripDate parseTripDate(String tripDate) throws ParseException {
+        requireNonNull(tripDate);
+        String trimmedTripDate = tripDate.trim();
+        if (!TripDate.isValidTripDate(trimmedTripDate)) {
+            throw new ParseException(TripDate.MESSAGE_CONSTRAINTS);
+        }
+        return new TripDate(trimmedTripDate);
     }
 }

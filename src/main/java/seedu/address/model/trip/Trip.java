@@ -10,23 +10,22 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a Trip in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Trip {
-    private final String name;
-    private final String accommodation;
-    private final String itinerary;
-    private final LocalDate date;
+    private final TripName name;
+    private final Accommodation accommodation;
+    private final Itinerary itinerary;
+    private final TripDate date;
     private final Set<Name> customerNames = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Trip(String name, String accommodation, String itinerary, LocalDate date, Set<Name> customerNames) {
+    public Trip(TripName name, Accommodation accommodation, Itinerary itinerary, TripDate date, Set<Name> customerNames) {
         requireAllNonNull(name, accommodation, itinerary, date, customerNames);
         this.name = name;
         this.accommodation = accommodation;
@@ -35,19 +34,19 @@ public class Trip {
         this.customerNames.addAll(customerNames);
     }
 
-    public String getName() {
+    public TripName getName() {
         return name;
     }
 
-    public String getAccommodation() {
+    public Accommodation getAccommodation() {
         return accommodation;
     }
 
-    public String getItinerary() {
+    public Itinerary getItinerary() {
         return itinerary;
     }
 
-    public LocalDate getDate() {
+    public TripDate getDate() {
         return date;
     }
 

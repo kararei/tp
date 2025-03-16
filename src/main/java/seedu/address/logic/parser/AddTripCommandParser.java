@@ -14,7 +14,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddTripCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
+import seedu.address.model.trip.Accommodation;
+import seedu.address.model.trip.Itinerary;
 import seedu.address.model.trip.Trip;
+import seedu.address.model.trip.TripDate;
+import seedu.address.model.trip.TripName;
 
 /**
  * Parses input arguments and creates a new AddTripCommand object
@@ -36,13 +40,10 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY, PREFIX_DATE);
-        // TODO: parse
-        String name = argMultimap.getValue(PREFIX_NAME).get();
-        String accommodation = argMultimap.getValue(PREFIX_ACCOMMODATION).get();
-        String itinerary = argMultimap.getValue(PREFIX_ITINERARY).get();
-
-        String dateString = argMultimap.getValue(PREFIX_DATE).get();
-        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("d/M/yyyy"));
+        TripName name = ParserUtil.parseTripName(argMultimap.getValue(PREFIX_NAME).get());
+        Accommodation accommodation = ParserUtil.parseAccommodation(argMultimap.getValue(PREFIX_ACCOMMODATION).get());
+        Itinerary itinerary = ParserUtil.parseItinerary(argMultimap.getValue(PREFIX_ITINERARY).get());
+        TripDate date = ParserUtil.parseTripDate(argMultimap.getValue(PREFIX_DATE).get());
 
         List<String> customerNames = argMultimap.getAllValues(PREFIX_CUSTOMER_NAME);
         Set<Name> customerNameSet = new HashSet<>();
