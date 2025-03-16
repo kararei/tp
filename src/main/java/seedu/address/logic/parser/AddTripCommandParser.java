@@ -34,10 +34,10 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
     public AddTripCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY,
-                        PREFIX_CUSTOMER_NAME, PREFIX_DATE);
+                        PREFIX_DATE, PREFIX_CUSTOMER_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY,
-                PREFIX_CUSTOMER_NAME, PREFIX_DATE)
+                PREFIX_DATE, PREFIX_CUSTOMER_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTripCommand.MESSAGE_USAGE));
         }
