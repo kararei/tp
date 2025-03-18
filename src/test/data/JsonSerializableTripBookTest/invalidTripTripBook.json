@@ -1,0 +1,11 @@
+{
+  "trips": [
+    {
+      "name": "Invalid Trip @#$",
+      "accommodation": "",
+      "itinerary": "Invalid itinerary with @#$",
+      "date": "invalid-date",
+      "customerNames": ["Invalid@Customer@Name"]
+    }
+  ]
+} 
