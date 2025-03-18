@@ -73,7 +73,7 @@ public class JsonAddressBookStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.removeContact(ALICE);
         jsonAddressBookStorage.saveAddressBook(original);
         readBack = jsonAddressBookStorage.readAddressBook().get();
         assertEquals(original, new AddressBook(readBack));
