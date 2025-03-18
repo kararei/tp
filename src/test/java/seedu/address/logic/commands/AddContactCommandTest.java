@@ -52,7 +52,8 @@ public class AddContactCommandTest {
         AddContactCommand addContactCommand = new AddContactCommand(validContact);
         ModelStub modelStub = new ModelStubWithPerson(validContact);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () -> addContactCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addContactCommand.execute(modelStub));
     }
 
     @Test
@@ -97,6 +98,7 @@ public class AddContactCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+
             throw new AssertionError("This method should not be called.");
         }
 
