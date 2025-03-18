@@ -14,7 +14,7 @@
 
 
 ## Overview
-This is TravelHub! TravelHub is a contact management app designed to help travel agents efficiently manage customer information and service details, such as addresses and contact information. 
+This is TravelHub! TravelHub is a contact management app designed to help travel agents efficiently manage customer information and service details, such as addresses and contact information.
 Using a simple command-line interface, it supports **adding, deleting, tagging of contact profiles and trips**.
 
 

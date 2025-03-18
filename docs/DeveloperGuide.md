@@ -625,7 +625,7 @@ This section defines key terms used in the user guide to ensure clarity and unde
 | **Ongoing Trip** | A trip that is currently active and being managed by the travel agent.                                                                         |
 | **Completed Trip** | A trip that has been concluded and no longer requires active management.                                                                      |
 | **Note** | Additional information or details added to a customer profile or trip, such as special requests or important reminders.                                 |
-  
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -679,5 +679,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
-  
+1. _{ more test cases …​ }
