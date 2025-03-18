@@ -12,11 +12,11 @@ import seedu.address.model.contact.exceptions.DuplicatePersonException;
 import seedu.address.model.contact.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A contact is considered unique by comparing using {@code Contact#isSamePerson(Contact)}. As such, adding and updating of
- * persons uses Contact#isSamePerson(Contact) for equality so as to ensure that the contact being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a contact uses Contact#equals(Object) so
- * as to ensure that the contact with exactly the same fields will be removed.
+ * A list of contacts that enforces uniqueness between its elements and does not allow nulls.
+ * A contact is considered unique by comparing using {@code Contact#isSamePerson(Contact)}. As such, adding and
+ * updating of contacts uses Contact#isSamePerson(Contact) for equality to ensure that the contact being added
+ * or updated is unique in terms of identity in the UniquePersonList. However, the removal of a contact uses
+ * Contact#equals(Object) to ensure that the contact with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
