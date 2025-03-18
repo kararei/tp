@@ -112,7 +112,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteContact(Person target) {
-        addressBook.removePerson(target);
+        addressBook.removeContact(target);
     }
 
     @Override

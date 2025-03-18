@@ -33,16 +33,12 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(personToDelete));
 
-<<<<<<< HEAD
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteContact(personToDelete);
-=======
+
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
->>>>>>> b886f7547b6a246fc99357ec7c362bf5c4b7da48
+        expectedModel.deleteContact(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -62,16 +58,12 @@ public class DeleteCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(personToDelete));
 
-<<<<<<< HEAD
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteContact(personToDelete);
-=======
+
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
->>>>>>> b886f7547b6a246fc99357ec7c362bf5c4b7da48
+        expectedModel.deleteContact(personToDelete);
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
