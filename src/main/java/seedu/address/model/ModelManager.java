@@ -21,24 +21,29 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final TripBook tripBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Trip> filteredTrips;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, tripBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTripBook tripBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, tripBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", trip book: " + tripBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.tripBook = new TripBook(tripBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTrips = new FilteredList<>(this.tripBook.getTripList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new TripBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -74,6 +79,17 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Path getTripBookFilePath() {
+        return userPrefs.getTripBookFilePath();
+    }
+
+    @Override
+    public void setTripBookFilePath(Path tripBookFilePath) {
+        requireNonNull(tripBookFilePath);
+        userPrefs.setTripBookFilePath(tripBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -112,6 +128,42 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== TripBook ================================================================================
+
+    @Override
+    public void setTripBook(ReadOnlyTripBook tripBook) {
+        this.tripBook.resetData(tripBook);
+    }
+
+    @Override
+    public ReadOnlyTripBook getTripBook() {
+        return tripBook;
+    }
+
+    @Override
+    public boolean hasTrip(Trip trip) {
+        requireNonNull(trip);
+        return tripBook.hasTrip(trip);
+    }
+
+    @Override
+    public void deleteTrip(Trip target) {
+        tripBook.removeTrip(target);
+    }
+
+    @Override
+    public void addTrip(Trip trip) {
+        tripBook.addTrip(trip);
+        updateFilteredTripList(PREDICATE_SHOW_ALL_TRIPS);
+    }
+
+    @Override
+    public void setTrip(Trip target, Trip editedTrip) {
+        requireAllNonNull(target, editedTrip);
+
+        tripBook.setTrip(target, editedTrip);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -129,33 +181,40 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    // TODO: implement this
+    //=========== Filtered Trip List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Trip} backed by the internal list of
+     * {@code versionedTripBook}
+     */
     @Override
-    public boolean hasTrip(Trip trip) {
-        return false;
+    public ObservableList<Trip> getFilteredTripList() {
+        return filteredTrips;
     }
 
-    // TODO: implement this
     @Override
-    public void addTrip(Trip person) {
-
+    public void updateFilteredTripList(Predicate<Trip> predicate) {
+        requireNonNull(predicate);
+        filteredTrips.setPredicate(predicate);
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
+        if (!(obj instanceof ModelManager)) {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+        ModelManager other = (ModelManager) obj;
+        return addressBook.equals(other.addressBook)
+                && tripBook.equals(other.tripBook)
+                && userPrefs.equals(other.userPrefs)
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredTrips.equals(other.filteredTrips);
     }
 
 }

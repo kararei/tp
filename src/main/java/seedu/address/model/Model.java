@@ -14,6 +14,8 @@ import seedu.address.model.trip.Trip;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Trip> PREDICATE_SHOW_ALL_TRIPS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -44,6 +46,16 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Returns the user prefs' trip book file path.
+     */
+    Path getTripBookFilePath();
+
+    /**
+     * Sets the user prefs' trip book file path.
+     */
+    void setTripBookFilePath(Path tripBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -87,13 +99,43 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if a trip with the same identity as {@code trip} exists in the address book.
+     * Replaces trip book data with the data in {@code tripBook}.
+     */
+    void setTripBook(ReadOnlyTripBook tripBook);
+
+    /** Returns the TripBook */
+    ReadOnlyTripBook getTripBook();
+
+    /**
+     * Returns true if a trip with the same identity as {@code trip} exists in the trip book.
      */
     boolean hasTrip(Trip trip);
 
     /**
-     * Adds the given trip.
-     * {@code trip} must not already exist in the address book.
+     * Deletes the given trip.
+     * The trip must exist in the trip book.
      */
-    void addTrip(Trip person);
+    void deleteTrip(Trip target);
+
+    /**
+     * Adds the given trip.
+     * {@code trip} must not already exist in the trip book.
+     */
+    void addTrip(Trip trip);
+
+    /**
+     * Replaces the given trip {@code target} with {@code editedTrip}.
+     * {@code target} must exist in the trip book.
+     * The trip identity of {@code editedTrip} must not be the same as another existing trip in the trip book.
+     */
+    void setTrip(Trip target, Trip editedTrip);
+
+    /** Returns an unmodifiable view of the filtered trip list */
+    ObservableList<Trip> getFilteredTripList();
+
+    /**
+     * Updates the filter of the filtered trip list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTripList(Predicate<Trip> predicate);
 }

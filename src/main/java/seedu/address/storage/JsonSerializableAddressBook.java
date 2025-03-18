@@ -32,7 +32,7 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyAddressBook} into this class for Json use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */

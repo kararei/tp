@@ -31,15 +31,38 @@ public class JsonUtilTest {
     public void deserializeObjectFromJsonFile_noExceptionThrown() throws IOException {
         FileUtil.writeToFile(SERIALIZATION_FILE, SerializableTestClass.JSON_STRING_REPRESENTATION);
 
-        SerializableTestClass serializableTestClass = JsonUtil
-                .deserializeObjectFromJsonFile(SERIALIZATION_FILE, SerializableTestClass.class);
+        SerializableTestClass serializableTestClass = JsonUtil.deserializeObjectFromJsonFile(
+                SERIALIZATION_FILE, SerializableTestClass.class);
 
         assertEquals(serializableTestClass.getName(), SerializableTestClass.getNameTestValue());
         assertEquals(serializableTestClass.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
     }
 
-    //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
+    @Test
+    public void jsonUtil_readJsonStringToObjectInstance_correctObject() throws IOException {
+        SerializableTestClass serializableTestClass = new SerializableTestClass();
+        serializableTestClass.setTestValues();
 
-    //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
+        String json = JsonUtil.toJsonString(serializableTestClass);
+        SerializableTestClass copy = JsonUtil.fromJsonString(json, SerializableTestClass.class);
+
+        assertEquals(serializableTestClass.getName(), copy.getName());
+        assertEquals(serializableTestClass.getListOfLocalDateTimes(), copy.getListOfLocalDateTimes());
+        assertEquals(serializableTestClass.getMapOfIntegerToString(), copy.getMapOfIntegerToString());
+    }
+
+    @Test
+    public void jsonUtil_writeThenReadObjectToJson_correctObject() throws IOException {
+        SerializableTestClass serializableTestClass = new SerializableTestClass();
+        serializableTestClass.setTestValues();
+
+        JsonUtil.serializeObjectToJsonFile(SERIALIZATION_FILE, serializableTestClass);
+        SerializableTestClass copy = JsonUtil.deserializeObjectFromJsonFile(
+                SERIALIZATION_FILE, SerializableTestClass.class);
+
+        assertEquals(serializableTestClass.getName(), copy.getName());
+        assertEquals(serializableTestClass.getListOfLocalDateTimes(), copy.getListOfLocalDateTimes());
+        assertEquals(serializableTestClass.getMapOfIntegerToString(), copy.getMapOfIntegerToString());
+    }
 }
