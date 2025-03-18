@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -49,6 +51,28 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void sampleDataTest() {
+        Person[] persons = SampleDataUtil.getSamplePersons();
+        Tag customerTag = new Tag("customer");
+        Tag serviceTag = new Tag("service");
+
+        Person alex = persons[0];
+        Person bernice = persons[1];
+        Person charlotte = persons[2];
+        Person david = persons[3];
+        Person irfan = persons[4];
+        Person roy = persons[5];
+
+        assertTrue(alex.getTags().contains(customerTag));
+        assertTrue(bernice.getTags().contains(serviceTag));
+        assertTrue(charlotte.getTags().isEmpty());
+        assertTrue(david.getTags().contains(customerTag));
+        assertTrue(irfan.getTags().contains(customerTag));
+        assertTrue(irfan.getTags().contains(serviceTag));
+        assertTrue(roy.getTags().contains(serviceTag));
     }
 
     @Test
