@@ -5,4 +5,4 @@
 
 ### Project: TravelHub
 
-Given below are my contributions to the project.  
+Given below are my contributions to the project.

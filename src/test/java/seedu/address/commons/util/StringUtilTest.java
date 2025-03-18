@@ -16,7 +16,7 @@ public class StringUtilTest {
     public void isNonZeroUnsignedInteger() {
 
         // EP: empty strings
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("")); // Boundary value
+        assertFalse(StringUtil.isNonZeroUnsignedInteger(""));
         assertFalse(StringUtil.isNonZeroUnsignedInteger("  "));
 
         // EP: not a number
@@ -34,14 +34,14 @@ public class StringUtilTest {
         assertFalse(StringUtil.isNonZeroUnsignedInteger("+1"));
 
         // EP: numbers with white space
-        assertFalse(StringUtil.isNonZeroUnsignedInteger(" 10 ")); // Leading/trailing spaces
-        assertFalse(StringUtil.isNonZeroUnsignedInteger("1 0")); // Spaces in the middle
+        assertFalse(StringUtil.isNonZeroUnsignedInteger(" 10 "));
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("1 0"));
 
         // EP: number larger than Integer.MAX_VALUE
         assertFalse(StringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
 
         // EP: valid numbers, should return true
-        assertTrue(StringUtil.isNonZeroUnsignedInteger("1")); // Boundary value
+        assertTrue(StringUtil.isNonZeroUnsignedInteger("1"));
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
@@ -56,19 +56,20 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase("typical sentence", null));
+        assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase(
+                "typical sentence", null));
     }
 
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "  "));
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.containsWordIgnoreCase(
+                "typical sentence", "  "));
     }
 
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.containsWordIgnoreCase(
+                "typical sentence", "aaa bbb"));
     }
 
     @Test
@@ -103,24 +104,40 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_validInputs_correctResult() {
-
         // Empty sentence
-        assertFalse(StringUtil.containsWordIgnoreCase("", "abc")); // Boundary case
-        assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
-
-        // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+        assertFalse(StringUtil.containsWordIgnoreCase("", "abc"));
+        assertFalse(StringUtil.containsWordIgnoreCase("    ", "abc"));
 
         // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
-        assertTrue(StringUtil.containsWordIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+        assertTrue(StringUtil.containsWordIgnoreCase("TyPiCaL SeNtEnCe", "typical"));
+        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc", "aaa"));
+        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc DDD", "BBB"));
+        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbb"));
 
         // Matches multiple words in sentence
-        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbb"));
+
+        // Matches part of a word only
+        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb"));
+
+        // Does not match
+        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "ddd"));
+
+        // Non-word characters
+        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "a*a"));
+        assertFalse(StringUtil.containsWordIgnoreCase("1234567890", "a"));
+        assertTrue(StringUtil.containsWordIgnoreCase("aaa123bbb", "aaa123bbb"));
+    }
+
+    @Test
+    public void containsWordIgnoreCase_specialCharacters_correctResult() {
+        // Special characters in sentence
+        assertTrue(StringUtil.containsWordIgnoreCase("$#@ abc !@#", "abc"));
+        assertFalse(StringUtil.containsWordIgnoreCase("$#@ !@#", "abc"));
+
+        // Unicode characters
+        assertTrue(StringUtil.containsWordIgnoreCase("über", "über"));
+        assertTrue(StringUtil.containsWordIgnoreCase("ÜBER", "über"));
     }
 
     //---------------- Tests for getDetails --------------------------------------

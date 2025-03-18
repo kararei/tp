@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTripBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.trip.Trip;
@@ -166,6 +167,46 @@ public class AddCommandTest {
 
         @Override
         public void addTrip(Trip person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getTripBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTripBookFilePath(Path tripBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTripBook(ReadOnlyTripBook tripBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyTripBook getTripBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTrip(Trip target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTrip(Trip target, Trip editedTrip) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Trip> getFilteredTripList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTripList(Predicate<Trip> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

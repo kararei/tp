@@ -1,0 +1,40 @@
+{
+  "_comment": "TripBook save file which contains the same Trip values as in TypicalTrips#getTypicalTripBook()",
+  "trips": [
+    {
+      "name": "Paris Adventure",
+      "accommodation": "Hotel de Paris",
+      "itinerary": "Visit Eiffel Tower, Louvre Museum",
+      "date": "15/6/2024",
+      "customerNames": ["Alice Pauline", "Bob Chen"]
+    },
+    {
+      "name": "Tokyo Explorer",
+      "accommodation": "Shinjuku Hotel",
+      "itinerary": "Visit Tokyo Tower, Shibuya Crossing",
+      "date": "20/7/2024",
+      "customerNames": ["Charlie Brown", "David Lee"]
+    },
+    {
+      "name": "Singapore Tour",
+      "accommodation": "Marina Bay Sands",
+      "itinerary": "Gardens by the Bay, Sentosa Island",
+      "date": "10/8/2024",
+      "customerNames": ["Eve Tan"]
+    },
+    {
+      "name": "Bali Getaway",
+      "accommodation": "Ubud Resort",
+      "itinerary": "Rice Terraces, Tanah Lot Temple",
+      "date": "5/9/2024",
+      "customerNames": ["Frank Wong", "Grace Liu"]
+    },
+    {
+      "name": "Seoul Discovery",
+      "accommodation": "Gangnam Hotel",
+      "itinerary": "Namsan Tower, Myeongdong Shopping",
+      "date": "1/10/2024",
+      "customerNames": ["Henry Park"]
+    }
+  ]
+}
