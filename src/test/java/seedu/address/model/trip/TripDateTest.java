@@ -93,6 +93,6 @@ public class TripDateTest {
     @Test
     public void toString_returnsDateString() {
         TripDate tripDate = new TripDate("15/6/2023");
-        assertEquals(LocalDate.of(2023, 6, 15).toString(), tripDate.toString());
+        assertEquals("15/6/2023", tripDate.toString());
     }
 }

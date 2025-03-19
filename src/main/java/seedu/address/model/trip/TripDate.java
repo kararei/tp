@@ -49,7 +49,7 @@ public class TripDate {
 
     @Override
     public String toString() {
-        return date.toString();
+        return date.format(DATE_FORMATTER);
     }
 
     @Override
