@@ -41,4 +41,19 @@ public class ListContactCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, (tagName.equals("") ? "" : tagName + " ")));
 
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListContactCommand)) {
+            return false;
+        }
+
+        ListContactCommand otherListContactCommand = (ListContactCommand) other;
+        return tagName.equals(otherListContactCommand.tagName);
+    }
 }

@@ -73,6 +73,13 @@ public class ContactTest {
         assertTrue(irfan.getTags().contains(customerTag));
         assertTrue(irfan.getTags().contains(serviceTag));
         assertTrue(roy.getTags().contains(serviceTag));
+
+        assertTrue(alex.isCustomer());
+        assertFalse(charlotte.isCustomer());
+        assertFalse(charlotte.isService());
+        assertTrue(irfan.isCustomer());
+        assertTrue(irfan.isService());
+        assertTrue(roy.isService());
     }
 
     @Test
