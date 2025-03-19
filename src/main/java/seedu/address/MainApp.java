@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTripBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TripBook;
 import seedu.address.model.UserPrefs;
@@ -94,7 +95,22 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, new TripBook(), userPrefs);
+        Optional<ReadOnlyTripBook> tripBookOptional;
+        ReadOnlyTripBook initialTripData;
+        try {
+            tripBookOptional = storage.readTripBook();
+            if (!tripBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getTripBookFilePath()
+                        + " for TripBook.");
+            }
+            initialTripData = tripBookOptional.orElseGet(TripBook::new);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getTripBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty TripBook.");
+            initialTripData = new TripBook();
+        }
+
+        return new ModelManager(initialData, initialTripData, userPrefs);
     }
 
     private void initLogging(Config config) {
