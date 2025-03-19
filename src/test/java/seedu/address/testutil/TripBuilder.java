@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.contact.Name;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
+import seedu.address.model.trip.Note;
 import seedu.address.model.trip.Trip;
 import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
@@ -19,12 +20,14 @@ public class TripBuilder {
     public static final String DEFAULT_ACCOMMODATION = "Hotel 81";
     public static final String DEFAULT_ITINERARY = "Eat baguettes";
     public static final String DEFAULT_DATE = "01/01/2205";
+    public static final String DEFAULT_NOTE = "No special requirements";
 
     private TripName name;
     private Accommodation accommodation;
     private Itinerary itinerary;
     private TripDate date;
     private Set<Name> customerNames;
+    private Note note;
 
     /**
      * Creates a {@code TripBuilder} with the default details.
@@ -35,6 +38,7 @@ public class TripBuilder {
         itinerary = new Itinerary(DEFAULT_ITINERARY);
         date = new TripDate(DEFAULT_DATE);
         customerNames = new HashSet<>();
+        note = new Note(DEFAULT_NOTE);
     }
 
     /**
@@ -46,6 +50,7 @@ public class TripBuilder {
         itinerary = tripToCopy.getItinerary();
         date = tripToCopy.getDate();
         customerNames = new HashSet<>(tripToCopy.getCustomerNames());
+        note = tripToCopy.getNote();
     }
 
     /**
@@ -55,7 +60,6 @@ public class TripBuilder {
         this.name = new TripName(name);
         return this;
     }
-
 
     /**
      * Sets the {@code Accommodation} of the {@code Trip} that we are building.
@@ -93,8 +97,15 @@ public class TripBuilder {
         return this;
     }
 
-    public Trip build() {
-        return new Trip(name, accommodation, itinerary, date, customerNames);
+    /**
+     * Sets the {@code Note} of the {@code Trip} that we are building.
+     */
+    public TripBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
     }
 
+    public Trip build() {
+        return new Trip(name, accommodation, itinerary, date, customerNames, note);
+    }
 }

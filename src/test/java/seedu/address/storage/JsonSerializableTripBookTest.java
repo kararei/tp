@@ -37,7 +37,7 @@ public class JsonSerializableTripBookTest {
 
     @Test
     public void toModelType_invalidTrip_throwsIllegalValueException() {
-        JsonAdaptedTrip invalidTrip = new JsonAdaptedTrip("", "", "", "", List.of());
+        JsonAdaptedTrip invalidTrip = new JsonAdaptedTrip("", "", "", "", List.of(), "");
         JsonSerializableTripBook dataFromFile = new JsonSerializableTripBook(List.of(invalidTrip));
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
