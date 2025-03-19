@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -24,16 +25,18 @@ public class AddTripCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ACCOMMODATION + "ACCOMMODATION "
-            + PREFIX_ITINERARY + "ITINERARY\n"
+            + PREFIX_ITINERARY + "ITINERARY "
             + PREFIX_DATE + "DATE "
-            + PREFIX_CUSTOMER_NAME + "CUSTOMER_NAME (>= 1) \n"
+            + PREFIX_CUSTOMER_NAME + "CUSTOMER_NAME (>= 1) "
+            + "[" + PREFIX_NOTE + "NOTE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Paris 2025 "
             + PREFIX_ACCOMMODATION + "Hotel Sunshine "
             + PREFIX_ITINERARY + "Visit Eiffel Tower; Eat baguette. "
             + PREFIX_DATE + "01/1/2025 "
             + PREFIX_CUSTOMER_NAME + "Jane Doe "
-            + PREFIX_CUSTOMER_NAME + "John Doe ";
+            + PREFIX_CUSTOMER_NAME + "John Doe "
+            + PREFIX_NOTE + "Customer prefers window seat";
 
     public static final String MESSAGE_SUCCESS = "New trip added: %1$s";
     public static final String MESSAGE_DUPLICATE_TRIP = "This trip already exists in the trip book";
