@@ -26,6 +26,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private String notes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +36,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        tags = SampleDataUtil.getTagSet("customer");
+        notes = "";
     }
 
     /**
@@ -47,6 +49,7 @@ public class PersonBuilder {
         email = contactToCopy.getEmail();
         address = contactToCopy.getAddress();
         tags = new HashSet<>(contactToCopy.getTags());
+        notes = contactToCopy.getNotes();
     }
 
     /**
@@ -89,8 +92,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Notes} of the {@code Contact} that we are building.
+     */
+    public PersonBuilder withNotes(String notes) {
+        this.notes = notes;
+        return this;
+    }
+
     public Contact build() {
-        return new Contact(name, phone, email, address, tags);
+        return new Contact(name, phone, email, address, tags, notes);
     }
 
 }
