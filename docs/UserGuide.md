@@ -97,6 +97,15 @@ Shows a list of all contacts in the address book.
 
 Format: `list`
 
+### Listing contacts : `listContact`
+
+Shows a list of contacts in the address book.
+
+Format: `listContact [customer/service]`
+
+* Without specifying the optional parameter, all contacts will be displayed.
+* By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
+
 ### Editing a contact : `edit`
 
 Edits an existing contact in the address book.
