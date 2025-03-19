@@ -15,15 +15,13 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTripBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.TripBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.DataLoadingUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTripBookStorage;
@@ -78,38 +76,8 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
-
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
-        }
-
-        Optional<ReadOnlyTripBook> tripBookOptional;
-        ReadOnlyTripBook initialTripData;
-        try {
-            tripBookOptional = storage.readTripBook();
-            if (!tripBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getTripBookFilePath()
-                        + " for TripBook.");
-            }
-            initialTripData = tripBookOptional.orElseGet(TripBook::new);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getTripBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty TripBook.");
-            initialTripData = new TripBook();
-        }
-
+        ReadOnlyAddressBook initialData = DataLoadingUtil.loadAddressBook(storage);
+        ReadOnlyTripBook initialTripData = DataLoadingUtil.loadTripBook(storage);
         return new ModelManager(initialData, initialTripData, userPrefs);
     }
 
