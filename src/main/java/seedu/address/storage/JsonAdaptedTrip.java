@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.contact.Name;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
@@ -67,48 +68,42 @@ class JsonAdaptedTrip {
     public Trip toModelType() throws IllegalValueException {
         final Set<Name> modelCustomerNames = new HashSet<>();
         for (String customerName : customerNames) {
-            if (!Name.isValidName(customerName)) {
+            try {
+                modelCustomerNames.add(ParserUtil.parseName(customerName));
+            } catch (IllegalValueException e) {
                 throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
             }
-            modelCustomerNames.add(new Name(customerName));
         }
 
         if (name == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TripName.class.getSimpleName()));
         }
-        if (!TripName.isValidName(name)) {
-            throw new IllegalValueException(TripName.MESSAGE_CONSTRAINTS);
-        }
-        final TripName modelName = new TripName(name);
 
         if (accommodation == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Accommodation.class.getSimpleName()));
         }
-        if (!Accommodation.isValidAccommodation(accommodation)) {
-            throw new IllegalValueException(Accommodation.MESSAGE_CONSTRAINTS);
-        }
-        final Accommodation modelAccommodation = new Accommodation(accommodation);
 
         if (itinerary == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Itinerary.class.getSimpleName()));
         }
-        if (!Itinerary.isValidItinerary(itinerary)) {
-            throw new IllegalValueException(Itinerary.MESSAGE_CONSTRAINTS);
-        }
-        final Itinerary modelItinerary = new Itinerary(itinerary);
 
         if (date == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TripDate.class.getSimpleName()));
         }
-        if (!TripDate.isValidTripDate(date)) {
-            throw new IllegalValueException(TripDate.MESSAGE_CONSTRAINTS);
-        }
-        final TripDate modelDate = new TripDate(date);
 
-        return new Trip(modelName, modelAccommodation, modelItinerary, modelDate, modelCustomerNames);
+        try {
+            final TripName modelName = ParserUtil.parseTripName(name);
+            final Accommodation modelAccommodation = ParserUtil.parseAccommodation(accommodation);
+            final Itinerary modelItinerary = ParserUtil.parseItinerary(itinerary);
+            final TripDate modelDate = ParserUtil.parseTripDate(date);
+
+            return new Trip(modelName, modelAccommodation, modelItinerary, modelDate, modelCustomerNames);
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
     }
 }
