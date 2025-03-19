@@ -25,7 +25,6 @@ import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
 import seedu.address.model.trip.Trip;
-import seedu.address.model.trip.TripName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.TripBuilder;
 
