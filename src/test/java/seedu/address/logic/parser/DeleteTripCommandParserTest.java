@@ -1,14 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import seedu.address.logic.commands.DeleteTripCommand;
-
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRIP;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.DeleteTripCommand;
 
 /**
  * Unit tests for {@code DeleteTripCommandParser}.
