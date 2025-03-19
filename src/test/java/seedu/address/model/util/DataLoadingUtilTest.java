@@ -116,4 +116,90 @@ public class DataLoadingUtilTest {
         ReadOnlyTripBook loaded = DataLoadingUtil.loadTripBook(storage);
         assertEquals(expected, loaded);
     }
+
+    @Test
+    public void loadAddressBook_emptyFile_returnsSampleAddressBook() throws DataLoadingException, IOException {
+        // Create an empty file
+        storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
+        // Clear the file
+        storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
+
+        ReadOnlyAddressBook loaded = DataLoadingUtil.loadAddressBook(storage);
+        assertEquals(SampleDataUtil.getSampleAddressBook(), loaded);
+    }
+
+    @Test
+    public void loadTripBook_emptyFile_returnsEmptyTripBook() throws DataLoadingException, IOException {
+        // Create an empty file
+        storage.saveTripBook(new TripBook(), getTempFilePath("tripbook.json"));
+        // Clear the file
+        storage.saveTripBook(new TripBook(), getTempFilePath("tripbook.json"));
+
+        ReadOnlyTripBook loaded = DataLoadingUtil.loadTripBook(storage);
+        assertEquals(new TripBook(), loaded);
+    }
+
+    @Test
+    public void loadAddressBook_corruptedFile_returnsEmptyAddressBook() throws DataLoadingException, IOException {
+        // Create a corrupted file with invalid JSON
+        try {
+            storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
+            // Write invalid JSON directly to the file
+            java.nio.file.Files.write(getTempFilePath("addressbook.json"), 
+                "invalid json content".getBytes());
+        } catch (IOException e) {
+            throw new AssertionError("Failed to create corrupted file", e);
+        }
+
+        ReadOnlyAddressBook loaded = DataLoadingUtil.loadAddressBook(storage);
+        assertEquals(new AddressBook(), loaded);
+    }
+
+    @Test
+    public void loadTripBook_corruptedFile_returnsEmptyTripBook() throws DataLoadingException, IOException {
+        // Create a corrupted file with invalid JSON
+        try {
+            storage.saveTripBook(new TripBook(), getTempFilePath("tripbook.json"));
+            // Write invalid JSON directly to the file
+            java.nio.file.Files.write(getTempFilePath("tripbook.json"), 
+                "invalid json content".getBytes());
+        } catch (IOException e) {
+            throw new AssertionError("Failed to create corrupted file", e);
+        }
+
+        ReadOnlyTripBook loaded = DataLoadingUtil.loadTripBook(storage);
+        assertEquals(new TripBook(), loaded);
+    }
+
+    @Test
+    public void loadAddressBook_malformedJson_returnsEmptyAddressBook() throws DataLoadingException, IOException {
+        // Create a file with malformed JSON
+        try {
+            storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
+            // Write malformed JSON
+            java.nio.file.Files.write(getTempFilePath("addressbook.json"), 
+                "{ \"addressbook\": { \"persons\": [ { } } }".getBytes());
+        } catch (IOException e) {
+            throw new AssertionError("Failed to create malformed JSON file", e);
+        }
+
+        ReadOnlyAddressBook loaded = DataLoadingUtil.loadAddressBook(storage);
+        assertEquals(new AddressBook(), loaded);
+    }
+
+    @Test
+    public void loadTripBook_malformedJson_returnsEmptyTripBook() throws DataLoadingException, IOException {
+        // Create a file with malformed JSON
+        try {
+            storage.saveTripBook(new TripBook(), getTempFilePath("tripbook.json"));
+            // Write malformed JSON
+            java.nio.file.Files.write(getTempFilePath("tripbook.json"), 
+                "{ \"tripbook\": { \"trips\": [ { } } }".getBytes());
+        } catch (IOException e) {
+            throw new AssertionError("Failed to create malformed JSON file", e);
+        }
+
+        ReadOnlyTripBook loaded = DataLoadingUtil.loadTripBook(storage);
+        assertEquals(new TripBook(), loaded);
+    }
 }
