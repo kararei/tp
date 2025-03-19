@@ -24,6 +24,20 @@ public class Contact {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final String notes;
+
+    /**
+     * Every field must be present and not null except for notes.
+     */
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String notes) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.notes = notes;
+    }
 
     /**
      * Every field must be present and not null.
@@ -35,12 +49,12 @@ public class Contact {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.notes = "";
     }
 
     public Name getName() {
         return name;
     }
-
     public Phone getPhone() {
         return phone;
     }
@@ -59,6 +73,10 @@ public class Contact {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     /**
@@ -114,7 +132,7 @@ public class Contact {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, notes);
     }
 
     @Override
@@ -125,6 +143,7 @@ public class Contact {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("notes", notes)
                 .toString();
     }
 
