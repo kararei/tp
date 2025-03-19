@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -90,7 +91,7 @@ public class DataLoadingUtilTest {
         try {
             storage.saveTripBook(new TripBook(), getTempFilePath("tripbook.json"));
             // Corrupt the file by writing invalid JSON
-            storage.saveUserPrefs(new UserPrefs());
+            Files.write(getTempFilePath("tripbook.json"), "invalid json content".getBytes());
         } catch (IOException e) {
             throw new AssertionError("Failed to create invalid file", e);
         }
@@ -118,14 +119,12 @@ public class DataLoadingUtilTest {
     }
 
     @Test
-    public void loadAddressBook_emptyFile_returnsSampleAddressBook() throws DataLoadingException, IOException {
+    public void loadAddressBook_emptyFile_returnsEmptyAddressBook() throws DataLoadingException, IOException {
         // Create an empty file
-        storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
-        // Clear the file
-        storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
+        Files.write(getTempFilePath("addressbook.json"), "{}".getBytes());
 
         ReadOnlyAddressBook loaded = DataLoadingUtil.loadAddressBook(storage);
-        assertEquals(SampleDataUtil.getSampleAddressBook(), loaded);
+        assertEquals(new AddressBook(), loaded);
     }
 
     @Test
@@ -145,8 +144,7 @@ public class DataLoadingUtilTest {
         try {
             storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
             // Write invalid JSON directly to the file
-            java.nio.file.Files.write(getTempFilePath("addressbook.json"), 
-                "invalid json content".getBytes());
+            Files.write(getTempFilePath("addressbook.json"), "invalid json content".getBytes());
         } catch (IOException e) {
             throw new AssertionError("Failed to create corrupted file", e);
         }
@@ -161,8 +159,7 @@ public class DataLoadingUtilTest {
         try {
             storage.saveTripBook(new TripBook(), getTempFilePath("tripbook.json"));
             // Write invalid JSON directly to the file
-            java.nio.file.Files.write(getTempFilePath("tripbook.json"), 
-                "invalid json content".getBytes());
+            Files.write(getTempFilePath("tripbook.json"), "invalid json content".getBytes());
         } catch (IOException e) {
             throw new AssertionError("Failed to create corrupted file", e);
         }
@@ -177,8 +174,7 @@ public class DataLoadingUtilTest {
         try {
             storage.saveAddressBook(new AddressBook(), getTempFilePath("addressbook.json"));
             // Write malformed JSON
-            java.nio.file.Files.write(getTempFilePath("addressbook.json"), 
-                "{ \"addressbook\": { \"persons\": [ { } } }".getBytes());
+            Files.write(getTempFilePath("addressbook.json"), "{ \"addressbook\": { \"persons\": [ { } } }".getBytes());
         } catch (IOException e) {
             throw new AssertionError("Failed to create malformed JSON file", e);
         }
@@ -193,8 +189,7 @@ public class DataLoadingUtilTest {
         try {
             storage.saveTripBook(new TripBook(), getTempFilePath("tripbook.json"));
             // Write malformed JSON
-            java.nio.file.Files.write(getTempFilePath("tripbook.json"), 
-                "{ \"tripbook\": { \"trips\": [ { } } }".getBytes());
+            Files.write(getTempFilePath("tripbook.json"), "{ \"tripbook\": { \"trips\": [ { } } }".getBytes());
         } catch (IOException e) {
             throw new AssertionError("Failed to create malformed JSON file", e);
         }
