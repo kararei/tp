@@ -1,0 +1,11 @@
+{
+  "tripbook" : {
+    "trips" : [ {
+      "name" : "Paris Adventure",
+      "accommodation" : "Hotel de Paris",
+      "itinerary" : "Visit Eiffel Tower, Louvre Museum",
+      "date" : "15/6/2024",
+      "customerNames" : [ "Alice Pauline", "Bob Chen" ]
+    } ]
+  }
+}
