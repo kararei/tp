@@ -62,6 +62,20 @@ public class Contact {
     }
 
     /**
+     * Returns an boolean on whether the contact is a customer based on its tag
+     */
+    public boolean isCustomer() {
+        return tags.stream().anyMatch(tag -> tag.tagName.equals("customer"));
+    }
+
+    /**
+     * Returns an boolean on whether the contact is a service based on its tag
+     */
+    public boolean isService() {
+        return tags.stream().anyMatch(tag -> tag.tagName.equals("service"));
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

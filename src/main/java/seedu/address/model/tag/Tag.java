@@ -11,6 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags should be specified as 't/customer' or 't/service'. "
                                                      + "You may include both, separated by a space.";
+    public static final String TAGNAME_SPECIFICATION = "Tag must be either 'customer' or 'service'.";
     public static final String VALIDATION_REGEX = "customer|service";
 
     public final String tagName;
