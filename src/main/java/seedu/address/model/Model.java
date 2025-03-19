@@ -14,6 +14,10 @@ import seedu.address.model.trip.Trip;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Contact> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    /** {@code Predicate} that checks for a customer tag */
+    Predicate<Contact> PREDICATE_SHOW_ALL_CUSTOMER = Contact::isCustomer;
+    /** {@code Predicate} that checks for a service tag */
+    Predicate<Contact> PREDICATE_SHOW_ALL_SERVICE = Contact::isService;
     /** {@code Predicate} that always evaluate to true */
     Predicate<Trip> PREDICATE_SHOW_ALL_TRIPS = unused -> true;
 
