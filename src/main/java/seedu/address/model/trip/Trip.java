@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Name;
+import seedu.address.model.contact.Name;
 
 /**
  * Represents a Trip in the address book.

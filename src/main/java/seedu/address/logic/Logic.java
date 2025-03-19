@@ -9,8 +9,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTripBook;
-import seedu.address.model.person.Person;
 import seedu.address.model.trip.Trip;
+import seedu.address.model.contact.Contact;
 
 /**
  * API of the Logic component
@@ -49,19 +49,4 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
-    /**
-     * Returns the TripBook.
-     *
-     * @see seedu.address.model.Model#getTripBook()
-     */
-    ReadOnlyTripBook getTripBook();
-
-    /** Returns an unmodifiable view of the filtered list of trips */
-    ObservableList<Trip> getFilteredTripList();
-
-    /**
-     * Returns the user prefs' trip book file path.
-     */
-    Path getTripBookFilePath();
 }

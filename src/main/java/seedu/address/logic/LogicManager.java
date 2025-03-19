@@ -16,8 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTripBook;
-import seedu.address.model.person.Person;
 import seedu.address.model.trip.Trip;
+import seedu.address.model.contact.Contact;
 import seedu.address.storage.Storage;
 
 /**
@@ -54,7 +54,6 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
-            storage.saveTripBook(model.getTripBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -87,20 +86,5 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
-    }
-
-    @Override
-    public ReadOnlyTripBook getTripBook() {
-        return model.getTripBook();
-    }
-
-    @Override
-    public ObservableList<Trip> getFilteredTripList() {
-        return model.getFilteredTripList();
-    }
-
-    @Override
-    public Path getTripBookFilePath() {
-        return model.getTripBookFilePath();
     }
 }
