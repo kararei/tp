@@ -18,7 +18,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -30,15 +30,15 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Contact contactToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteContactCommand deleteCommand = new DeleteContactCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
-                Messages.format(personToDelete));
+                Messages.format(contactToDelete));
 
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
-        expectedModel.deleteContact(personToDelete);
+        expectedModel.deleteContact(contactToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -55,15 +55,15 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Contact contactToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteContactCommand deleteCommand = new DeleteContactCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
-                Messages.format(personToDelete));
+                Messages.format(contactToDelete));
 
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
-        expectedModel.deleteContact(personToDelete);
+        expectedModel.deleteContact(contactToDelete);
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -100,7 +100,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
