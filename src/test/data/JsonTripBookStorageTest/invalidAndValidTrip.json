@@ -1,0 +1,17 @@
+{
+  "tripbook" : {
+    "trips" : [ {
+      "name" : "Paris 2025",
+      "accommodation" : "Hotel 81",
+      "itinerary" : "Eat baguettes",
+      "date" : "01/01/2205",
+      "customerNames" : [ "John Doe", "Jane Doe" ]
+    }, {
+      "name" : "R@chel",
+      "accommodation" : " ",
+      "itinerary" : " ",
+      "date" : "32/13/2025",
+      "customerNames" : [ "R@chel" ]
+    } ]
+  }
+} 
