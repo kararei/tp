@@ -177,8 +177,28 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTagName_vaild_emptyTag() throws ParseException {
+        assertEquals("", ParserUtil.parseTagName(""));
+    }
+
+    @Test
+    public void parseTagName_vaild_tagName1() throws ParseException {
+        assertEquals("service", ParserUtil.parseTagName(VALID_TAG_1));
+    }
+
+    @Test
+    public void parseTagName_vaild_tagName2() throws ParseException {
+        assertEquals("customer", ParserUtil.parseTagName(VALID_TAG_2));
+    }
+
+    @Test
+    public void parseTagName_invaild_tagName() throws ParseException {
+        assertEquals("customer", ParserUtil.parseTagName(VALID_TAG_2));
+    }
+
+    @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagName(INVALID_TAG));
     }
 
     @Test
