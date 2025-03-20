@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddTripCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteContactCommand;
+import seedu.address.logic.commands.DeleteTripCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case AddTripCommand.COMMAND_WORD:
             return new AddTripCommandParser().parse(arguments);
+
+        case DeleteTripCommand.COMMAND_WORD:
+            return new DeleteTripCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -159,6 +160,21 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the trip at the given {@code targetIndex} in the
+     * {@code model}'s trip book.
+     */
+    public static void showTripAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTripList().size());
+
+        Trip trip = model.getFilteredTripList().get(targetIndex.getZeroBased());
+        String tripName = trip.getName().toString();
+        final String[] splitName = tripName.split("\\s+");
+        model.updateFilteredTripList(t -> StringUtil.containsWordIgnoreCase(t.getName().toString(), splitName[0]));
+
+        assertEquals(1, model.getFilteredTripList().size());
     }
 
 }
