@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRIPS;
 
+import java.util.List;
+
 import seedu.address.model.Model;
 import seedu.address.model.trip.Trip;
-
-import java.util.List;
 
 /**
  * Lists all trips in the address book to the user.
@@ -30,12 +30,12 @@ public class ListTripCommand extends Command {
         if (tripList.isEmpty()) {
             return new CommandResult(MESSAGE_EMPTY);
         }
-        StringBuilder MESSAGE_SUCCESS = new StringBuilder("Listed all trips:\n");
+        StringBuilder messageOutput = new StringBuilder("Listed all trips:\n");
         int counter = 0;
         for (Trip trip : tripList) {
-            MESSAGE_SUCCESS.append(++counter).append(". ").append(trip.toListString()).append("\n");
+            messageOutput.append(++counter).append(". ").append(trip.toListString()).append("\n");
         }
-        return new CommandResult(MESSAGE_SUCCESS.toString().trim());
+        return new CommandResult(messageOutput.toString().trim());
     }
 }
 

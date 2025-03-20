@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.contact.Name;
 import seedu.address.testutil.TripBuilder;
 
-import java.util.Arrays;
-
 public class TripTest {
 
     private static final Trip PARIS = new TripBuilder().withName("Paris 2025")
