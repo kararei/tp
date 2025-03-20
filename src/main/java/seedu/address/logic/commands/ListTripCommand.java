@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRIPS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SERVICE;
 
 import seedu.address.model.Model;
 import seedu.address.model.trip.Trip;
@@ -21,7 +19,7 @@ public class ListTripCommand extends Command {
             + "Examples: "
             + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Listed all %s trips";
+    public static final String MESSAGE_SUCCESS = "Listed all trips";
 
     @Override
     public CommandResult execute(Model model) {
