@@ -54,23 +54,45 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        return switch (commandWord) {
-        case AddContactCommand.COMMAND_WORD -> new AddContactCommandParser().parse(arguments);
-        case EditCommand.COMMAND_WORD -> new EditCommandParser().parse(arguments);
-        case DeleteContactCommand.COMMAND_WORD -> new DeleteContactCommandParser().parse(arguments);
-        case ClearCommand.COMMAND_WORD -> new ClearCommand();
-        case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
-        case ListCommand.COMMAND_WORD -> new ListCommand();
-        case ListContactCommand.COMMAND_WORD -> new ListContactCommandParser().parse(arguments);
-        case ExitCommand.COMMAND_WORD -> new ExitCommand();
-        case HelpCommand.COMMAND_WORD -> new HelpCommand();
-        case AddTripCommand.COMMAND_WORD -> new AddTripCommandParser().parse(arguments);
-        case DeleteTripCommand.COMMAND_WORD -> new DeleteTripCommandParser().parse(arguments);
-        default -> {
+        switch (commandWord) {
+
+        case AddContactCommand.COMMAND_WORD:
+            return new AddContactCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
+        case DeleteContactCommand.COMMAND_WORD:
+            return new DeleteContactCommandParser().parse(arguments);
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
+        case ListContactCommand.COMMAND_WORD:
+            return new ListContactCommandParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        case AddTripCommand.COMMAND_WORD:
+            return new AddTripCommandParser().parse(arguments);
+
+        case DeleteTripCommand.COMMAND_WORD:
+            return new DeleteTripCommandParser().parse(arguments);
+
+        default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
-        };
     }
 
 }
