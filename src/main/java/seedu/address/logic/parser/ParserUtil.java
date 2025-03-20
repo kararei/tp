@@ -16,6 +16,7 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
+import seedu.address.model.trip.Note;
 import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
 
@@ -24,7 +25,8 @@ import seedu.address.model.trip.TripName;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
+    private static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -107,7 +109,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim().toLowerCase();
+        String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -149,13 +151,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static TripName parseTripName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!TripName.isValidName(trimmedName)) {
+    public static TripName parseTripName(String tripName) throws ParseException {
+        requireNonNull(tripName);
+        String trimmedTripName = tripName.trim();
+        if (!TripName.isValidName(trimmedTripName)) {
             throw new ParseException(TripName.MESSAGE_CONSTRAINTS);
         }
-        return new TripName(trimmedName);
+        return new TripName(trimmedTripName);
     }
 
     /**
@@ -201,5 +203,20 @@ public class ParserUtil {
             throw new ParseException(TripDate.MESSAGE_CONSTRAINTS);
         }
         return new TripDate(trimmedTripDate);
+    }
+
+    /**
+     * Parses a {@code String note} into a {@code Note}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code note} is invalid.
+     */
+    public static Note parseNote(String note) throws ParseException {
+        requireNonNull(note);
+        String trimmedNote = note.trim();
+        if (!Note.isValidNote(trimmedNote)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return new Note(trimmedNote);
     }
 }

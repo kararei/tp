@@ -64,7 +64,9 @@ public class Messages {
                 .append(trip.getDate())
                 .append("; Customers: ");
         builder.append(trip.getCustomerNames().stream().map(customer -> customer.fullName)
-                .collect(Collectors.joining(", ")));
+                .collect(Collectors.joining(", ")))
+                .append("; Note: ")
+                .append(trip.getNote());
         return builder.toString();
     }
 

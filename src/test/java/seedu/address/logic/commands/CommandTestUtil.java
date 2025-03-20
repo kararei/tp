@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -98,12 +99,19 @@ public class CommandTestUtil {
     public static final String TRIP_CUSTOMER_DESC_AMY = " " + PREFIX_CUSTOMER_NAME + VALID_NAME_AMY;
     public static final String TRIP_CUSTOMER_DESC_BOB = " " + PREFIX_CUSTOMER_NAME + VALID_NAME_BOB;
 
+    public static final String VALID_NOTE = "Customer prefers window seat";
+    public static final String INVALID_NOTE = " "; // empty note
+
+    public static final String TRIP_NOTE_DESC = " " + PREFIX_NOTE + VALID_NOTE;
+    public static final String INVALID_TRIP_NOTE_DESC = " " + PREFIX_NOTE + INVALID_NOTE;
+
     public static final Trip PARIS_2025_TRIP = new TripBuilder()
             .withName(VALID_TRIP_NAME_PARIS_2025)
             .withAccommodation(VALID_ACCOMMODATION_HOTEL_81)
             .withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
             .withDate(VALID_TRIP_DATE_2025)
             .withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
+            .withNote(VALID_NOTE)
             .build();
 
     /**

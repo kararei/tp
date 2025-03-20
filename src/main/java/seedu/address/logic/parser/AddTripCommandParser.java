@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Name;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
+import seedu.address.model.trip.Note;
 import seedu.address.model.trip.Trip;
 import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
@@ -34,7 +36,7 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
     public AddTripCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY,
-                        PREFIX_DATE, PREFIX_CUSTOMER_NAME);
+                        PREFIX_DATE, PREFIX_CUSTOMER_NAME, PREFIX_NOTE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY,
                 PREFIX_DATE, PREFIX_CUSTOMER_NAME)
@@ -42,11 +44,20 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTripCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY, PREFIX_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ACCOMMODATION,
+                PREFIX_ITINERARY, PREFIX_DATE, PREFIX_NOTE);
         TripName name = ParserUtil.parseTripName(argMultimap.getValue(PREFIX_NAME).get());
         Accommodation accommodation = ParserUtil.parseAccommodation(argMultimap.getValue(PREFIX_ACCOMMODATION).get());
         Itinerary itinerary = ParserUtil.parseItinerary(argMultimap.getValue(PREFIX_ITINERARY).get());
         TripDate date = ParserUtil.parseTripDate(argMultimap.getValue(PREFIX_DATE).get());
+
+        // Note is optional, use default value if not provided
+        Note note;
+        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+            note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+        } else {
+            note = new Note("No special requirements");
+        }
 
         List<String> customerNames = argMultimap.getAllValues(PREFIX_CUSTOMER_NAME);
         Set<Name> customerNameSet = new HashSet<>();
@@ -54,7 +65,7 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
             customerNameSet.add(ParserUtil.parseName(customerName));
         }
 
-        Trip trip = new Trip(name, accommodation, itinerary, date, customerNameSet);
+        Trip trip = new Trip(name, accommodation, itinerary, date, customerNameSet, note);
         return new AddTripCommand(trip);
     }
 
