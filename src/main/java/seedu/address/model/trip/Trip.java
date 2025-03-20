@@ -94,4 +94,17 @@ public class Trip {
                 .add("customerNames", customerNames)
                 .toString();
     }
+
+    public String toListString() {
+        return String.format("Name = '%s', "
+                + "Accommodation = '%s', "
+                + "Itinerary = '%s', "
+                + "Date = '%s', "
+                + "Customer Names = '%s'",
+                name, accommodation, itinerary, date, customerNames);
+    }
+
+
+
+
 }

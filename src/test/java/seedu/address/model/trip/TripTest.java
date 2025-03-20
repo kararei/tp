@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.contact.Name;
 import seedu.address.testutil.TripBuilder;
 
+import java.util.Arrays;
+
 public class TripTest {
 
     private static final Trip PARIS = new TripBuilder().withName("Paris 2025")
@@ -116,5 +118,18 @@ public class TripTest {
                 + ", date=" + PARIS.getDate()
                 + ", customerNames=" + PARIS.getCustomerNames() + "}";
         assertEquals(expected, PARIS.toString());
+    }
+
+    @Test
+    public void toListString_validTrip_returnsCorrectFormat() {
+        String expectedParis = "Name = 'Paris 2025', "
+                + "Accommodation = 'Hotel 81', "
+                + "Itinerary = 'Eat baguettes', "
+                + "Date = '1/1/2205', "
+                + "Customer Names = '[John Doe, Jane Doe]'";
+
+
+
+        assertEquals(expectedParis, PARIS.toListString());
     }
 }

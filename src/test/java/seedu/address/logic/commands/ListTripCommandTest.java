@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.trip.Trip;
+
+import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListTripCommand.
@@ -36,7 +39,8 @@ public class ListTripCommandTest {
      */
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListTripCommand(), model, ListTripCommand.MESSAGE_SUCCESS, expectedModel);
+        String MESSAGE_EXPECTED = generateExpectedMessage(expectedModel);
+        assertCommandSuccess(new ListTripCommand(), model, MESSAGE_EXPECTED, expectedModel);
     }
 
     /**
@@ -48,7 +52,22 @@ public class ListTripCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new seedu.address.model.TripBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
 
-        assertCommandSuccess(new ListTripCommand(), model, ListTripCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListTripCommand(), model, ListTripCommand.MESSAGE_EMPTY, expectedModel);
+    }
+
+    private String generateExpectedMessage(Model model) {
+        List<Trip> tripList = model.getFilteredTripList();
+
+        if (tripList.isEmpty()) {
+            return ListTripCommand.MESSAGE_EMPTY;
+        }
+
+        StringBuilder MESSAGE_OUTPUT = new StringBuilder("Listed all trips:\n");
+        int counter = 0;
+        for (Trip trip : tripList) {
+            MESSAGE_OUTPUT.append(++counter).append(". ").append(trip.toListString()).append("\n");
+        }
+        return MESSAGE_OUTPUT.toString().trim();
     }
 
 }
