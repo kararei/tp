@@ -7,6 +7,7 @@ public class CliSyntax {
 
     /* Shared prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_NOTE = new Prefix("nts/");
 
     /* Customer prefix definitions */
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
@@ -19,5 +20,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_ITINERARY = new Prefix("i/");
     public static final Prefix PREFIX_CUSTOMER_NAME = new Prefix("c/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
-    public static final Prefix PREFIX_NOTE = new Prefix("nts/");
 }

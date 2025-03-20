@@ -47,6 +47,10 @@ public class Messages {
                 .append(contact.getAddress())
                 .append("; Tags: ");
         contact.getTags().forEach(builder::append);
+        if (!contact.getNotes().isEmpty()) {
+            builder.append("; Notes: ")
+                    .append(contact.getNotes());
+        }
         return builder.toString();
     }
 
