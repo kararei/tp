@@ -126,4 +126,17 @@ public class TripTest {
                 + ", note=" + PARIS.getNote() + "}";
         assertEquals(expected, PARIS.toString());
     }
+
+    @Test
+    public void toListString_validTrip_returnsCorrectFormat() {
+        String expectedParis = "Name = 'Paris 2025', "
+                + "Accommodation = 'Hotel 81', "
+                + "Itinerary = 'Eat baguettes', "
+                + "Date = '1/1/2205', "
+                + "Customer Names = '[John Doe, Jane Doe]'";
+
+
+
+        assertEquals(expectedParis, PARIS.toListString());
+    }
 }

@@ -102,4 +102,23 @@ public class Trip {
                 .add("note", note)
                 .toString();
     }
+
+    /**
+     * Returns a formatted string representation of the trip, including its name,
+     * accommodation, itinerary, date, and associated customer names.
+     *
+     * @return A string containing trip details in a readable format.
+     */
+    public String toListString() {
+        return String.format("Name = '%s', "
+                + "Accommodation = '%s', "
+                + "Itinerary = '%s', "
+                + "Date = '%s', "
+                + "Customer Names = '%s'",
+                name, accommodation, itinerary, date, customerNames);
+    }
+
+
+
+
 }
