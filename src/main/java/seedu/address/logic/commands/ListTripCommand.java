@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRIPS;
 
 import seedu.address.model.Model;
-import seedu.address.model.trip.Trip;
-import seedu.address.model.trip.TripDate;
 
 /**
  * Lists all trips in the address book to the user.
