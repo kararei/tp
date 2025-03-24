@@ -1,5 +1,6 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,17 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+    }
+
+    @Test
+    public void isValidCustomerStyle() {
+        Tag customerTag = new Tag("customer");
+        assertTrue(customerTag.getStyleClass().equals("customer-tag"));
+    }
+
+    public void isValidServiceStyle() {
+        Tag serviceTag = new Tag("service");
+        assertTrue(serviceTag.getStyleClass().equals("service-tag"));
     }
 
 }
