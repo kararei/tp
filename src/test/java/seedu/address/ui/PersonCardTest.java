@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.contact.Contact;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
@@ -27,6 +28,20 @@ public class PersonCardTest {
                 .build();
         TestFxmlObject testObject = new TestFxmlObject(contact.getNotes());
         assertEquals("Likes the sea", testObject.getText());
+
+        Tag customerTag = contact.getTags().stream()
+                .filter(tag -> tag.tagName.equals("customer"))
+                .findFirst()
+                .get();
+        TestFxmlObject customerTagObject = new TestFxmlObject(customerTag.getStyleClass());
+        assertEquals("customer-tag", customerTagObject.getText());
+
+        Tag serviceTag = contact.getTags().stream()
+                .filter(tag -> tag.tagName.equals("service"))
+                .findFirst()
+                .get();
+        TestFxmlObject serviceTagObject = new TestFxmlObject(serviceTag.getStyleClass());
+        assertEquals("service-tag", serviceTagObject.getText());
     }
 
     @Test
