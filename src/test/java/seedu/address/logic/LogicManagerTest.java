@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalTrips.getTypicalTrips;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -28,6 +30,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.trip.Trip;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTripBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -49,7 +52,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        JsonTripBookStorage tripBookStorage = new JsonTripBookStorage(temporaryFolder.resolve("tripBook.json"));
+        JsonTripBookStorage tripBookStorage =
+                new JsonTripBookStorage(temporaryFolder.resolve("tripBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, tripBookStorage);
         logic = new LogicManager(model, storage);
     }
@@ -87,6 +91,33 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTripList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTripList().remove(0));
+    }
+
+    @Test
+    public void getFilteredTripList_returnsCorrectList() {
+        for (Trip trip : getTypicalTrips()) {
+            model.addTrip(trip);
+        }
+
+        ObservableList<Trip> filteredTripList = logic.getFilteredTripList();
+
+        assertEquals(getTypicalTrips().size(), filteredTripList.size());
+        for (int i = 0; i < getTypicalTrips().size(); i++) {
+            assertEquals(getTypicalTrips().get(i), filteredTripList.get(i));
+        }
+    }
+
+    @Test
+    public void getAddressBookFilePath_returnsCorrectPath() {
+
+        Path expectedPath = model.getAddressBookFilePath();
+        Path actualPath = logic.getAddressBookFilePath();
+        assertEquals(expectedPath, actualPath);
     }
 
     /**
