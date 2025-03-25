@@ -47,10 +47,9 @@ public class EditTripCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTripCommand.MESSAGE_USAGE);
 
-    private EditTripCommandParser parser = new EditTripCommandParser();
+    private final EditTripCommandParser parser = new EditTripCommandParser();
 
-    @Test
-    public void parse_missingParts_failure() {
+    @Test public void parse_missingParts_failure() {
         // no index specified
         assertParseFailure(parser, VALID_TRIP_NAME_PARIS_2025, MESSAGE_INVALID_FORMAT);
 
@@ -61,8 +60,7 @@ public class EditTripCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
-    @Test
-    public void parse_invalidPreamble_failure() {
+    @Test public void parse_invalidPreamble_failure() {
         // negative index
         assertParseFailure(parser, "-5" + TRIP_NAME_DESC_PARIS_2025, MESSAGE_INVALID_FORMAT);
 
@@ -76,10 +74,10 @@ public class EditTripCommandParserTest {
         assertParseFailure(parser, "1 z/ string", MESSAGE_INVALID_FORMAT);
     }
 
-    @Test
-    public void parse_invalidValue_failure() {
+    @Test public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_TRIP_NAME_DESC, TripName.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_ACCOMMODATION_DESC, Accommodation.MESSAGE_CONSTRAINTS); // invalid accommodation
+        assertParseFailure(parser, "1" + INVALID_ACCOMMODATION_DESC, Accommodation.MESSAGE_CONSTRAINTS); // invalid
+        // accommodation
         assertParseFailure(parser, "1" + INVALID_ITINERARY_DESC, Itinerary.MESSAGE_CONSTRAINTS); // invalid itinerary
         assertParseFailure(parser, "1" + INVALID_TRIP_DATE_DESC, TripDate.MESSAGE_CONSTRAINTS); // invalid date
         assertParseFailure(parser, "1" + INVALID_TRIP_NOTE_DESC, Note.MESSAGE_CONSTRAINTS); // invalid note
@@ -93,8 +91,7 @@ public class EditTripCommandParserTest {
                 + VALID_TRIP_DATE_2025, TripName.MESSAGE_CONSTRAINTS);
     }
 
-    @Test
-    public void parse_allFieldsSpecified_success() {
+    @Test public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_TRIP;
         String userInput = targetIndex.getOneBased() + ACCOMMODATION_DESC_HOTEL_81 + TRIP_CUSTOMER_DESC_AMY
                 + ITINERARY_DESC_EAT_BAGUETTES + TRIP_DATE_DESC_2025 + TRIP_NAME_DESC_PARIS_2025
@@ -109,8 +106,7 @@ public class EditTripCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    @Test
-    public void parse_someFieldsSpecified_success() {
+    @Test public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_TRIP;
         String userInput = targetIndex.getOneBased() + ACCOMMODATION_DESC_HOTEL_81 + ITINERARY_DESC_EAT_BAGUETTES;
 
@@ -121,8 +117,7 @@ public class EditTripCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    @Test
-    public void parse_oneFieldSpecified_success() {
+    @Test public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_TRIP;
         String userInput = targetIndex.getOneBased() + TRIP_NAME_DESC_PARIS_2025;
@@ -161,8 +156,7 @@ public class EditTripCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    @Test
-    public void parse_multipleRepeatedFields_failure() {
+    @Test public void parse_multipleRepeatedFields_failure() {
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_TRIP;
         String userInput = targetIndex.getOneBased() + INVALID_ACCOMMODATION_DESC + ACCOMMODATION_DESC_HOTEL_81;
@@ -175,28 +169,28 @@ public class EditTripCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ACCOMMODATION));
 
         // multiple valid fields repeated
-        userInput = targetIndex.getOneBased() + ACCOMMODATION_DESC_HOTEL_81 + TRIP_DATE_DESC_2025 + ITINERARY_DESC_EAT_BAGUETTES
-                + TRIP_NAME_DESC_PARIS_2025 + ACCOMMODATION_DESC_HOTEL_81 + TRIP_DATE_DESC_2025 + ITINERARY_DESC_EAT_BAGUETTES;
+        userInput = targetIndex.getOneBased() + ACCOMMODATION_DESC_HOTEL_81 + TRIP_DATE_DESC_2025
+                + ITINERARY_DESC_EAT_BAGUETTES + TRIP_NAME_DESC_PARIS_2025 + ACCOMMODATION_DESC_HOTEL_81
+                + TRIP_DATE_DESC_2025 + ITINERARY_DESC_EAT_BAGUETTES;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ACCOMMODATION, PREFIX_DATE, PREFIX_ITINERARY));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_ACCOMMODATION_DESC + INVALID_TRIP_DATE_DESC + INVALID_ITINERARY_DESC
-                + INVALID_ACCOMMODATION_DESC + INVALID_TRIP_DATE_DESC + INVALID_ITINERARY_DESC;
+        userInput =
+                targetIndex.getOneBased() + INVALID_ACCOMMODATION_DESC + INVALID_TRIP_DATE_DESC + INVALID_ITINERARY_DESC
+                        + INVALID_ACCOMMODATION_DESC + INVALID_TRIP_DATE_DESC + INVALID_ITINERARY_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ACCOMMODATION, PREFIX_DATE, PREFIX_ITINERARY));
     }
 
-    @Test
-    public void parse_resetCustomerNames_success() {
+    @Test public void parse_resetCustomerNames_success() {
         Index targetIndex = INDEX_THIRD_TRIP;
         String userInput = targetIndex.getOneBased() + CUSTOMER_NAME_EMPTY;
 
         EditTripDescriptor descriptor = new EditTripDescriptorBuilder().withCustomerNames().build();
         EditTripCommand expectedCommand = new EditTripCommand(targetIndex, descriptor);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
