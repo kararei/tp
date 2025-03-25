@@ -62,47 +62,4 @@ public class TripCard extends UiPart<Region> {
                 .orElse("");
         customerNames.setText("Customers: " + customerNamesStr);
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof TripCard)) {
-            return false;
-        }
-
-        TripCard tripCard = (TripCard) other;
-        return id.getText().equals(tripCard.id.getText())
-                && trip.equals(tripCard.trip);
-    }
-
-    public Label getId() {
-        return id;
-    }
-
-    public Label getName() {
-        return name;
-    }
-
-    public Label getDate() {
-        return date;
-    }
-
-    public Label getItinerary() {
-        return itinerary;
-    }
-
-    public Label getAccommodation() {
-        return accommodation;
-    }
-
-    public Label getCustomerNames() {
-        return customerNames;
-    }
-
-    public Label getNotes() {
-        return notes;
-    }
 }
