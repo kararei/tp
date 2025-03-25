@@ -42,14 +42,16 @@ public class EditTripCommandParser implements Parser<EditTripCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTripCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY, PREFIX_DATE, PREFIX_NOTE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ACCOMMODATION,
+                PREFIX_ITINERARY, PREFIX_DATE, PREFIX_NOTE);
         EditTripCommand.EditTripDescriptor editTripDescriptor = new EditTripCommand.EditTripDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editTripDescriptor.setName(ParserUtil.parseTripName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_ACCOMMODATION).isPresent()) {
-            editTripDescriptor.setAccommodation(ParserUtil.parseAccommodation(argMultimap.getValue(PREFIX_ACCOMMODATION).get()));
+            editTripDescriptor.setAccommodation(ParserUtil.parseAccommodation(
+                    argMultimap.getValue(PREFIX_ACCOMMODATION).get()));
         }
         if (argMultimap.getValue(PREFIX_ITINERARY).isPresent()) {
             editTripDescriptor.setItinerary(ParserUtil.parseItinerary(argMultimap.getValue(PREFIX_ITINERARY).get()));

@@ -104,13 +104,15 @@ public class EditTripCommand extends Command {
         assert tripToEdit != null;
 
         TripName updatedName = editTripDescriptor.getName().orElse(tripToEdit.getName());
-        Accommodation updatedAccommodation = editTripDescriptor.getAccommodation().orElse(tripToEdit.getAccommodation());
+        Accommodation updatedAccommodation = editTripDescriptor.getAccommodation()
+                .orElse(tripToEdit.getAccommodation());
         Itinerary updatedItinerary = editTripDescriptor.getItinerary().orElse(tripToEdit.getItinerary());
         TripDate updatedDate = editTripDescriptor.getDate().orElse(tripToEdit.getDate());
         Set<Name> updatedCustomerNames = editTripDescriptor.getCustomerNames().orElse(tripToEdit.getCustomerNames());
         Note updatedNote = editTripDescriptor.getNote().orElse(tripToEdit.getNote());
 
-        return new Trip(updatedName, updatedAccommodation, updatedItinerary, updatedDate, updatedCustomerNames, updatedNote);
+        return new Trip(updatedName, updatedAccommodation,
+                updatedItinerary, updatedDate, updatedCustomerNames, updatedNote);
     }
 
     @Override
