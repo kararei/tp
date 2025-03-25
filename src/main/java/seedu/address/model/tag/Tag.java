@@ -34,6 +34,15 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the appropriate CSS class name based on the tagname.
+     * @return A string representing the CSS class name for the tagname.
+     *         Returns "customer-tag" for "customer" and "service-tag" for "service".
+     */
+    public String getStyleClass() {
+        return tagName.equalsIgnoreCase("customer") ? "customer-tag" : "service-tag";
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

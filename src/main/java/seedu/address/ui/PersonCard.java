@@ -57,6 +57,10 @@ public class PersonCard extends UiPart<Region> {
         notes.setText(contact.getNotes());
         contact.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label label = new Label(tag.tagName);
+                    label.getStyleClass().add(tag.getStyleClass());
+                    tags.getChildren().add(label);
+                });
     }
 }
