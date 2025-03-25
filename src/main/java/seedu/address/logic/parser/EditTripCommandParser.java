@@ -9,8 +9,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -59,17 +61,12 @@ public class EditTripCommandParser implements Parser<EditTripCommand> {
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editTripDescriptor.setDate(ParserUtil.parseTripDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-        if (argMultimap.getValue(PREFIX_CUSTOMER_NAME).isPresent()) {
-            List<String> customerNames = argMultimap.getAllValues(PREFIX_CUSTOMER_NAME);
-            Set<Name> customerNameSet = new HashSet<>();
-            for (String customerName : customerNames) {
-                customerNameSet.add(ParserUtil.parseName(customerName));
-            }
-            editTripDescriptor.setCustomerNames(customerNameSet);
-        }
+        parseCustomerNamesForEdit(argMultimap.getAllValues(PREFIX_CUSTOMER_NAME))
+                .ifPresent(editTripDescriptor::setCustomerNames);
 
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
-            editTripDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
+            editTripDescriptor.setNote(ParserUtil.parseNote(
+                    argMultimap.getValue(PREFIX_NOTE).get()));
         }
 
         if (!editTripDescriptor.isAnyFieldEdited()) {
@@ -77,5 +74,25 @@ public class EditTripCommandParser implements Parser<EditTripCommand> {
         }
 
         return new EditTripCommand(index, editTripDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> customerNames} into a {@code Set<Name>} if {@code customerNames} is non-empty.
+     * If {@code customerNames} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Name>} containing zero names.
+     */
+    private Optional<Set<Name>> parseCustomerNamesForEdit(Collection<String> customerNames) throws ParseException {
+        assert customerNames != null;
+
+        if (customerNames.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> nameSet = customerNames.size() == 1 && customerNames.contains("")
+                ? Collections.emptySet() : customerNames;
+        Set<Name> customerNameSet = new HashSet<>();
+        for (String customerName : nameSet) {
+            customerNameSet.add(ParserUtil.parseName(customerName));
+        }
+        return Optional.of(customerNameSet);
     }
 }
