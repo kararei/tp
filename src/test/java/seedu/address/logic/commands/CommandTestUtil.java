@@ -27,6 +27,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
 import seedu.address.model.trip.Trip;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTripDescriptorBuilder;
 import seedu.address.testutil.TripBuilder;
 
 /**
@@ -113,6 +114,37 @@ public class CommandTestUtil {
             .withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
             .withNote(VALID_NOTE)
             .build();
+
+    public static final String VALID_TRIP_NAME_TOKYO_2026 = "TOKYO 2026";
+    public static final String TRIP_NAME_DESC_TOKYO_2026 = " " + PREFIX_NAME + VALID_TRIP_NAME_TOKYO_2026;
+
+    public static final String VALID_ACCOMMODATION_RITZ = "Ritz Hotel";
+    public static final String ACCOMMODATION_DESC_RITZ = " " + PREFIX_ACCOMMODATION + VALID_ACCOMMODATION_RITZ;
+
+    public static final String VALID_ITINERARY_VISIT_TOWER = "Visit Tokyo Tower";
+    public static final String ITINERARY_DESC_VISIT_TOWER = " " + PREFIX_ITINERARY + VALID_ITINERARY_VISIT_TOWER;
+
+    public static final String VALID_TRIP_DATE_2026 = "01/01/2026";
+    public static final String TRIP_DATE_DESC_2026 = " " + PREFIX_DATE + VALID_TRIP_DATE_2026;
+
+    public static final String VALID_NOTE_TOKYO = "Customer requested Japanese-speaking guide";
+    public static final String TRIP_NOTE_DESC_TOKYO = " " + PREFIX_NOTE + VALID_NOTE_TOKYO;
+
+    public static final EditTripCommand.EditTripDescriptor DESC_PARIS_2025;
+    public static final EditTripCommand.EditTripDescriptor DESC_TOKYO_2026;
+
+    static {
+        // Add this to the existing static block in CommandTestUtil.java
+        DESC_PARIS_2025 = new EditTripDescriptorBuilder().withName(VALID_TRIP_NAME_PARIS_2025)
+                .withAccommodation(VALID_ACCOMMODATION_HOTEL_81).withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
+                .withDate(VALID_TRIP_DATE_2025).withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
+                .withNote(VALID_NOTE).build();
+
+        DESC_TOKYO_2026 = new EditTripDescriptorBuilder().withName(VALID_TRIP_NAME_TOKYO_2026)
+                .withAccommodation(VALID_ACCOMMODATION_RITZ).withItinerary(VALID_ITINERARY_VISIT_TOWER)
+                .withDate(VALID_TRIP_DATE_2026).withCustomerNames(VALID_NAME_AMY)
+                .withNote(VALID_NOTE_TOKYO).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
