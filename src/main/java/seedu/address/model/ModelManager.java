@@ -43,6 +43,9 @@ public class ModelManager implements Model {
         logger.info("ModelManager initialized successfully");
     }
 
+    /**
+     * Creates a new ModelManager with empty data.
+     */
     public ModelManager() {
         this(new AddressBook(), new TripBook(), new UserPrefs());
         logger.info("Created new ModelManager with empty data");
