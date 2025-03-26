@@ -46,7 +46,7 @@ Adds a new contact (customer or service provider) to the system.
 * `addContact n/Beach Resort p/12345678 e/resort@example.com a/456 Beach Road t/service nts/24-hour reception`
 
 **Parameter Requirements**:
-* `NAME`: Alphabetic characters, spaces, and hyphens allowed
+* `NAME`: Alphabetic characters and spaces are allowed
 * `PHONE`: Must be 8 digits
 * `EMAIL`: Must follow standard email format (e.g., user@domain.com)
 * `ADDRESS`: Any alphanumeric characters, spaces, and common punctuation marks
