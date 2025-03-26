@@ -61,4 +61,4 @@ AddCommand -[hidden]-> LogicManager : result
 
 [<-- LogicManager
 deactivate LogicManager
-@enduml 
+@enduml
