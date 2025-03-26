@@ -41,6 +41,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        logger.info("LogicManager initialized with model and storage");
     }
 
     @Override
@@ -54,9 +55,12 @@ public class LogicManager implements Logic {
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveTripBook(model.getTripBook());
+            logger.info("Command executed successfully: " + command.getClass().getSimpleName());
         } catch (AccessDeniedException e) {
+            logger.warning("Command execution failed: " + e.getMessage());
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
+            logger.warning("Command execution failed: " + ioe.getMessage());
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
@@ -65,31 +69,37 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
+        logger.fine("Retrieving address book");
         return model.getAddressBook();
     }
 
     @Override
     public ObservableList<Contact> getFilteredPersonList() {
+        logger.fine("Retrieving filtered person list");
         return model.getFilteredPersonList();
     }
 
     @Override
     public ObservableList<Trip> getFilteredTripList() {
+        logger.fine("Retrieving filtered trip list");
         return model.getFilteredTripList();
     }
 
     @Override
     public Path getAddressBookFilePath() {
+        logger.fine("Retrieving address book file path");
         return model.getAddressBookFilePath();
     }
 
     @Override
     public GuiSettings getGuiSettings() {
+        logger.fine("Retrieving GUI settings");
         return model.getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
+        logger.info("Updating GUI settings");
         model.setGuiSettings(guiSettings);
     }
 }

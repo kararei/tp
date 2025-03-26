@@ -40,10 +40,12 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredContacts = new FilteredList<>(this.addressBook.getPersonList());
         filteredTrips = new FilteredList<>(this.tripBook.getTripList());
+        logger.info("ModelManager initialized successfully");
     }
 
     public ModelManager() {
         this(new AddressBook(), new TripBook(), new UserPrefs());
+        logger.info("Created new ModelManager with empty data");
     }
 
     //=========== UserPrefs ==================================================================================
@@ -51,33 +53,39 @@ public class ModelManager implements Model {
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
+        logger.info("Updating user preferences");
         this.userPrefs.resetData(userPrefs);
     }
 
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
+        logger.fine("Retrieving user preferences");
         return userPrefs;
     }
 
     @Override
     public GuiSettings getGuiSettings() {
+        logger.fine("Retrieving GUI settings");
         return userPrefs.getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
+        logger.info("Updating GUI settings");
         userPrefs.setGuiSettings(guiSettings);
     }
 
     @Override
     public Path getAddressBookFilePath() {
+        logger.fine("Retrieving address book file path");
         return userPrefs.getAddressBookFilePath();
     }
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
+        logger.info("Updating address book file path to: " + addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
@@ -97,71 +105,81 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        logger.info("Address book data reset");
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
+        logger.fine("Retrieving address book");
         return addressBook;
     }
 
     @Override
     public boolean hasContact(Contact contact) {
         requireNonNull(contact);
+        logger.fine("Checking if contact exists: " + contact.getName());
         return addressBook.hasContact(contact);
     }
 
     @Override
     public void deleteContact(Contact target) {
         addressBook.removeContact(target);
+        logger.info("Deleted contact: " + target.getName());
     }
 
     @Override
     public void addPerson(Contact contact) {
         addressBook.addPerson(contact);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.info("Added new contact: " + contact.getName());
     }
 
     @Override
     public void setPerson(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
-
         addressBook.setContact(target, editedContact);
+        logger.info("Updated contact: " + target.getName() + " to: " + editedContact.getName());
     }
 
     //=========== TripBook ================================================================================
 
     @Override
-    public void setTripBook(ReadOnlyTripBook tripBook) {
-        this.tripBook.resetData(tripBook);
+    public void setTripBook(ReadOnlyTripBook newData) {
+        tripBook.resetData(newData);
+        logger.info("Trip book data reset");
     }
 
     @Override
     public ReadOnlyTripBook getTripBook() {
+        logger.fine("Retrieving trip book");
         return tripBook;
     }
 
     @Override
     public boolean hasTrip(Trip trip) {
         requireNonNull(trip);
+        logger.fine("Checking if trip exists: " + trip.getName());
         return tripBook.hasTrip(trip);
     }
 
     @Override
     public void deleteTrip(Trip target) {
         tripBook.removeTrip(target);
+        logger.info("Deleted trip: " + target.getName());
     }
 
     @Override
     public void addTrip(Trip trip) {
         tripBook.addTrip(trip);
         updateFilteredTripList(PREDICATE_SHOW_ALL_TRIPS);
+        logger.info("Added new trip: " + trip.getName());
     }
 
     @Override
     public void setTrip(Trip target, Trip editedTrip) {
         requireAllNonNull(target, editedTrip);
-
         tripBook.setTrip(target, editedTrip);
+        logger.info("Updated trip: " + target.getName() + " to: " + editedTrip.getName());
     }
 
     //=========== Filtered Contact List Accessors =============================================================
@@ -172,12 +190,14 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Contact> getFilteredPersonList() {
+        logger.fine("Retrieving filtered person list");
         return filteredContacts;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
+        logger.info("Updating filtered person list with new predicate");
         filteredContacts.setPredicate(predicate);
     }
 
@@ -189,12 +209,14 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Trip> getFilteredTripList() {
+        logger.fine("Retrieving filtered trip list");
         return filteredTrips;
     }
 
     @Override
     public void updateFilteredTripList(Predicate<Trip> predicate) {
         requireNonNull(predicate);
+        logger.info("Updating filtered trip list with new predicate");
         filteredTrips.setPredicate(predicate);
     }
 
