@@ -14,6 +14,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.contact.Name;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
+import seedu.address.model.trip.Note;
 import seedu.address.model.trip.Trip;
 import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
@@ -30,6 +31,7 @@ class JsonAdaptedTrip {
     private final String itinerary;
     private final String date;
     private final List<String> customerNames = new ArrayList<>();
+    private final String note;
 
     /**
      * Constructs a {@code JsonAdaptedTrip} with the given trip details.
@@ -37,7 +39,7 @@ class JsonAdaptedTrip {
     @JsonCreator
     public JsonAdaptedTrip(@JsonProperty("name") String name, @JsonProperty("accommodation") String accommodation,
             @JsonProperty("itinerary") String itinerary, @JsonProperty("date") String date,
-            @JsonProperty("customerNames") List<String> customerNames) {
+            @JsonProperty("customerNames") List<String> customerNames, @JsonProperty("note") String note) {
         this.name = name;
         this.accommodation = accommodation;
         this.itinerary = itinerary;
@@ -45,6 +47,7 @@ class JsonAdaptedTrip {
         if (customerNames != null) {
             this.customerNames.addAll(customerNames);
         }
+        this.note = note;
     }
 
     /**
@@ -58,6 +61,7 @@ class JsonAdaptedTrip {
         customerNames.addAll(source.getCustomerNames().stream()
                 .map(customer -> customer.fullName)
                 .collect(Collectors.toList()));
+        note = source.getNote().toString();
     }
 
     /**
@@ -95,15 +99,47 @@ class JsonAdaptedTrip {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TripDate.class.getSimpleName()));
         }
 
-        try {
-            final TripName modelName = ParserUtil.parseTripName(name);
-            final Accommodation modelAccommodation = ParserUtil.parseAccommodation(accommodation);
-            final Itinerary modelItinerary = ParserUtil.parseItinerary(itinerary);
-            final TripDate modelDate = ParserUtil.parseTripDate(date);
-
-            return new Trip(modelName, modelAccommodation, modelItinerary, modelDate, modelCustomerNames);
-        } catch (IllegalValueException e) {
-            throw new IllegalValueException(e.getMessage());
+        if (note == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
         }
+
+        final TripName modelName;
+        final Accommodation modelAccommodation;
+        final Itinerary modelItinerary;
+        final TripDate modelDate;
+        final Note modelNote;
+
+        try {
+            modelName = ParserUtil.parseTripName(name);
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(TripName.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            modelAccommodation = ParserUtil.parseAccommodation(accommodation);
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(Accommodation.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            modelItinerary = ParserUtil.parseItinerary(itinerary);
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(Itinerary.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            modelDate = ParserUtil.parseTripDate(date);
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(TripDate.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            modelNote = ParserUtil.parseNote(note);
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Trip(modelName, modelAccommodation, modelItinerary, modelDate, modelCustomerNames, modelNote);
     }
 }

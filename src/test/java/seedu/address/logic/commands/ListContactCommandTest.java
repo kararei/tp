@@ -37,10 +37,10 @@ public class ListContactCommandTest {
     @Test
     public void execute_listContactFilteredByCustomer() {
         String customerTagName = "customer";
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMER);
+        assertTrue(model.getFilteredPersonList().size() == 6);
         assertCommandSuccess(new ListContactCommand(customerTagName), model,
             String.format(ListContactCommand.MESSAGE_SUCCESS, (customerTagName + " ")), model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMER);
-        assertTrue(model.getFilteredPersonList().size() == 2);
     }
 
     @Test

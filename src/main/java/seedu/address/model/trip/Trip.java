@@ -20,18 +20,20 @@ public class Trip {
     private final Itinerary itinerary;
     private final TripDate date;
     private final Set<Name> customerNames = new HashSet<>();
+    private final Note note;
 
     /**
      * Every field must be present and not null.
      */
     public Trip(TripName name, Accommodation accommodation, Itinerary itinerary, TripDate date,
-                Set<Name> customerNames) {
-        requireAllNonNull(name, accommodation, itinerary, date, customerNames);
+                Set<Name> customerNames, Note note) {
+        requireAllNonNull(name, accommodation, itinerary, date, customerNames, note);
         this.name = name;
         this.accommodation = accommodation;
         this.itinerary = itinerary;
         this.date = date;
         this.customerNames.addAll(customerNames);
+        this.note = note;
     }
 
     public TripName getName() {
@@ -52,6 +54,10 @@ public class Trip {
 
     public Set<Name> getCustomerNames() {
         return Collections.unmodifiableSet(customerNames);
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -76,12 +82,13 @@ public class Trip {
         return Objects.equals(name, trip.name) && Objects.equals(accommodation, trip.accommodation)
                 && Objects.equals(itinerary, trip.itinerary)
                 && Objects.equals(date, trip.date)
-                && Objects.equals(customerNames, trip.customerNames);
+                && Objects.equals(customerNames, trip.customerNames)
+                && Objects.equals(note, trip.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, accommodation, itinerary, date, customerNames);
+        return Objects.hash(name, accommodation, itinerary, date, customerNames, note);
     }
 
     @Override
@@ -92,6 +99,7 @@ public class Trip {
                 .add("itinerary", itinerary)
                 .add("date", date)
                 .add("customerNames", customerNames)
+                .add("note", note)
                 .toString();
     }
 

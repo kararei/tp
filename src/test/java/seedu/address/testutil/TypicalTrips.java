@@ -23,51 +23,59 @@ public class TypicalTrips {
             .withAccommodation("Hotel de Paris")
             .withItinerary("Visit Eiffel Tower, Louvre Museum")
             .withDate("15/6/2024")
-            .withCustomerNames("Alice Pauline", "Bob Chen").build();
+            .withCustomerNames("Alice Pauline", "Bob Chen")
+            .withNote("First time in Paris").build();
 
     public static final Trip TOKYO = new TripBuilder().withName("Tokyo Explorer")
             .withAccommodation("Shinjuku Hotel")
             .withItinerary("Visit Tokyo Tower, Shibuya Crossing")
             .withDate("20/7/2024")
-            .withCustomerNames("Charlie Brown", "David Lee").build();
+            .withCustomerNames("Charlie Brown", "David Lee")
+            .withNote("Business trip").build();
 
     public static final Trip SINGAPORE = new TripBuilder().withName("Singapore Tour")
             .withAccommodation("Marina Bay Sands")
             .withItinerary("Gardens by the Bay, Sentosa Island")
             .withDate("10/8/2024")
-            .withCustomerNames("Eve Tan").build();
+            .withCustomerNames("Eve Tan")
+            .withNote("Family vacation").build();
 
     public static final Trip BALI = new TripBuilder().withName("Bali Getaway")
             .withAccommodation("Ubud Resort")
             .withItinerary("Rice Terraces, Tanah Lot Temple")
             .withDate("5/9/2024")
-            .withCustomerNames("Frank Wong", "Grace Liu").build();
+            .withCustomerNames("Frank Wong", "Grace Liu")
+            .withNote("Honeymoon trip").build();
 
     public static final Trip SEOUL = new TripBuilder().withName("Seoul Discovery")
             .withAccommodation("Gangnam Hotel")
             .withItinerary("Namsan Tower, Myeongdong Shopping")
             .withDate("1/10/2024")
-            .withCustomerNames("Henry Park").build();
+            .withCustomerNames("Henry Park")
+            .withNote("Solo trip").build();
 
     // Manually added
     public static final Trip LONDON = new TripBuilder().withName("London Explorer")
             .withAccommodation("Westminster Hotel")
             .withItinerary("Big Ben, London Eye")
             .withDate("15/11/2024")
-            .withCustomerNames("Ian Smith").build();
+            .withCustomerNames("Ian Smith")
+            .withNote("Christmas shopping").build();
 
     public static final Trip NEW_YORK = new TripBuilder().withName("NYC Adventure")
             .withAccommodation("Manhattan Hotel")
             .withItinerary("Times Square, Central Park")
             .withDate("20/12/2024")
-            .withCustomerNames("Jane Wilson").build();
+            .withCustomerNames("Jane Wilson")
+            .withNote("New Year celebration").build();
 
     // Manually added - Trip's details found in {@code CommandTestUtil}
     public static final Trip PARIS_2025 = new TripBuilder().withName(VALID_TRIP_NAME_PARIS_2025)
             .withAccommodation(VALID_ACCOMMODATION_HOTEL_81)
             .withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
             .withDate(VALID_TRIP_DATE_2025)
-            .withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB).build();
+            .withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
+            .withNote("Summer vacation").build();
 
     public static final String KEYWORD_MATCHING_PARIS = "Paris"; // A keyword that matches PARIS
 

@@ -17,6 +17,7 @@ public class TripTest {
             .withItinerary("Eat baguettes")
             .withDate("01/01/2205")
             .withCustomerNames("John Doe", "Jane Doe")
+            .withNote("Customer prefers window seat")
             .build();
 
     private static final Trip TOKYO = new TripBuilder().withName("Tokyo 2025")
@@ -24,6 +25,7 @@ public class TripTest {
             .withItinerary("Visit Tokyo Tower")
             .withDate("02/02/2205")
             .withCustomerNames("Alice Smith", "Bob Jones")
+            .withNote("Customer prefers aisle seat")
             .build();
 
     // Valid values for testing modifications
@@ -32,6 +34,7 @@ public class TripTest {
     private static final String VALID_ITINERARY_TOKYO = "Visit Tokyo Tower";
     private static final String VALID_DATE_TOKYO = "02/02/2205";
     private static final String VALID_CUSTOMER_BOB = "Bob Jones";
+    private static final String VALID_NOTE_TOKYO = "Customer prefers aisle seat";
 
     @Test
     public void getCustomerNames_modifyList_throwsUnsupportedOperationException() {
@@ -52,6 +55,7 @@ public class TripTest {
                 .withItinerary(VALID_ITINERARY_TOKYO)
                 .withDate(VALID_DATE_TOKYO)
                 .withCustomerNames(VALID_CUSTOMER_BOB)
+                .withNote(VALID_NOTE_TOKYO)
                 .build();
         assertTrue(PARIS.isSameTrip(editedParis));
 
@@ -106,6 +110,10 @@ public class TripTest {
         // different customer names -> returns false
         editedParis = new TripBuilder(PARIS).withCustomerNames(VALID_CUSTOMER_BOB).build();
         assertFalse(PARIS.equals(editedParis));
+
+        // different note -> returns false
+        editedParis = new TripBuilder(PARIS).withNote(VALID_NOTE_TOKYO).build();
+        assertFalse(PARIS.equals(editedParis));
     }
 
     @Test
@@ -114,7 +122,8 @@ public class TripTest {
                 + ", accommodation=" + PARIS.getAccommodation()
                 + ", itinerary=" + PARIS.getItinerary()
                 + ", date=" + PARIS.getDate()
-                + ", customerNames=" + PARIS.getCustomerNames() + "}";
+                + ", customerNames=" + PARIS.getCustomerNames()
+                + ", note=" + PARIS.getNote() + "}";
         assertEquals(expected, PARIS.toString());
     }
 

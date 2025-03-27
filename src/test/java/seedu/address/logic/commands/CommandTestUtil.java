@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -25,6 +27,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.NameContainsKeywordsPredicate;
 import seedu.address.model.trip.Trip;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTripDescriptorBuilder;
 import seedu.address.testutil.TripBuilder;
 
 /**
@@ -69,10 +72,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_SERVICE).build();
+                .withTags(VALID_TAG_SERVICE).withNotes("").build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_CUSTOMER, VALID_TAG_SERVICE).build();
+                .withTags(VALID_TAG_CUSTOMER, VALID_TAG_SERVICE).withNotes("").build();
     }
 
     public static final String VALID_TRIP_NAME_PARIS_2025 = "PARIS 2025";
@@ -97,13 +100,51 @@ public class CommandTestUtil {
     public static final String TRIP_CUSTOMER_DESC_AMY = " " + PREFIX_CUSTOMER_NAME + VALID_NAME_AMY;
     public static final String TRIP_CUSTOMER_DESC_BOB = " " + PREFIX_CUSTOMER_NAME + VALID_NAME_BOB;
 
+    public static final String VALID_NOTE = "Customer prefers window seat";
+    public static final String INVALID_NOTE = " "; // empty note
+
+    public static final String TRIP_NOTE_DESC = " " + PREFIX_NOTE + VALID_NOTE;
+    public static final String INVALID_TRIP_NOTE_DESC = " " + PREFIX_NOTE + INVALID_NOTE;
+
     public static final Trip PARIS_2025_TRIP = new TripBuilder()
             .withName(VALID_TRIP_NAME_PARIS_2025)
             .withAccommodation(VALID_ACCOMMODATION_HOTEL_81)
             .withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
             .withDate(VALID_TRIP_DATE_2025)
             .withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
+            .withNote(VALID_NOTE)
             .build();
+
+    public static final String VALID_TRIP_NAME_TOKYO_2026 = "TOKYO 2026";
+    public static final String TRIP_NAME_DESC_TOKYO_2026 = " " + PREFIX_NAME + VALID_TRIP_NAME_TOKYO_2026;
+
+    public static final String VALID_ACCOMMODATION_RITZ = "Ritz Hotel";
+    public static final String ACCOMMODATION_DESC_RITZ = " " + PREFIX_ACCOMMODATION + VALID_ACCOMMODATION_RITZ;
+
+    public static final String VALID_ITINERARY_VISIT_TOWER = "Visit Tokyo Tower";
+    public static final String ITINERARY_DESC_VISIT_TOWER = " " + PREFIX_ITINERARY + VALID_ITINERARY_VISIT_TOWER;
+
+    public static final String VALID_TRIP_DATE_2026 = "01/01/2026";
+    public static final String TRIP_DATE_DESC_2026 = " " + PREFIX_DATE + VALID_TRIP_DATE_2026;
+
+    public static final String VALID_NOTE_TOKYO = "Customer requested Japanese-speaking guide";
+    public static final String TRIP_NOTE_DESC_TOKYO = " " + PREFIX_NOTE + VALID_NOTE_TOKYO;
+
+    public static final EditTripCommand.EditTripDescriptor DESC_PARIS_2025;
+    public static final EditTripCommand.EditTripDescriptor DESC_TOKYO_2026;
+
+    static {
+        // Add this to the existing static block in CommandTestUtil.java
+        DESC_PARIS_2025 = new EditTripDescriptorBuilder().withName(VALID_TRIP_NAME_PARIS_2025)
+                .withAccommodation(VALID_ACCOMMODATION_HOTEL_81).withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
+                .withDate(VALID_TRIP_DATE_2025).withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
+                .withNote(VALID_NOTE).build();
+
+        DESC_TOKYO_2026 = new EditTripDescriptorBuilder().withName(VALID_TRIP_NAME_TOKYO_2026)
+                .withAccommodation(VALID_ACCOMMODATION_RITZ).withItinerary(VALID_ITINERARY_VISIT_TOWER)
+                .withDate(VALID_TRIP_DATE_2026).withCustomerNames(VALID_NAME_AMY)
+                .withNote(VALID_NOTE_TOKYO).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -159,6 +200,21 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the trip at the given {@code targetIndex} in the
+     * {@code model}'s trip book.
+     */
+    public static void showTripAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTripList().size());
+
+        Trip trip = model.getFilteredTripList().get(targetIndex.getZeroBased());
+        String tripName = trip.getName().toString();
+        final String[] splitName = tripName.split("\\s+");
+        model.updateFilteredTripList(t -> StringUtil.containsWordIgnoreCase(t.getName().toString(), splitName[0]));
+
+        assertEquals(1, model.getFilteredTripList().size());
     }
 
 }

@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label notes;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Contact} and index to display.
@@ -52,8 +54,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(contact.getPhone().value);
         address.setText(contact.getAddress().value);
         email.setText(contact.getEmail().value);
+        notes.setText(contact.getNotes());
         contact.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label label = new Label(tag.tagName);
+                    label.getStyleClass().add(tag.getStyleClass());
+                    tags.getChildren().add(label);
+                });
     }
 }
