@@ -40,9 +40,6 @@ deactivate ListTripCommand
 ListTripCommandParser --> AddressBookParser : l
 deactivate ListTripCommandParser
 
-ListTripCommandParser -[hidden]-> AddressBookParser
-destroy ListTripCommandParser
-
 AddressBookParser --> LogicManager : l
 deactivate AddressBookParser
 
