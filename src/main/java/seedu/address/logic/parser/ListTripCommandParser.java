@@ -2,13 +2,13 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.ListTripCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.trip.TripDate;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import seedu.address.logic.commands.ListTripCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.trip.TripDate;
 
 /**
  * Parses input arguments and creates a new ListContactCommand object

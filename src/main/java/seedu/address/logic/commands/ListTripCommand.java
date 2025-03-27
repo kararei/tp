@@ -40,7 +40,7 @@ public class ListTripCommand extends Command {
         if (date == null) {
             predicate = PREDICATE_SHOW_ALL_TRIPS;
         } else {
-            predicate = trip -> trip.getDate().equals(date);
+            predicate = trip -> trip.getDate().date.equals(date);
         }
 
         model.updateFilteredTripList(predicate);
