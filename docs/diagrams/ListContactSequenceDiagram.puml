@@ -49,9 +49,8 @@ deactivate AddressBookParser
 LogicManager -> ListContactCommand : execute(m)
 activate ListContactCommand
 
-ListContactCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_SERVICE)
+ListContactCommand -> Model : updateFilteredPersonList(show_service)
 activate Model
-
 
 deactivate Model
 
