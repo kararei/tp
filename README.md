@@ -39,18 +39,19 @@ TravelHub provides travel agents with tools to:
 #### Add Contact: `addContact`
 Adds a new contact (customer or service provider) to the system.
 
-**Format**: `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+**Format**: `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [nts/NOTE]`
 
 **Examples**:
-* `addContact n/John Doe p/98765432 e/johndoe@example.com a/123 Main Street t/Customer`
-* `addContact n/Beach Resort p/12345678 e/resort@example.com a/456 Beach Road t/Service`
+* `addContact n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/customer t/service nts/Preferred contact method is email`
+* `addContact n/Beach Resort p/12345678 e/resort@example.com a/456 Beach Road t/service nts/24-hour reception`
 
 **Parameter Requirements**:
-* `NAME`: Alphabetic characters, spaces, and hyphens allowed
-* `PHONE_NUMBER`: Must be 8 digits
+* `NAME`: Alphabetic characters and spaces are allowed
+* `PHONE`: Must be 8 digits
 * `EMAIL`: Must follow standard email format (e.g., user@domain.com)
 * `ADDRESS`: Any alphanumeric characters, spaces, and common punctuation marks
-* `TAG`: Must be either Customer or Service (optional)
+* `TAG`: Must be either 'customer' or 'service' (optional, can have both)
+* `NOTE`: Any text (optional)
 
 #### Delete Contact: `deleteContact`
 Removes a contact from the system.
@@ -73,17 +74,19 @@ Tags a contact as either a customer or service provider.
 #### Add Trip: `addTrip`
 Schedules a new trip with associated details.
 
-**Format**: `addTrip d/DATE c/CUSTOMER_INDEX a/ACCOMMODATION i/ITINERARY`
+**Format**: `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE c/CUSTOMER_NAME... [nts/NOTE]`
 
 **Examples**:
-* `addTrip d/2023-12-25 c/1 a/Hotel Sunshine i/Visit Eiffel Tower`
-* `addTrip d/2024-01-01 c/2 a/Beach Resort i/Relax by the beach`
+* `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
+* `addTrip n/Beach Vacation a/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
 
 **Parameter Requirements**:
-* `DATE`: Must be in YYYY-MM-DD format
-* `CUSTOMER_INDEX`: Must be a positive integer representing the customer's position in the list
+* `NAME`: Any alphanumeric characters and spaces
 * `ACCOMMODATION`: Any alphanumeric characters and spaces
-* `ITINERARY`: Any alphanumeric characters and spaces
+* `ITINERARY`: Any text, can include multiple activities separated by semicolons
+* `DATE`: Must be in DD/MM/YYYY format
+* `CUSTOMER_NAME`: Any alphanumeric characters and spaces
+* `NOTE`: Any text (optional)
 
 #### Delete Trip: `deleteTrip`
 Removes a trip from the system.
@@ -108,12 +111,12 @@ Adds notes to customer profiles or trips.
 
 | Command           | Format                                                             | Example                                                                                  |
 |-------------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| Add Contact       | `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`    | `addContact n/John Doe p/98765432 e/johndoe@example.com a/123 Main Street t/Customer`    |
+| Add Contact       | `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [nts/NOTE]` | `addContact n/John Doe p/98765432 e/johnd@example.com a/123 Main Street t/customer nts/Preferred contact method is email` |
 | Delete Contact    | `deleteContact INDEX`                                              | `deleteContact 1`                                                                        |
-| Tag Contact       | `tagContact INDEX t/TAG`                                           | `tagContact 1 t/Customer`                                                                |
-| Add Trip          | `addTrip d/DATE c/CUSTOMER_INDEX a/ACCOMMODATION i/ITINERARY`      | `addTrip d/2023-12-25 c/1 a/Hotel Sunshine i/Visit Eiffel Tower`                         |
+| Edit Contact      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [nts/NOTE]` | `edit 1 p/87654321 e/john.doe@example.com` |
+| Add Trip          | `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE c/CUSTOMER_NAME... [nts/NOTE]` | `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower d/01/1/2025 c/Jane Doe nts/Customer prefers window seat` |
 | Delete Trip       | `deleteTrip INDEX`                                                 | `deleteTrip 1`                                                                           |
-| Add Note          | `addNote INDEX NOTE`                                               | `addNote 1 Special dietary requirements`                                                 |
+| Edit Trip         | `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]` | `editTrip 1 i/Visit Eiffel Tower; Visit Louvre` |
 
 ## Acknowledgements
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
