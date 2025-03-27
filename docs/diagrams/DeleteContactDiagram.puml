@@ -37,7 +37,7 @@ activate Model
 Model --> DeleteCommand : filteredList
 deactivate Model
 
-DeleteCommand -> DeleteCommand : validateIndex(1)
+DeleteCommand -> DeleteCommand : validate(1)
 
 DeleteCommand -> Model : deletePerson(contact)
 activate Model

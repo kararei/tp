@@ -18,7 +18,7 @@ group Command Execution
 
     DeleteCommand -> ModelManager : getFilteredTripList()
     ModelManager --> DeleteCommand : filteredList
-    DeleteCommand -> DeleteCommand : validateIndex(1)
+    DeleteCommand -> DeleteCommand : validate(1)
 
     alt Index valid
         DeleteCommand -> ModelManager : deleteTrip(index)
