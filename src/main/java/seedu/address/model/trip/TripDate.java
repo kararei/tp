@@ -16,7 +16,6 @@ public class TripDate {
     public static final String MESSAGE_CONSTRAINTS =
             "Trip date should be in the format of d/M/yyyy";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
-
     public final LocalDate date;
 
     /**

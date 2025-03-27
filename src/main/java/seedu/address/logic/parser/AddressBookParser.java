@@ -78,7 +78,7 @@ public class AddressBookParser {
             return new ListContactCommandParser().parse(arguments);
 
         case ListTripCommand.COMMAND_WORD:
-            return new ListTripCommand();
+            return new ListTripCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
