@@ -74,4 +74,3 @@ deactivate ListTripCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
-@enduml
