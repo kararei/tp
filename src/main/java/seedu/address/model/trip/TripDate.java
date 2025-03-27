@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Trip's date in the address book.
@@ -14,8 +15,9 @@ import java.time.format.DateTimeParseException;
 public class TripDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Trip date should be in the format of d/M/yyyy";
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
+            "Trip date should be in the format of d/M/yyyy and must be a valid date";
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final LocalDate date;
 
@@ -27,7 +29,15 @@ public class TripDate {
     public TripDate(String date) {
         requireNonNull(date);
         checkArgument(isValidTripDate(date), MESSAGE_CONSTRAINTS);
+
+        // Assert that preconditions are met
+        assert !date.trim().isEmpty() : "Date string cannot be empty";
+        assert isValidTripDate(date) : "Date must be valid before parsing";
+
         this.date = LocalDate.parse(date.trim(), DATE_FORMATTER);
+
+        // Post-construction validation
+        assert this.date.getYear() >= 1000 && this.date.getYear() <= 9999 : "Year must be between 1000-9999";
     }
 
     /**
@@ -39,13 +49,17 @@ public class TripDate {
         }
 
         try {
-            LocalDate.parse(test.trim(), DATE_FORMATTER);
+            LocalDate parsedDate = LocalDate.parse(test.trim(), DATE_FORMATTER);
+            // Additional validation for year range
+            int year = parsedDate.getYear();
+            if (year < 1000 || year > 9999) {
+                return false;
+            }
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
-
 
     @Override
     public String toString() {
@@ -58,7 +72,6 @@ public class TripDate {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof TripDate)) {
             return false;
         }
