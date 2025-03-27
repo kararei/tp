@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents a Trip's date in the address book.
@@ -18,6 +21,7 @@ public class TripDate {
             "Trip date should be in the format of d/M/yyyy and must be a valid date";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
+    private static final Logger logger = LogsCenter.getLogger(TripDate.class);
 
     public final LocalDate date;
 
@@ -30,11 +34,19 @@ public class TripDate {
         requireNonNull(date);
         checkArgument(isValidTripDate(date), MESSAGE_CONSTRAINTS);
 
+        logger.fine("Creating new TripDate with input: " + date);
+
         // Assert that preconditions are met
         assert !date.trim().isEmpty() : "Date string cannot be empty";
         assert isValidTripDate(date) : "Date must be valid before parsing";
 
-        this.date = LocalDate.parse(date.trim(), DATE_FORMATTER);
+        try {
+            this.date = LocalDate.parse(date.trim(), DATE_FORMATTER);
+            logger.fine("Successfully parsed date: " + this.date);
+        } catch (DateTimeParseException e) {
+            logger.warning("Failed to parse date: " + date);
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
 
         // Post-construction validation
         assert this.date.getYear() >= 1000 && this.date.getYear() <= 9999 : "Year must be between 1000-9999";
@@ -45,6 +57,7 @@ public class TripDate {
      */
     public static boolean isValidTripDate(String test) {
         if (test == null || test.trim().isEmpty()) {
+            logger.fine("Invalid date: null or empty string");
             return false;
         }
 
@@ -53,17 +66,21 @@ public class TripDate {
             // Additional validation for year range
             int year = parsedDate.getYear();
             if (year < 1000 || year > 9999) {
+                logger.fine("Invalid year in date: " + test);
                 return false;
             }
             return true;
         } catch (DateTimeParseException e) {
+            logger.fine("Failed to parse date string: " + test);
             return false;
         }
     }
 
     @Override
     public String toString() {
-        return date.format(DATE_FORMATTER);
+        String formatted = date.format(DATE_FORMATTER);
+        logger.finest("Formatting date to string: " + formatted);
+        return formatted;
     }
 
     @Override
@@ -77,7 +94,9 @@ public class TripDate {
         }
 
         TripDate otherTripDate = (TripDate) other;
-        return date.equals(otherTripDate.date);
+        boolean isEqual = date.equals(otherTripDate.date);
+        logger.finest("Comparing TripDates: " + this + " and " + otherTripDate + " -> " + isEqual);
+        return isEqual;
     }
 
     @Override
