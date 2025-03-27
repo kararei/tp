@@ -5,7 +5,7 @@ title Sequence Diagram for Delete Trip Command
 actor User
 participant ":MainWindow" as MainWindow
 participant ":LogicManager" as LogicManager
-participant ":DeleteContactCommand" as DeleteCommand
+participant ":DeleteTripCommand" as DeleteCommand
 participant ":ModelManager" as ModelManager
 participant ":TripBook" as TripBook
 
@@ -16,7 +16,7 @@ group Command Execution
     LogicManager -> DeleteCommand : execute(model)
     activate DeleteCommand
 
-    DeleteCommand -> ModelManager : getFilteredPersonList()
+    DeleteCommand -> ModelManager : getFilteredTripList()
     ModelManager --> DeleteCommand : filteredList
     DeleteCommand -> DeleteCommand : validateIndex(1)
 
