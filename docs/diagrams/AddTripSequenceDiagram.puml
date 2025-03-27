@@ -6,6 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddTripCommandParser" as AddTripParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
 participant "a:AddTripCommand" as AddCommand LOGIC_COLOR
 end box
 
@@ -22,12 +23,35 @@ activate AddressBookParser
 AddressBookParser -> AddTripParser : parse()
 activate AddTripParser
 
-AddTripParser -> AddTripParser : parseTripName()
-AddTripParser -> AddTripParser : parseAccommodation()
-AddTripParser -> AddTripParser : parseItinerary()
-AddTripParser -> AddTripParser : parseTripDate()
-AddTripParser -> AddTripParser : parseName()
-AddTripParser -> AddTripParser : parseNote()
+AddTripParser -> ParserUtil : parseTripName()
+activate ParserUtil
+ParserUtil --> AddTripParser
+deactivate ParserUtil
+
+AddTripParser -> ParserUtil : parseAccommodation()
+activate ParserUtil
+ParserUtil --> AddTripParser
+deactivate ParserUtil
+
+AddTripParser -> ParserUtil : parseItinerary()
+activate ParserUtil
+ParserUtil --> AddTripParser
+deactivate ParserUtil
+
+AddTripParser -> ParserUtil : parseTripDate()
+activate ParserUtil
+ParserUtil --> AddTripParser
+deactivate ParserUtil
+
+AddTripParser -> ParserUtil : parseName()
+activate ParserUtil
+ParserUtil --> AddTripParser
+deactivate ParserUtil
+
+AddTripParser -> ParserUtil : parseNote()
+activate ParserUtil
+ParserUtil --> AddTripParser
+deactivate ParserUtil
 
 create AddCommand
 AddTripParser -> AddCommand
