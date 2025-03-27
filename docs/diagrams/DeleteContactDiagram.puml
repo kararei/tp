@@ -51,7 +51,6 @@ deactivate Model
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 DeleteCommand -[hidden]-> LogicManager : result
-destroy DeleteCommand
 
 [<-- LogicManager
 deactivate LogicManager
