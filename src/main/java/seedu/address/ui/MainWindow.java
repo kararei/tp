@@ -66,9 +66,9 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        logger.info("MainWindow initialized with primary stage and logic");
 
         setAccelerators();
-
         helpWindow = new HelpWindow();
     }
 
@@ -114,32 +114,41 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        logger.info("Filling inner parts of MainWindow");
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        logger.fine("Person list panel initialized");
 
         tripListPanel = new TripListPanel(logic.getFilteredTripList());
         tripListPanelPlaceholder.getChildren().add(tripListPanel.getRoot());
+        logger.fine("Trip list panel initialized");
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        logger.fine("Result display initialized");
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        logger.fine("Status bar footer initialized");
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        logger.fine("Command box initialized");
     }
 
     /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
+        logger.info("Setting window default size");
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+        logger.fine("Window size set to: " + guiSettings.getWindowWidth() + "x" + guiSettings.getWindowHeight());
     }
 
     /**
@@ -147,14 +156,18 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        logger.info("Help window requested");
         if (!helpWindow.isShowing()) {
             helpWindow.show();
+            logger.fine("Help window shown");
         } else {
             helpWindow.focus();
+            logger.fine("Help window focused");
         }
     }
 
     void show() {
+        logger.info("Showing main window");
         primaryStage.show();
     }
 
@@ -163,11 +176,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        logger.info("Handling application exit");
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+        logger.info("Application exit completed");
     }
 
     public PersonListPanel getPersonListPanel() {
