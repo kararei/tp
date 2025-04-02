@@ -85,6 +85,7 @@ Available commands:
  - editContact: Edits a contact at a specified index
  - listContact: Lists all contacts [can specify tag type]
  - listTrips: Lists all trips 
+ - clear: Clear all contacts and trips from Ui
  - exit: Exits the program
 ```
 
@@ -199,10 +200,11 @@ Examples:
 
 Shows a list of all trips in the address book.
 
-Format: `listTrip [upcoming/past]`
+Format: `listTrip [DATE]`
 
 * Without specifying the optional parameter, all trips will be displayed.
-* By specifying the `[upcoming/past]` parameter, only upcoming or past trips will be displayed.
+* By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
+* The date should be in the format of DD/MM/YYYY.
 
 ### Editing a trip : `editTrip`
 
@@ -220,20 +222,6 @@ Format: `editTrip INDEX [n/NAME] [d/DATE] [c/CONTACT_INDEX] [l/LOCATION] [t/TAG]
 Examples:
 * `editTrip 1 d/20/12/2023 l/Marina Bay Sands nts/Changed venue due to renovation` Edits the date, location and adds a note for the 1st trip.
 * `editTrip 2 n/Follow-up Meeting c/2 t/urgent` Edits the name and contact of the 2nd trip and changes its tag to urgent.
-
-### Deleting a trip : `deleteTrip`
-
-Deletes the specified trip from the address book.
-
-Format: `deleteTrip INDEX`
-
-* Deletes the trip at the specified `INDEX`.
-* The index refers to the index number shown in the displayed trip list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the address book.
-* `listTrip upcoming` followed by `deleteTrip 1` deletes the 1st trip in the upcoming trips list.
 
 ### Clearing all entries : `clear`
 
@@ -292,6 +280,5 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Add Trip** | `addTrip n/NAME d/DATE c/CONTACT_INDEX l/LOCATION [t/TAG]…​ [nts/NOTE]`<br> e.g., `addTrip n/Business Meeting d/15/12/2023 c/1 l/Orchard Road t/important nts/Bring sales materials`
-**List Trip** | `listTrip [upcoming/past]`<br> e.g., `listTrip upcoming`
+**List Trip** | `listTrip [dd/MM/YYYY]`<br> e.g., `listTrip 15/12/2023`
 **Edit Trip** | `editTrip INDEX [n/NAME] [d/DATE] [c/CONTACT_INDEX] [l/LOCATION] [t/TAG]…​ [nts/NOTE]`<br> e.g., `editTrip 1 d/20/12/2023 l/Marina Bay Sands nts/Changed venue due to renovation`
-**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 2`
