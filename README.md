@@ -60,15 +60,6 @@ Removes a contact from the system.
 
 **Example**: `deleteContact 1`
 
-#### Tag Contact: `tagContact`
-Tags a contact as either a customer or service provider.
-
-**Format**: `tagContact INDEX t/TAG`
-
-**Examples**:
-* `tagContact 1 t/Customer`
-* `tagContact 2 t/Service`
-
 ### 2. Trip Management
 
 #### Add Trip: `addTrip`
@@ -95,25 +86,13 @@ Removes a trip from the system.
 
 **Example**: `deleteTrip 1`
 
-### 3. Notes Management
-
-#### Add Note: `addNote`
-Adds notes to customer profiles or trips.
-
-**Format**: `addNote INDEX NOTE`
-
-**Examples**:
-* `addNote 1 Special dietary requirements`
-* `addNote 2 Important meeting at 10 AM`
-
-
 ## Command Summary
 
 | Command           | Format                                                             | Example                                                                                  |
 |-------------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------------|
 | Add Contact       | `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [nts/NOTE]` | `addContact n/John Doe p/98765432 e/johnd@example.com a/123 Main Street t/customer nts/Preferred contact method is email` |
 | Delete Contact    | `deleteContact INDEX`                                              | `deleteContact 1`                                                                        |
-| Edit Contact      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [nts/NOTE]` | `edit 1 p/87654321 e/john.doe@example.com` |
+| Edit Contact      | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [nts/NOTE]` | `edit 1 p/87654321 e/john.doe@example.com` |
 | Add Trip          | `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE c/CUSTOMER_NAME... [nts/NOTE]` | `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower d/01/1/2025 c/Jane Doe nts/Customer prefers window seat` |
 | Delete Trip       | `deleteTrip INDEX`                                                 | `deleteTrip 1`                                                                           |
 | Edit Trip         | `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]` | `editTrip 1 i/Visit Eiffel Tower; Visit Louvre` |
