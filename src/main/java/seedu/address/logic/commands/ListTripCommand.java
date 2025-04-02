@@ -20,8 +20,8 @@ public class ListTripCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all the trips\n"
             + "Parameters: [DATE in d-M-yyyy] (optional)\n"
             + "Examples: "
-            + COMMAND_WORD + "\n"
-            + COMMAND_WORD + "1/1/2025";
+            + COMMAND_WORD + " OR "
+            + COMMAND_WORD + " 1/1/2025";
 
     private final LocalDate date;
 
