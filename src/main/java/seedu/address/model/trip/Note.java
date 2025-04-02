@@ -1,35 +1,27 @@
 package seedu.address.model.trip;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Trip's note in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
+ * Guarantees: immutable
  */
 public class Note {
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Note should not be blank";
 
     public final String note;
 
     /**
      * Constructs a {@code Note}.
      *
-     * @param note A valid note.
+     * @param note A note, if there is no note, simply just set it to an empty string
      */
     public Note(String note) {
         requireNonNull(note);
-        checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
-        this.note = note;
-    }
-
-    /**
-     * Returns true if a given string is a valid note.
-     */
-    public static boolean isValidNote(String test) {
-        return test != null && !test.trim().isEmpty();
+        if (!note.trim().isEmpty()) {
+            this.note = note.trim();
+        } else {
+            this.note = "";
+        }
     }
 
     @Override

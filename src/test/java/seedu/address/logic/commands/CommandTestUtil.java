@@ -101,10 +101,8 @@ public class CommandTestUtil {
     public static final String TRIP_CUSTOMER_DESC_BOB = " " + PREFIX_CUSTOMER_NAME + VALID_NAME_BOB;
 
     public static final String VALID_NOTE = "Customer prefers window seat";
-    public static final String INVALID_NOTE = " "; // empty note
 
     public static final String TRIP_NOTE_DESC = " " + PREFIX_NOTE + VALID_NOTE;
-    public static final String INVALID_TRIP_NOTE_DESC = " " + PREFIX_NOTE + INVALID_NOTE;
 
     public static final Trip PARIS_2025_TRIP = new TripBuilder()
             .withName(VALID_TRIP_NAME_PARIS_2025)

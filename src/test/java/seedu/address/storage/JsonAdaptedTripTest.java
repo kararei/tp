@@ -22,7 +22,6 @@ public class JsonAdaptedTripTest {
     private static final String INVALID_ITINERARY = " ";
     private static final String INVALID_DATE = "1/1/202";
     private static final String INVALID_CUSTOMER_NAME = "R@chel";
-    private static final String INVALID_NOTE = " ";
 
     private static final String VALID_NAME = PARIS.getName().toString();
     private static final String VALID_ACCOMMODATION = PARIS.getAccommodation().toString();
@@ -113,14 +112,6 @@ public class JsonAdaptedTripTest {
         JsonAdaptedTrip trip = new JsonAdaptedTrip(VALID_NAME, VALID_ACCOMMODATION, VALID_ITINERARY,
                 VALID_DATE, invalidCustomerNames, VALID_NOTE);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, trip::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidNote_throwsIllegalValueException() {
-        JsonAdaptedTrip trip = new JsonAdaptedTrip(VALID_NAME, VALID_ACCOMMODATION, VALID_ITINERARY,
-                VALID_DATE, VALID_CUSTOMER_NAMES, INVALID_NOTE);
-        String expectedMessage = Note.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, trip::toModelType);
     }
 
