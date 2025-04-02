@@ -24,18 +24,27 @@ public class NameTest {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
-        // invalid name
+        // invalid names
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("^")); // only invalid symbol
+        assertFalse(Name.isValidName("peter*")); // contains invalid symbol
+        assertFalse(Name.isValidName("!!!")); // only invalid symbols
+        assertFalse(Name.isValidName("John@Doe")); // disallowed special characters
 
-        // valid name
+        // valid names
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("Jeanne d’Arc")); // with curly apostrophe
+        assertTrue(Name.isValidName("Tharman s/o Soham")); // with slash
+        assertTrue(Name.isValidName("Jean-Luc Picard")); // with hyphen
+        assertTrue(Name.isValidName("O'Connor")); // with straight apostrophe
+        assertTrue(Name.isValidName("Dr. John A. Smith")); // with dots
+        assertTrue(Name.isValidName("李小龙")); // Unicode characters (Chinese)
+        assertTrue(Name.isValidName("Nguyễn Văn A")); // Unicode with accents
     }
 
     @Test
