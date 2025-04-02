@@ -18,6 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditContactCommand;
 import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.contact.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,7 +46,8 @@ public class EditContactCommandParser implements Parser<EditContactCommand> {
                 EditContactCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -62,7 +64,7 @@ public class EditContactCommandParser implements Parser<EditContactCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
-            editPersonDescriptor.setNotes(argMultimap.getValue(PREFIX_NOTE).get());
+            editPersonDescriptor.setNote(new Note(argMultimap.getValue(PREFIX_NOTE).get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

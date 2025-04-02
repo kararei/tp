@@ -58,7 +58,7 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
-        descriptor.getNotes().ifPresent(notes -> sb.append(PREFIX_NOTE).append(notes).append(" "));
+        descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note).append(" "));
         return sb.toString();
     }
 }

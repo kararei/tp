@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CUSTOMER;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
+import seedu.address.model.contact.Note;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditContactDescriptorTest {
@@ -56,8 +57,8 @@ public class EditContactDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_CUSTOMER).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different notes -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNotes("Different notes").build();
+        // different note -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNote(new Note("Different note")).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -69,8 +70,8 @@ public class EditContactDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + ", notes="
-                + editPersonDescriptor.getNotes().orElse(null) + "}";
+                + editPersonDescriptor.getTags().orElse(null) + ", note="
+                + editPersonDescriptor.getNote().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

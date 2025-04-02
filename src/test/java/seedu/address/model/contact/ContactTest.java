@@ -125,7 +125,7 @@ public class ContactTest {
     public void toStringMethod() {
         String expected = Contact.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", notes=" + ALICE.getNotes() + "}";
+                + ", note=" + ALICE.getNote() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

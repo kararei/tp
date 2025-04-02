@@ -40,7 +40,7 @@ public class TripCard extends UiPart<Region> {
     @FXML
     private Label customerNames;
     @FXML
-    private Label notes;
+    private Label note;
 
     /**
      * Creates a {@code TripCard} with the given {@code Trip} and index to display.
@@ -53,7 +53,7 @@ public class TripCard extends UiPart<Region> {
         date.setText("(" + trip.getDate().toString() + ")");
         itinerary.setText("Itinerary: " + trip.getItinerary().itinerary);
         accommodation.setText("Accomodation: " + trip.getAccommodation().accommodation);
-        notes.setText("Notes: " + trip.getNote().note);
+        note.setText("Note: " + trip.getNote().note);
 
         String customerNamesStr = trip.getCustomerNames().stream()
                 .sorted(Comparator.comparing(customerName -> customerName.fullName.toLowerCase()))

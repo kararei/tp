@@ -28,7 +28,7 @@ public class AddContactCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG] (Must be 'customer' or 'service', or both) "
-            + "[" + PREFIX_NOTE + "NOTES]\n"
+            + "[" + PREFIX_NOTE + "NOTE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

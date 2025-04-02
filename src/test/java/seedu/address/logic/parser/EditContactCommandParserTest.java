@@ -42,6 +42,7 @@ import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -163,9 +164,9 @@ public class EditContactCommandParserTest {
         expectedCommand = new EditContactCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // notes
-        userInput = targetIndex.getOneBased() + " " + PREFIX_NOTE + "New notes";
-        descriptor = new EditPersonDescriptorBuilder().withNotes("New notes").build();
+        // note
+        userInput = targetIndex.getOneBased() + " " + PREFIX_NOTE + "New note";
+        descriptor = new EditPersonDescriptorBuilder().withNote(new Note("New note")).build();
         expectedCommand = new EditContactCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

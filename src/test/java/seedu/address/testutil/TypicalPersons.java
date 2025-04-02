@@ -27,18 +27,18 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("service")
-            .withNotes("Preferred tour guide for European trips").build();
+            .withNote("Preferred tour guide for European trips").build();
     public static final Contact BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("customer", "service")
-            .withNotes("VIP customer, prefers luxury accommodations").build();
+            .withNote("VIP customer, prefers luxury accommodations").build();
     public static final Contact CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withNotes("Business traveler, frequent flyer").build();
+            .withNote("Business traveler, frequent flyer").build();
     public static final Contact DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("customer")
-            .withNotes("Family of 4, needs child-friendly activities").build();
+            .withNote("Family of 4, needs child-friendly activities").build();
     public static final Contact ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Contact FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
