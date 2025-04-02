@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags should be specified as 't/customer' or 't/service'. "
-                                                     + "You may include both, separated by a space.";
+                                                     + "You may include both by specifying 't/customer t/service'";
     public static final String TAGNAME_SPECIFICATION = "Tag must be either 'customer' or 'service'.";
     public static final String VALIDATION_REGEX = "customer|service";
 
