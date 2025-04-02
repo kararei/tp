@@ -5,9 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ACCOMMODATION
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRIP_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRIP_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRIP_NOTE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ITINERARY_DESC_EAT_BAGUETTES;
-import static seedu.address.logic.commands.CommandTestUtil.PARIS_2025_TRIP;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TRIP_CUSTOMER_DESC_AMY;
@@ -17,6 +15,9 @@ import static seedu.address.logic.commands.CommandTestUtil.TRIP_NAME_DESC_PARIS_
 import static seedu.address.logic.commands.CommandTestUtil.TRIP_NOTE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ACCOMMODATION_HOTEL_81;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITINERARY_EAT_BAGUETTES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRIP_DATE_2025;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRIP_NAME_PARIS_2025;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACCOMMODATION;
@@ -33,7 +34,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddTripCommand;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
-import seedu.address.model.trip.Note;
 import seedu.address.model.trip.Trip;
 import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
@@ -44,7 +44,14 @@ public class AddTripCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Trip expectedTrip = new TripBuilder(PARIS_2025_TRIP).build();
+        Trip expectedTrip = new TripBuilder()
+                .withName(VALID_TRIP_NAME_PARIS_2025)
+                .withAccommodation(VALID_ACCOMMODATION_HOTEL_81)
+                .withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
+                .withDate(VALID_TRIP_DATE_2025)
+                .withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
+                .withNote(VALID_NOTE)
+                .build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE
@@ -60,8 +67,13 @@ public class AddTripCommandParserTest {
 
     @Test
     public void parse_allFieldsPresentWithoutNote_success() {
-        Trip expectedTrip = new TripBuilder(PARIS_2025_TRIP)
-                .withNote("No special requirements")
+        Trip expectedTrip = new TripBuilder()
+                .withName(VALID_TRIP_NAME_PARIS_2025)
+                .withAccommodation(VALID_ACCOMMODATION_HOTEL_81)
+                .withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
+                .withDate(VALID_TRIP_DATE_2025)
+                .withCustomerNames(VALID_NAME_AMY, VALID_NAME_BOB)
+                .withNote("")
                 .build();
 
         // whitespace only preamble
@@ -131,12 +143,6 @@ public class AddTripCommandParserTest {
         assertParseFailure(parser, INVALID_TRIP_DATE_DESC + validExpectedTripString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE));
 
-        // invalid note
-        assertParseFailure(parser, INVALID_TRIP_NOTE_DESC + validExpectedTripString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
-
-        // valid value followed by invalid value
-
         // invalid name
         assertParseFailure(parser, validExpectedTripString + INVALID_TRIP_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
@@ -153,9 +159,6 @@ public class AddTripCommandParserTest {
         assertParseFailure(parser, validExpectedTripString + INVALID_TRIP_DATE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE));
 
-        // invalid note
-        assertParseFailure(parser, validExpectedTripString + INVALID_TRIP_NOTE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
     }
 
     @Test
@@ -239,15 +242,6 @@ public class AddTripCommandParserTest {
                         + TRIP_CUSTOMER_DESC_AMY
                         + TRIP_NOTE_DESC,
                 TripDate.MESSAGE_CONSTRAINTS);
-
-        // invalid note
-        assertParseFailure(parser, TRIP_NAME_DESC_PARIS_2025
-                        + ACCOMMODATION_DESC_HOTEL_81
-                        + ITINERARY_DESC_EAT_BAGUETTES
-                        + TRIP_DATE_DESC_2025
-                        + TRIP_CUSTOMER_DESC_AMY
-                        + INVALID_TRIP_NOTE_DESC,
-                Note.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_TRIP_NAME_DESC

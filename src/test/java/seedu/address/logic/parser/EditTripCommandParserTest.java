@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ACCOMMODATION
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRIP_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRIP_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRIP_NOTE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.ITINERARY_DESC_EAT_BAGUETTES;
 import static seedu.address.logic.commands.CommandTestUtil.TRIP_CUSTOMER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TRIP_CUSTOMER_DESC_BOB;
@@ -21,6 +20,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ACCOMMODATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRIP;
@@ -35,7 +35,6 @@ import seedu.address.logic.commands.EditTripCommand;
 import seedu.address.logic.commands.EditTripCommand.EditTripDescriptor;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
-import seedu.address.model.trip.Note;
 import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
 import seedu.address.testutil.EditTripDescriptorBuilder;
@@ -80,7 +79,6 @@ public class EditTripCommandParserTest {
         // accommodation
         assertParseFailure(parser, "1" + INVALID_ITINERARY_DESC, Itinerary.MESSAGE_CONSTRAINTS); // invalid itinerary
         assertParseFailure(parser, "1" + INVALID_TRIP_DATE_DESC, TripDate.MESSAGE_CONSTRAINTS); // invalid date
-        assertParseFailure(parser, "1" + INVALID_TRIP_NOTE_DESC, Note.MESSAGE_CONSTRAINTS); // invalid note
 
         // invalid accommodation followed by valid itinerary
         assertParseFailure(parser, "1" + INVALID_ACCOMMODATION_DESC + ITINERARY_DESC_EAT_BAGUETTES,
@@ -190,6 +188,16 @@ public class EditTripCommandParserTest {
         String userInput = targetIndex.getOneBased() + CUSTOMER_NAME_EMPTY;
 
         EditTripDescriptor descriptor = new EditTripDescriptorBuilder().withCustomerNames().build();
+        EditTripCommand expectedCommand = new EditTripCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_emptyNoteField_success() {
+        Index targetIndex = INDEX_THIRD_TRIP;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_NOTE;
+
+        EditTripDescriptor descriptor = new EditTripDescriptorBuilder().withNote("").build();
         EditTripCommand expectedCommand = new EditTripCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

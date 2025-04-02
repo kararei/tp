@@ -36,7 +36,7 @@ public class MessagesTest {
                 .build();
 
         String expected = "Paris 2025; Accommodation: Hotel 81; Itinerary: Eat baguettes; "
-                + "Date: 1/1/2205; Customers: John Doe, Jane Doe; Note: No special requirements";
+                + "Date: 1/1/2205; Customers: John Doe, Jane Doe; Note: ";
         assertEquals(expected, Messages.format(trip));
     }
 

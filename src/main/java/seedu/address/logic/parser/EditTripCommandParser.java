@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTripCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Name;
+import seedu.address.model.trip.Note;
 
 /**
  * Parses input arguments and creates a new EditTripCommand object
@@ -64,9 +65,11 @@ public class EditTripCommandParser implements Parser<EditTripCommand> {
         parseCustomerNamesForEdit(argMultimap.getAllValues(PREFIX_CUSTOMER_NAME))
                 .ifPresent(editTripDescriptor::setCustomerNames);
 
-        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
-            editTripDescriptor.setNote(ParserUtil.parseNote(
-                    argMultimap.getValue(PREFIX_NOTE).get()));
+        // Handle note field
+        if (!argMultimap.getAllValues(PREFIX_NOTE).isEmpty()) {
+            // If note prefix is present, create a note with whatever value is there (could be empty)
+            String noteValue = argMultimap.getValue(PREFIX_NOTE).orElse("");
+            editTripDescriptor.setNote(new Note(noteValue));
         }
 
         if (!editTripDescriptor.isAnyFieldEdited()) {

@@ -56,7 +56,7 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         } else {
-            note = new Note("No special requirements");
+            note = new Note("");
         }
 
         List<String> customerNames = argMultimap.getAllValues(PREFIX_CUSTOMER_NAME);

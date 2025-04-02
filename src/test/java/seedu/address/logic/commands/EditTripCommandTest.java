@@ -138,6 +138,24 @@ public class EditTripCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_TRIP_DISPLAYED_INDEX);
     }
 
+    @Test public void execute_emptyNoteUnfilteredList_success() {
+        Index indexLastTrip = Index.fromOneBased(model.getFilteredTripList().size());
+        Trip lastTrip = model.getFilteredTripList().get(indexLastTrip.getZeroBased());
+
+        TripBuilder tripInList = new TripBuilder(lastTrip);
+        Trip editedTrip = tripInList.withNote("").build();
+
+        EditTripDescriptor descriptor = new EditTripDescriptorBuilder().withNote("").build();
+        EditTripCommand editCommand = new EditTripCommand(indexLastTrip, descriptor);
+
+        String expectedMessage = String.format(EditTripCommand.MESSAGE_EDIT_TRIP_SUCCESS, Messages.format(editedTrip));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
+        expectedModel.setTrip(lastTrip, editedTrip);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
     @Test public void equals() {
         final EditTripCommand standardCommand = new EditTripCommand(INDEX_FIRST_TRIP, DESC_PARIS_2025);
 

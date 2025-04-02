@@ -137,7 +137,7 @@ class JsonAdaptedTrip {
         try {
             modelNote = ParserUtil.parseNote(note);
         } catch (IllegalValueException e) {
-            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException("Note is invalid");
         }
 
         return new Trip(modelName, modelAccommodation, modelItinerary, modelDate, modelCustomerNames, modelNote);

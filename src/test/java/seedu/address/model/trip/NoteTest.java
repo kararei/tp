@@ -42,4 +42,16 @@ public class NoteTest {
         Note note2 = new Note("Different note");
         assertNotEquals(note1.hashCode(), note2.hashCode());
     }
+
+    @Test
+    public void constructor_emptyString_returnsEmptyNote() {
+        Note note = new Note("");
+        assertEquals("", note.note);
+    }
+
+    @Test
+    public void constructor_blankString_returnsEmptyNote() {
+        Note note = new Note("   ");
+        assertEquals("", note.note);
+    }
 }
