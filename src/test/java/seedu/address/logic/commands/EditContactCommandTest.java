@@ -41,7 +41,8 @@ public class EditContactCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedContact).build();
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedContact));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedContact);
@@ -62,7 +63,8 @@ public class EditContactCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_CUSTOMER).withNotes("New notes").build();
         EditContactCommand editContactCommand = new EditContactCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedContact));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
         expectedModel.setPerson(lastContact, editedContact);
@@ -75,7 +77,8 @@ public class EditContactCommandTest {
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
         Contact editedContact = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedContact));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
 
@@ -91,7 +94,8 @@ public class EditContactCommandTest {
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedContact));
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTripBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedContact);
