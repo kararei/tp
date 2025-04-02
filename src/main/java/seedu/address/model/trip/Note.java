@@ -13,7 +13,7 @@ public class Note {
     /**
      * Constructs a {@code Note}.
      *
-     * @param note A note, if there is no note, simply just set it to an empty string.
+     * @param note A note, if there is no note, simply just set it to an empty string
      */
     public Note(String note) {
         requireNonNull(note);
