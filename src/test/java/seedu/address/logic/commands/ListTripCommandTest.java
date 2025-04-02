@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalTrips.BALI;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTrips.BALI;
 import static seedu.address.testutil.TypicalTrips.getTypicalTripBook;
 
 import java.time.LocalDate;
