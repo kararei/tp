@@ -141,19 +141,33 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a contact : `delete`
+### Deleting a contact : `deleteContact`
 
 Deletes the specified contact from the address book.
 
-Format: `delete INDEX`
+Format: `deleteContact INDEX`
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+* `list` followed by `deleteContact 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
+
+### Deleting a trip : `deleteTrip`
+
+Deletes the specified trip from the trip book.
+
+Format: `deleteTrip INDEX`
+
+* Deletes the trip at the specified `INDEX`.
+* The index refers to the index number shown in the displayed trip list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `deleteTrip 2` deletes the 2nd trip in the address book.
+* `find Betsy` followed by `deleteTrip 1` deletes the 1st trip in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -208,7 +222,8 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
+**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
