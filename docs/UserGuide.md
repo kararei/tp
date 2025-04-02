@@ -69,18 +69,31 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a list of all available commands.
 
 Format: `help`
 
+Expected output:
 
-### Adding a contact: `add`
+```
+Available commands:
+ - help: Shows program usage instructions
+ - addContact: Adds a new contact
+ - addTrip: Adds a new trip
+ - deleteContact: Removes a contact at a specified index
+ - deleteTrip: Removes a trip at a specified index
+ - editContact: Edits a contact at a specified index
+ - listContact: Lists all contacts [can specify tag type]
+ - listTrips: Lists all trips 
+ - clear: Clear all contacts and trips from Ui
+ - exit: Exits the program
+```
+
+### Adding a contact: `addContact`
 
 Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -106,22 +119,21 @@ Format: `listContact [customer/service]`
 * Without specifying the optional parameter, all contacts will be displayed.
 * By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
 
-### Editing a contact : `edit`
+### Editing a contact : `editContact`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+*  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by name: `find`
 
@@ -169,6 +181,48 @@ Examples:
 * `list` followed by `deleteTrip 2` deletes the 2nd trip in the address book.
 * `find Betsy` followed by `deleteTrip 1` deletes the 1st trip in the results of the `find` command.
 
+### Adding a trip : `addTrip`
+
+Adds a trip to the address book.
+
+Format: `addTrip n/NAME d/DATE c/CONTACT_INDEX l/LOCATION [t/TAG]…​ [nts/NOTE]`
+
+* Adds a trip with the specified details.
+* The CONTACT_INDEX refers to the index number of the contact in the displayed contact list.
+* The date should be in the format of DD/MM/YYYY.
+* You can add optional notes about the trip using the nts/ parameter.
+
+Examples:
+* `addTrip n/Business Meeting d/15/12/2023 c/1 l/Orchard Road t/important nts/Bring sales materials`
+* `addTrip n/Site Visit d/22/01/2024 c/3 l/Jurong East t/service t/follow-up`
+
+### Listing all trips : `listTrip`
+
+Shows a list of all trips in the address book.
+
+Format: `listTrip [DATE]`
+
+* Without specifying the optional parameter, all trips will be displayed.
+* By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
+* The date should be in the format of DD/MM/YYYY.
+
+### Editing a trip : `editTrip`
+
+Edits an existing trip in the address book.
+
+Format: `editTrip INDEX [n/NAME] [d/DATE] [c/CONTACT_INDEX] [l/LOCATION] [t/TAG]…​ [nts/NOTE]`
+
+* Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the trip will be removed i.e adding of tags is not cumulative.
+* You can remove all the trip's tags by typing `t/` without specifying any tags after it.
+
+Examples:
+* `editTrip 1 d/20/12/2023 l/Marina Bay Sands nts/Changed venue due to renovation` Edits the date, location and adds a note for the 1st trip.
+* `editTrip 2 n/Follow-up Meeting c/2 t/urgent` Edits the name and contact of the 2nd trip and changes its tag to urgent.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -196,10 +250,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -222,9 +272,13 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
 **Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
 **Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Add Trip** | `addTrip n/NAME d/DATE c/CONTACT_INDEX l/LOCATION [t/TAG]…​ [nts/NOTE]`<br> e.g., `addTrip n/Business Meeting d/15/12/2023 c/1 l/Orchard Road t/important nts/Bring sales materials`
+**List Trip** | `listTrip [dd/MM/YYYY]`<br> e.g., `listTrip 15/12/2023`
+**Edit Trip** | `editTrip INDEX [n/NAME] [d/DATE] [c/CONTACT_INDEX] [l/LOCATION] [t/TAG]…​ [nts/NOTE]`<br> e.g., `editTrip 1 d/20/12/2023 l/Marina Bay Sands nts/Changed venue due to renovation`
