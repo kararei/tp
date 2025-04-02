@@ -1,4 +1,4 @@
-package seedu.address.model.trip;
+package seedu.address.model.contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,11 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class NoteTest {
-
-    @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Note(null));
-    }
 
     @Test
     public void equals() {
@@ -52,12 +47,31 @@ public class NoteTest {
     @Test
     public void constructor_emptyString_returnsEmptyNote() {
         Note note = new Note("");
-        assertEquals("", note.note);
+        assertTrue(note.isEmpty());
     }
 
     @Test
     public void constructor_blankString_returnsEmptyNote() {
         Note note = new Note("   ");
-        assertEquals("", note.note);
+        assertTrue(note.isEmpty());
+    }
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Note(null));
+    }
+
+    @Test
+    public void getValue() {
+        String validNote = "Test note";
+        Note note = new Note(validNote);
+        assertEquals(validNote, note.getNote());
+    }
+
+    @Test
+    public void testToString() {
+        String validNote = "Test note";
+        Note note = new Note(validNote);
+        assertEquals(validNote, note.toString());
     }
 }

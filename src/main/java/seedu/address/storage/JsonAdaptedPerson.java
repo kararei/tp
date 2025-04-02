@@ -60,7 +60,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        note = source.getNote().getValue();
+        note = source.getNote().getNote();
     }
 
     /**
@@ -107,7 +107,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Note modelNote = new Note(note);
+        final Note modelNote = new Note(note != null ? note : "");
         return new Contact(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNote);
     }
 

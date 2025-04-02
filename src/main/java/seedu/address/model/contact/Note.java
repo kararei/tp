@@ -1,5 +1,7 @@
 package seedu.address.model.contact;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Objects;
  * Guarantees: immutable.
  */
 public class Note {
-    private final String value;
+    private final String note;
 
     /**
      * Constructs a {@code Note}.
@@ -15,14 +17,19 @@ public class Note {
      * @param note A valid note string.
      */
     public Note(String note) {
-        this.value = note;
+        requireNonNull(note);
+        if (!note.trim().isEmpty()) {
+            this.note = note.trim();
+        } else {
+            this.note = "";
+        }
     }
 
     /**
      * Returns the note value.
      */
-    public String getValue() {
-        return value;
+    public String getNote() {
+        return note;
     }
 
     @Override
@@ -37,20 +44,20 @@ public class Note {
         }
 
         Note otherNote = (Note) other;
-        return value.equals(otherNote.value);
+        return note.equals(otherNote.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(note);
     }
 
     @Override
     public String toString() {
-        return value;
+        return note;
     }
 
     public boolean isEmpty() {
-        return value.isEmpty();
+        return note.isEmpty();
     }
 }
