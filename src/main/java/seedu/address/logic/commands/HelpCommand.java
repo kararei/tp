@@ -20,7 +20,7 @@ public class HelpCommand extends Command {
             + "- deleteTrip: Removes a trip at a specified index\n"
             + "- edit: Edits a contact at a specified index\n"
             + "- listContact: Lists all contacts [can specify tag type]\n"
-            + "- listTrips: Lists all trips \n"
+            + "- listTrip: Lists all trips \n"
             + "- exit: Exits the program";
 
     @Override
