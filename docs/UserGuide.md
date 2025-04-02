@@ -163,8 +163,22 @@ Format: `deleteContact INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+* `list` followed by `deleteContact 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
+
+### Deleting a trip : `deleteTrip`
+
+Deletes the specified trip from the trip book.
+
+Format: `deleteTrip INDEX`
+
+* Deletes the trip at the specified `INDEX`.
+* The index refers to the index number shown in the displayed trip list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `deleteTrip 2` deletes the 2nd trip in the address book.
+* `find Betsy` followed by `deleteTrip 1` deletes the 1st trip in the results of the `find` command.
 
 ### Adding a trip : `addTrip`
 
@@ -272,6 +286,8 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
+**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
+**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
