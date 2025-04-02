@@ -31,14 +31,14 @@ import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
 
 /**
- * Edits the details of an existing contact in the address book.
+ * Edits the details of an existing trip in the address book.
  */
 public class EditTripCommand extends Command {
 
     public static final String COMMAND_WORD = "editTrip";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the trip identified "
-            + "by the index number used in the displayed contact list. "
+            + "by the index number used in the displayed trip list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + "NAME "
@@ -64,7 +64,7 @@ public class EditTripCommand extends Command {
     private final EditTripDescriptor editTripDescriptor;
 
     /**
-     * @param index of the contact in the filtered trip list to edit
+     * @param index of the trip in the filtered trip list to edit
      * @param editTripDescriptor details to edit the trip with
      */
     public EditTripCommand(Index index, EditTripDescriptor editTripDescriptor) {
