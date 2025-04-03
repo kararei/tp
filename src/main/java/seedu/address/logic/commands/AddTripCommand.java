@@ -39,7 +39,7 @@ public class AddTripCommand extends Command {
             + PREFIX_NOTE + "Customer prefers window seat";
 
     public static final String MESSAGE_SUCCESS = "New trip added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TRIP = "This trip already exists in the trip book" 
+    public static final String MESSAGE_DUPLICATE_TRIP = "This trip already exists in the trip book"
                                                         + "(name has to be unique and it is case-insensitive)";
 
     private final Trip toAdd;
