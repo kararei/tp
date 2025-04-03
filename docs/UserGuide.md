@@ -104,6 +104,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
 ### Listing contacts : `listContact`
 
 Shows a list of contacts in the address book.
@@ -221,11 +226,6 @@ Format: `deleteTrip INDEX`
 Examples:
 * `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Clearing all entries : `clear`
 
 Clears all contact and trip entries in the application.
@@ -275,7 +275,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help` |
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List Contact**   | `listContact [customer/service]`
+**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
 **Add Contact**    | `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​` <br> e.g., `addContact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/customer`
 **Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
 **Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
