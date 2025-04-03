@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Available commands:\n "
+    public static final String SHOWING_HELP_MESSAGE = "Available commands:\n"
             + "- help: Shows program usage instructions\n"
             + "- addContact: Adds a new contact\n"
             + "- addTrip: Adds a new trip with name, accommodation"
@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
             + "- editTrip: Edits a trip at a specified index\n"
             + "- listContact: Lists all contacts [can specify tag type]\n"
             + "- listTrips: Lists all trips \n"
-            + "- clear: Clear all contacts and trips from Ui\n"
+            + "- clear: Clear all contacts and trips\n"
             + "- exit: Exits the program";
 
     @Override

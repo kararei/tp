@@ -18,9 +18,9 @@ public class ListTripCommand extends Command {
     public static final String COMMAND_WORD = "listTrip";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all the trips\n"
-            + "Parameters: [DATE in d-M-yyyy] (optional)\n"
+            + "Parameters: [DATE in d/M/yyyy] (optional)\n"
             + "Examples: "
-            + COMMAND_WORD + " OR "
+            + COMMAND_WORD + " OR \n"
             + COMMAND_WORD + " 1/1/2025";
 
     private final LocalDate date;
