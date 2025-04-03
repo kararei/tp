@@ -178,7 +178,7 @@ Format: `listTrip [DATE]`
 
 Adds a trip to the trip book.
 
-Format: `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
+Format: `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Adds a trip with the specified details.
 * The date should be in the format of DD/MM/YYYY.
@@ -194,7 +194,7 @@ Examples:
 
 Edits an existing trip in the trip book.
 
-Format: `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
+Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
 * The index **must be a positive integer** 1, 2, 3, …​
