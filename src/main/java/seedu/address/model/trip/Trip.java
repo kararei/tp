@@ -70,7 +70,7 @@ public class Trip {
         }
 
         return otherTrip != null
-                && otherTrip.getName().equals(getName());
+                && otherTrip.getName().name.equalsIgnoreCase(getName().name);
     }
 
     @Override

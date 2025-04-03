@@ -63,9 +63,9 @@ public class TripTest {
         editedParis = new TripBuilder(PARIS).withName(VALID_NAME_TOKYO).build();
         assertFalse(PARIS.isSameTrip(editedParis));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Trip editedTokyo = new TripBuilder(TOKYO).withName(VALID_NAME_TOKYO.toLowerCase()).build();
-        assertFalse(TOKYO.isSameTrip(editedTokyo));
+        assertTrue(TOKYO.isSameTrip(editedTokyo));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_TOKYO + " ";
