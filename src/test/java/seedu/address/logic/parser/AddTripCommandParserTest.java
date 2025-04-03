@@ -88,6 +88,47 @@ public class AddTripCommandParserTest {
     }
 
     @Test
+    public void parse_allFieldsPresentWithoutCustomerNames_success() {
+        Trip expectedTrip = new TripBuilder()
+                .withName(VALID_TRIP_NAME_PARIS_2025)
+                .withAccommodation(VALID_ACCOMMODATION_HOTEL_81)
+                .withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
+                .withDate(VALID_TRIP_DATE_2025)
+                .withCustomerNames() // Empty customer names
+                .withNote(VALID_NOTE)
+                .build();
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE
+                + TRIP_NAME_DESC_PARIS_2025
+                + ACCOMMODATION_DESC_HOTEL_81
+                + ITINERARY_DESC_EAT_BAGUETTES
+                + TRIP_DATE_DESC_2025
+                + TRIP_NOTE_DESC,
+                new AddTripCommand(expectedTrip));
+    }
+
+    @Test
+    public void parse_minimumFieldsPresent_success() {
+        Trip expectedTrip = new TripBuilder()
+                .withName(VALID_TRIP_NAME_PARIS_2025)
+                .withAccommodation(VALID_ACCOMMODATION_HOTEL_81)
+                .withItinerary(VALID_ITINERARY_EAT_BAGUETTES)
+                .withDate(VALID_TRIP_DATE_2025)
+                .withCustomerNames() // Empty customer names
+                .withNote("") // Empty note
+                .build();
+
+        // whitespace only preamble, only required fields
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE
+                + TRIP_NAME_DESC_PARIS_2025
+                + ACCOMMODATION_DESC_HOTEL_81
+                + ITINERARY_DESC_EAT_BAGUETTES
+                + TRIP_DATE_DESC_2025,
+                new AddTripCommand(expectedTrip));
+    }
+
+    @Test
     public void parse_repeatedNonCustomerName_failure() {
         String validExpectedTripString = TRIP_NAME_DESC_PARIS_2025
                 + ACCOMMODATION_DESC_HOTEL_81
@@ -169,32 +210,28 @@ public class AddTripCommandParserTest {
         assertParseFailure(parser, VALID_TRIP_NAME_PARIS_2025
                         + ACCOMMODATION_DESC_HOTEL_81
                         + ITINERARY_DESC_EAT_BAGUETTES
-                        + TRIP_DATE_DESC_2025
-                        + TRIP_CUSTOMER_DESC_AMY,
+                        + TRIP_DATE_DESC_2025,
                 expectedMessage);
 
         // missing accommodation prefix
         assertParseFailure(parser, TRIP_NAME_DESC_PARIS_2025
                         + VALID_ACCOMMODATION_HOTEL_81
                         + ITINERARY_DESC_EAT_BAGUETTES
-                        + TRIP_DATE_DESC_2025
-                        + TRIP_CUSTOMER_DESC_AMY,
+                        + TRIP_DATE_DESC_2025,
                 expectedMessage);
 
         // missing itinerary prefix
         assertParseFailure(parser, TRIP_NAME_DESC_PARIS_2025
                         + ACCOMMODATION_DESC_HOTEL_81
                         + VALID_ITINERARY_EAT_BAGUETTES
-                        + TRIP_DATE_DESC_2025
-                        + TRIP_CUSTOMER_DESC_AMY,
+                        + TRIP_DATE_DESC_2025,
                 expectedMessage);
 
         // missing date prefix
         assertParseFailure(parser, TRIP_NAME_DESC_PARIS_2025
                         + ACCOMMODATION_DESC_HOTEL_81
                         + ITINERARY_DESC_EAT_BAGUETTES
-                        + VALID_TRIP_DATE_2025
-                        + TRIP_CUSTOMER_DESC_AMY,
+                        + VALID_TRIP_DATE_2025,
                 expectedMessage);
 
         // all prefixes missing
@@ -212,7 +249,6 @@ public class AddTripCommandParserTest {
                         + ACCOMMODATION_DESC_HOTEL_81
                         + ITINERARY_DESC_EAT_BAGUETTES
                         + TRIP_DATE_DESC_2025
-                        + TRIP_CUSTOMER_DESC_AMY
                         + TRIP_NOTE_DESC,
                 TripName.MESSAGE_CONSTRAINTS);
 
@@ -221,7 +257,6 @@ public class AddTripCommandParserTest {
                         + INVALID_ACCOMMODATION_DESC
                         + ITINERARY_DESC_EAT_BAGUETTES
                         + TRIP_DATE_DESC_2025
-                        + TRIP_CUSTOMER_DESC_AMY
                         + TRIP_NOTE_DESC,
                 Accommodation.MESSAGE_CONSTRAINTS);
 
@@ -230,7 +265,6 @@ public class AddTripCommandParserTest {
                         + ACCOMMODATION_DESC_HOTEL_81
                         + INVALID_ITINERARY_DESC
                         + TRIP_DATE_DESC_2025
-                        + TRIP_CUSTOMER_DESC_AMY
                         + TRIP_NOTE_DESC,
                 Itinerary.MESSAGE_CONSTRAINTS);
 
@@ -239,7 +273,6 @@ public class AddTripCommandParserTest {
                         + ACCOMMODATION_DESC_HOTEL_81
                         + ITINERARY_DESC_EAT_BAGUETTES
                         + INVALID_TRIP_DATE_DESC
-                        + TRIP_CUSTOMER_DESC_AMY
                         + TRIP_NOTE_DESC,
                 TripDate.MESSAGE_CONSTRAINTS);
 
@@ -248,7 +281,6 @@ public class AddTripCommandParserTest {
                         + ACCOMMODATION_DESC_HOTEL_81
                         + ITINERARY_DESC_EAT_BAGUETTES
                         + INVALID_TRIP_DATE_DESC
-                        + TRIP_CUSTOMER_DESC_AMY
                         + TRIP_NOTE_DESC,
                 TripName.MESSAGE_CONSTRAINTS);
 

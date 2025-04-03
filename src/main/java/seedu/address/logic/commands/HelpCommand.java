@@ -15,12 +15,15 @@ public class HelpCommand extends Command {
     public static final String SHOWING_HELP_MESSAGE = "Available commands:\n"
             + "- help: Shows program usage instructions\n"
             + "- addContact: Adds a new contact\n"
-            + "- addTrip: Adds a new trip\n"
+            + "- addTrip: Adds a new trip with name, accommodation"
+            + "itinerary, date, optional customer names and optional note\n"
             + "- deleteContact: Removes a contact at a specified index\n"
             + "- deleteTrip: Removes a trip at a specified index\n"
-            + "- edit: Edits a contact at a specified index\n"
+            + "- editContact: Edits a contact at a specified index\n"
+            + "- editTrip: Edits a trip at a specified index\n"
             + "- listContact: Lists all contacts [can specify tag type]\n"
-            + "- listTrip: Lists all trips \n"
+            + "- listTrips: Lists all trips \n"
+            + "- clear: Clear all contacts and trips\n"
             + "- exit: Exits the program";
 
     @Override

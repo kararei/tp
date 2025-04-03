@@ -65,18 +65,19 @@ Removes a contact from the system.
 #### Add Trip: `addTrip`
 Schedules a new trip with associated details.
 
-**Format**: `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE c/CUSTOMER_NAME... [nts/NOTE]`
+**Format**: `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 **Examples**:
 * `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
 * `addTrip n/Beach Vacation a/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
+* `addTrip n/Business Conference a/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
 
 **Parameter Requirements**:
 * `NAME`: Any alphanumeric characters and spaces
 * `ACCOMMODATION`: Any alphanumeric characters and spaces
 * `ITINERARY`: Any text, can include multiple activities separated by semicolons
 * `DATE`: Must be in DD/MM/YYYY format
-* `CUSTOMER_NAME`: Any alphanumeric characters and spaces
+* `CUSTOMER_NAME`: Any alphanumeric characters and spaces (optional)
 * `NOTE`: Any text (optional)
 
 #### Delete Trip: `deleteTrip`
@@ -93,7 +94,7 @@ Removes a trip from the system.
 | Add Contact       | `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [nts/NOTE]` | `addContact n/John Doe p/98765432 e/johnd@example.com a/123 Main Street t/customer nts/Preferred contact method is email` |
 | Delete Contact    | `deleteContact INDEX`                                              | `deleteContact 1`                                                                        |
 | Edit Contact      | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [nts/NOTE]` | `edit 1 p/87654321 e/john.doe@example.com` |
-| Add Trip          | `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE c/CUSTOMER_NAME... [nts/NOTE]` | `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower d/01/1/2025 c/Jane Doe nts/Customer prefers window seat` |
+| Add Trip          | `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]` | `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower d/01/1/2025 c/Jane Doe nts/Customer prefers window seat` |
 | Delete Trip       | `deleteTrip INDEX`                                                 | `deleteTrip 1`                                                                           |
 | Edit Trip         | `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]` | `editTrip 1 i/Visit Eiffel Tower; Visit Louvre` |
 

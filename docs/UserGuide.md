@@ -79,10 +79,11 @@ Expected output:
 Available commands:
  - help: Shows program usage instructions
  - addContact: Adds a new contact
- - addTrip: Adds a new trip
+ - addTrip: Adds a new trip with name, accommodation, itinerary, date, optional customer names and optional note
  - deleteContact: Removes a contact at a specified index
  - deleteTrip: Removes a trip at a specified index
  - editContact: Edits a contact at a specified index
+ - editTrip: Edits a trip at a specified index
  - listContact: Lists all contacts [can specify tag type]
  - listTrips: Lists all trips 
  - clear: Clear all contacts and trips from Ui
@@ -185,16 +186,17 @@ Examples:
 
 Adds a trip to the address book.
 
-Format: `addTrip n/NAME d/DATE c/CONTACT_INDEX l/LOCATION [t/TAG]…​ [nts/NOTE]`
+Format: `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Adds a trip with the specified details.
-* The CONTACT_INDEX refers to the index number of the contact in the displayed contact list.
 * The date should be in the format of DD/MM/YYYY.
-* You can add optional notes about the trip using the nts/ parameter.
+* Customer names are optional. You can specify multiple customer names by using the c/ prefix multiple times.
+* You can add optional notes about the trip using the nts/ prefix.
 
 Examples:
-* `addTrip n/Business Meeting d/15/12/2023 c/1 l/Orchard Road t/important nts/Bring sales materials`
-* `addTrip n/Site Visit d/22/01/2024 c/3 l/Jurong East t/service t/follow-up`
+* `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
+* `addTrip n/Beach Vacation a/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
+* `addTrip n/Business Conference a/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
 
 ### Listing all trips : `listTrip`
 
@@ -210,18 +212,19 @@ Format: `listTrip [DATE]`
 
 Edits an existing trip in the address book.
 
-Format: `editTrip INDEX [n/NAME] [d/DATE] [c/CONTACT_INDEX] [l/LOCATION] [t/TAG]…​ [nts/NOTE]`
+Format: `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the trip will be removed i.e adding of tags is not cumulative.
-* You can remove all the trip's tags by typing `t/` without specifying any tags after it.
+* When editing customer names, the existing customer names of the trip will be removed and replaced with the new ones.
+* You can remove all customer names by not including any c/ prefixes.
+* Customer names are optional.
 
 Examples:
-* `editTrip 1 d/20/12/2023 l/Marina Bay Sands nts/Changed venue due to renovation` Edits the date, location and adds a note for the 1st trip.
-* `editTrip 2 n/Follow-up Meeting c/2 t/urgent` Edits the name and contact of the 2nd trip and changes its tag to urgent.
+* `editTrip 1 a/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` Edits the accommodation, itinerary, and adds a note for the 1st trip.
+* `editTrip 2 n/London Trip 2025 c/Jane Doe c/Bob Smith` Edits the name and changes the customer names for the 2nd trip.
 
 ### Clearing all entries : `clear`
 
@@ -279,6 +282,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Add Trip** | `addTrip n/NAME d/DATE c/CONTACT_INDEX l/LOCATION [t/TAG]…​ [nts/NOTE]`<br> e.g., `addTrip n/Business Meeting d/15/12/2023 c/1 l/Orchard Road t/important nts/Bring sales materials`
+**Add Trip** | `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
 **List Trip** | `listTrip [dd/MM/YYYY]`<br> e.g., `listTrip 15/12/2023`
-**Edit Trip** | `editTrip INDEX [n/NAME] [d/DATE] [c/CONTACT_INDEX] [l/LOCATION] [t/TAG]…​ [nts/NOTE]`<br> e.g., `editTrip 1 d/20/12/2023 l/Marina Bay Sands nts/Changed venue due to renovation`
+**Edit Trip** | `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 a/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`

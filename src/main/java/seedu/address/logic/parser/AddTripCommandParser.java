@@ -39,7 +39,7 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
                         PREFIX_DATE, PREFIX_CUSTOMER_NAME, PREFIX_NOTE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ACCOMMODATION, PREFIX_ITINERARY,
-                PREFIX_DATE, PREFIX_CUSTOMER_NAME)
+                PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTripCommand.MESSAGE_USAGE));
         }
@@ -59,6 +59,7 @@ public class AddTripCommandParser implements Parser<AddTripCommand> {
             note = new Note("");
         }
 
+        // Customer names are optional
         List<String> customerNames = argMultimap.getAllValues(PREFIX_CUSTOMER_NAME);
         Set<Name> customerNameSet = new HashSet<>();
         for (String customerName : customerNames) {

@@ -27,7 +27,7 @@ public class AddTripCommand extends Command {
             + PREFIX_ACCOMMODATION + "ACCOMMODATION "
             + PREFIX_ITINERARY + "ITINERARY "
             + PREFIX_DATE + "DATE "
-            + PREFIX_CUSTOMER_NAME + "CUSTOMER_NAME (>= 1) "
+            + "[" + PREFIX_CUSTOMER_NAME + "CUSTOMER_NAME] "
             + "[" + PREFIX_NOTE + "NOTE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Paris 2025 "
