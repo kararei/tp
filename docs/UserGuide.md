@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# TravelHub User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TravelHub is a contact management app designed to help travel agents efficiently manage customer information and service details, such as addresses and contact information. Using a simple command-line interface, it supports **adding, deleting, tagging of contact profiles and trips**.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -22,20 +22,20 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar travelhub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all the available commands.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `listContact` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `deleteContact 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts and trips.
 
    * `exit` : Exits the app.
 
@@ -53,10 +53,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/customer` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/customer`, `t/customer t/service` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -86,55 +86,10 @@ Available commands:
 - editTrip: Edits a trip at a specified index
 - listContact: Lists all contacts [can specify tag type]
 - listTrip: Lists all trips 
+- find: Find contacts whose names contain any of the given keywords
 - clear: Clear all contacts and trips
 - exit: Exits the program
 ```
-
-### Adding a contact: `addContact`
-
-Adds a contact to the address book.
-
-Format: `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<box type="tip" seamless>
-
-**Tip:** A contact can have any number of tags (including 0)
-</box>
-
-Examples:
-* `addContact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addContact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all contacts : `list`
-
-Shows a list of all contacts in the address book.
-
-Format: `list`
-
-### Listing contacts : `listContact`
-
-Shows a list of contacts in the address book.
-
-Format: `listContact [customer/service]`
-
-* Without specifying the optional parameter, all contacts will be displayed.
-* By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
-
-### Editing a contact : `editContact`
-
-Edits an existing contact in the address book.
-
-Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
-
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
-
-Examples:
-*  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by name: `find`
 
@@ -154,6 +109,52 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Listing contacts : `listContact`
+
+Shows a list of contacts in the address book.
+
+Format: `listContact [customer/service]`
+
+* Without specifying the optional parameter, all contacts will be displayed.
+* By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
+
+### Adding a contact: `addContact`
+
+Adds a contact to the address book.
+
+Format: `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​`
+
+<box type="tip" seamless>
+
+**Tip:** Tags must be 'customer' or 'service' e.g., 't/customer t/service'.
+
+A contact can have no tags, 1 tag or both the customer and service tag.
+
+**Requirements:** Email must be unique across all contacts
+</box>
+
+Examples:
+* `addContact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addContact n/XYZ Restaurant e/xyz_cuisine@example.com a/XYZ Street p/67654321 t/service nts/Serves western cuisine`
+* `addContact n/Betty's Gift Shop e/betty_biz@example.com a/Sunshine Street 3 p/67654321 t/service t/customer`
+
+### Editing a contact : `editContact`
+
+Edits an existing contact in the address book.
+
+Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
+* You can remove all the contact's notes by typing `nts/` without specifying anything after it.
+
+Examples:
+*  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+
 ### Deleting a contact : `deleteContact`
 
 Deletes the specified contact from the address book.
@@ -165,28 +166,24 @@ Format: `deleteContact INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `deleteContact 2` deletes the 2nd contact in the address book.
+* `listContact` followed by `deleteContact 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
 
-### Deleting a trip : `deleteTrip`
+### Listing all trips : `listTrip`
 
-Deletes the specified trip from the trip book.
+Shows a list of all trips in the trip book.
 
-Format: `deleteTrip INDEX`
+Format: `listTrip [DATE]`
 
-* Deletes the trip at the specified `INDEX`.
-* The index refers to the index number shown in the displayed trip list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `deleteTrip 2` deletes the 2nd trip in the address book.
-* `find Betsy` followed by `deleteTrip 1` deletes the 1st trip in the results of the `find` command.
+* Without specifying the optional parameter, all trips will be displayed.
+* By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
+* The date should be in the format of DD/MM/YYYY.
 
 ### Adding a trip : `addTrip`
 
-Adds a trip to the address book.
+Adds a trip to the trip book.
 
-Format: `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
+Format: `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Adds a trip with the specified details.
 * The date should be in the format of DD/MM/YYYY.
@@ -198,21 +195,11 @@ Examples:
 * `addTrip n/Beach Vacation a/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
 * `addTrip n/Business Conference a/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
 
-### Listing all trips : `listTrip`
-
-Shows a list of all trips in the address book.
-
-Format: `listTrip [DATE]`
-
-* Without specifying the optional parameter, all trips will be displayed.
-* By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
-* The date should be in the format of DD/MM/YYYY.
-
 ### Editing a trip : `editTrip`
 
-Edits an existing trip in the address book.
+Edits an existing trip in the trip book.
 
-Format: `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
+Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -226,9 +213,22 @@ Examples:
 * `editTrip 1 a/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` Edits the accommodation, itinerary, and adds a note for the 1st trip.
 * `editTrip 2 n/London Trip 2025 c/Jane Doe c/Bob Smith` Edits the name and changes the customer names for the 2nd trip.
 
+### Deleting a trip : `deleteTrip`
+
+Deletes the specified trip from the trip book.
+
+Format: `deleteTrip INDEX`
+
+* Deletes the trip at the specified `INDEX`.
+* The index refers to the index number shown in the displayed trip list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all contact and trip entries in the application.
 
 Format: `clear`
 
@@ -240,17 +240,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook and TripBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Similarly TripBook data are saved automatically as a JSON file `[JAR file location]/data/tripbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, AddressBook and TripBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook and TripBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -258,7 +258,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook and TripBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -273,15 +273,15 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
-**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
-**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
+**Help**   | `help` |
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Add Trip** | `addTrip n/NAME a/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `addTrip n/Paris 2025 a/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
+**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
+**Add Contact**    | `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​` <br> e.g., `addContact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/customer`
+**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
+**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
 **List Trip** | `listTrip [dd/MM/YYYY]`<br> e.g., `listTrip 15/12/2023`
-**Edit Trip** | `editTrip INDEX [n/NAME] [a/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 a/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
+**Add Trip** | `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
+**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
+**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
+**Clear**  | `clear`
+**Exit**   | `exit`

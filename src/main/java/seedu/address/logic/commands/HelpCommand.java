@@ -23,6 +23,7 @@ public class HelpCommand extends Command {
             + "- editTrip: Edits a trip at a specified index\n"
             + "- listContact: Lists all contacts [can specify tag type]\n"
             + "- listTrip: Lists all trips \n"
+            + "- find: Find contacts whose names contain any of the given keywords \n"
             + "- clear: Clear all contacts and trips\n"
             + "- exit: Exits the program";
 
