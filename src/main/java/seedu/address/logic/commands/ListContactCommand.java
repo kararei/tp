@@ -58,7 +58,6 @@ public class ListContactCommand extends Command {
         }
 
         ListContactCommand otherListContactCommand = (ListContactCommand) other;
-        assert otherListContactCommand.tagName != null : "Other command's tag name cannot be null";
         return tagName.equals(otherListContactCommand.tagName);
     }
 }
