@@ -98,12 +98,16 @@ public class Contact {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Contact otherContact) {
+        if (otherContact == null) {
+            return false;
+        }
         if (otherContact == this) {
             return true;
         }
+        String otherEmail = otherContact.getEmail().toString().toLowerCase();
+        String thisEmail = getEmail().toString().toLowerCase();
 
-        return otherContact != null
-                && otherContact.getEmail().equals(getEmail());
+        return otherEmail.equals(thisEmail);
     }
 
     /**
