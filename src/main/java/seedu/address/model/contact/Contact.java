@@ -101,9 +101,11 @@ public class Contact {
         if (otherContact == this) {
             return true;
         }
+        String otherEmail = otherContact.getEmail().toString().toLowerCase();
+        String thisEmail = getEmail().toString().toLowerCase();
 
         return otherContact != null
-                && otherContact.getEmail().equals(getEmail());
+                && otherEmail.equals(thisEmail);
     }
 
     /**
