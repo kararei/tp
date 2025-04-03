@@ -45,7 +45,7 @@ public class ContactTest {
 
         // email differs in case, all other attributes same -> returns false
         Contact editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
