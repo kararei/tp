@@ -16,6 +16,7 @@ public class ListContactCommandParser implements Parser<ListContactCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListContactCommand parse(String args) throws ParseException {
+        assert args != null : "Input args should not be null";
         try {
             String tag = ParserUtil.parseTagName(args);
             return new ListContactCommand(tag);
