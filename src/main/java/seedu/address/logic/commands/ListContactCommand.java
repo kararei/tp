@@ -23,6 +23,13 @@ public class ListContactCommand extends Command {
 
     private final String tagName;
 
+    /**
+     * Creates a ListContactCommand to list contacts based on the specified tag.
+     * If no tag is specified, all contacts will be listed.
+     *
+     * @param tagname The tag name to filter contacts by. Can be empty, "customer", or "service".
+     * @throws AssertionError if tagname is null.
+     */
     public ListContactCommand(String tagname) {
         assert tagname != null : "Tag name cannot be null";
         this.tagName = tagname;
