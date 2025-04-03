@@ -31,7 +31,7 @@
       <Label fx:id="accommodation" styleClass="cell_small_label" text="\$accommodation" />
       <Label fx:id="itinerary" styleClass="cell_small_label" text="\$itinerary" wrapText="true"/>
       <Label fx:id="customerNames" styleClass="cell_small_label" text="\$customerNames" wrapText="true"/>
-      <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" />
+      <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
     </VBox>
   </GridPane>
 </HBox>

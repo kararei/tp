@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Note;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -57,10 +58,10 @@ public class EditContactCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastContact);
         Contact editedContact = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_CUSTOMER).withNotes("New notes").build();
+                .withTags(VALID_TAG_CUSTOMER).withNote("New note").build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_CUSTOMER).withNotes("New notes").build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_CUSTOMER).withNote(new Note("New note")).build();
         EditContactCommand editContactCommand = new EditContactCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,

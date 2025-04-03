@@ -47,9 +47,9 @@ public class Messages {
                 .append(contact.getAddress())
                 .append("; Tags: ");
         contact.getTags().forEach(builder::append);
-        if (!contact.getNotes().isEmpty()) {
-            builder.append("; Notes: ")
-                    .append(contact.getNotes());
+        if (!contact.getNote().isEmpty()) {
+            builder.append("; Note: ")
+                    .append(contact.getNote());
         }
         return builder.toString();
     }

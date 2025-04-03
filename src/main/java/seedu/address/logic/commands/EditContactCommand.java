@@ -26,6 +26,7 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -45,7 +46,7 @@ public class EditContactCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG] (Must be 'customer' or 'service', or both) "
-            + "[" + PREFIX_NOTE + "NOTES]\n"
+            + "[" + PREFIX_NOTE + "NOTE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -102,9 +103,9 @@ public class EditContactCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(contactToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(contactToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(contactToEdit.getTags());
-        String updatedNotes = editPersonDescriptor.getNotes().orElse(contactToEdit.getNotes());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(contactToEdit.getNote());
 
-        return new Contact(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNotes);
+        return new Contact(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNote);
     }
 
     @Override
@@ -141,7 +142,7 @@ public class EditContactCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private String notes;
+        private Note note;
 
         public EditPersonDescriptor() {}
 
@@ -155,14 +156,14 @@ public class EditContactCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setNotes(toCopy.notes);
+            setNote(toCopy.note);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, notes);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note);
         }
 
         public void setName(Name name) {
@@ -214,12 +215,12 @@ public class EditContactCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setNotes(String notes) {
-            this.notes = notes;
+        public void setNote(Note note) {
+            this.note = note;
         }
 
-        public Optional<String> getNotes() {
-            return Optional.ofNullable(notes);
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
         }
 
         @Override
@@ -239,7 +240,7 @@ public class EditContactCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(notes, otherEditPersonDescriptor.notes);
+                    && Objects.equals(note, otherEditPersonDescriptor.note);
         }
 
         @Override
@@ -250,7 +251,7 @@ public class EditContactCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
-                    .add("notes", notes)
+                    .add("note", note)
                     .toString();
         }
     }

@@ -21,12 +21,12 @@ public class PersonCardTest {
     }
 
     @Test
-    public void display_notesAndTags() {
+    public void display_noteAndTags() {
         Contact contact = new PersonBuilder()
-                .withNotes("Likes the sea")
+                .withNote("Likes the sea")
                 .withTags("customer", "service")
                 .build();
-        TestFxmlObject testObject = new TestFxmlObject(contact.getNotes());
+        TestFxmlObject testObject = new TestFxmlObject(contact.getNote().toString());
         assertEquals("Likes the sea", testObject.getText());
 
         Tag customerTag = contact.getTags().stream()
@@ -47,7 +47,7 @@ public class PersonCardTest {
     @Test
     public void testEquals() {
         Contact contact = new PersonBuilder()
-                .withNotes("Allergic to peanuts")
+                .withNote("Allergic to peanuts")
                 .withTags("customer")
                 .build();
 

@@ -24,19 +24,19 @@ public class Contact {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final String notes;
+    private final Note note;
 
     /**
-     * Every field must be present and not null except for notes.
+     * Every field must be present and not null except for note.
      */
-    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String notes) {
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.notes = notes;
+        this.note = note;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Contact {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.notes = "";
+        this.note = new Note("");
     }
 
     public Name getName() {
@@ -75,8 +75,8 @@ public class Contact {
         return Collections.unmodifiableSet(tags);
     }
 
-    public String getNotes() {
-        return notes;
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -126,13 +126,14 @@ public class Contact {
                 && phone.equals(otherContact.phone)
                 && email.equals(otherContact.email)
                 && address.equals(otherContact.address)
-                && tags.equals(otherContact.tags);
+                && tags.equals(otherContact.tags)
+                && note.equals(otherContact.note);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, notes);
+        return Objects.hash(name, phone, email, address, tags, note);
     }
 
     @Override
@@ -143,7 +144,7 @@ public class Contact {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("notes", notes)
+                .add("note", note)
                 .toString();
     }
 
