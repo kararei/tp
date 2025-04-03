@@ -77,17 +77,17 @@ Expected output:
 
 ```
 Available commands:
- - help: Shows program usage instructions
- - addContact: Adds a new contact
- - addTrip: Adds a new trip with name, accommodation, itinerary, date, optional customer names and optional note
- - deleteContact: Removes a contact at a specified index
- - deleteTrip: Removes a trip at a specified index
- - editContact: Edits a contact at a specified index
- - editTrip: Edits a trip at a specified index
- - listContact: Lists all contacts [can specify tag type]
- - listTrips: Lists all trips 
- - clear: Clear all contacts and trips from Ui
- - exit: Exits the program
+- help: Shows program usage instructions
+- addContact: Adds a new contact
+- addTrip: Adds a new trip with name, accommodation, itinerary, date, optional customer names and optional note
+- deleteContact: Removes a contact at a specified index
+- deleteTrip: Removes a trip at a specified index
+- editContact: Edits a contact at a specified index
+- editTrip: Edits a trip at a specified index
+- listContact: Lists all contacts [can specify tag type]
+- listTrip: Lists all trips 
+- clear: Clear all contacts and trips
+- exit: Exits the program
 ```
 
 ### Adding a contact: `addContact`
