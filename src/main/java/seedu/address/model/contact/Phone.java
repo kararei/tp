@@ -14,7 +14,7 @@ public class Phone {
             "Phone numbers should only contain numbers (no + for country code), "
                     + "and should be between 3 and 15 digits long.\n"
                     + "Example: 6598765432 (country code + number)";
-    public static final String VALIDATION_REGEX = "^\\d{3, 15}$";
+    public static final String VALIDATION_REGEX = "^\\d{3,15}$";
     public final String value;
 
     /**
