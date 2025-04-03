@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TravelHub Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -300,8 +300,6 @@ TravelHub streamlines the travel planning workflow by enabling rapid client and 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-(For all use cases below, the **System** is the `Travel Agency Management System` and the **Actor** is the `Travel Agent`, unless specified otherwise)
-
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
 | `* * *` | travel agent | add contacts along with comprehensive details | profile and contact them |
@@ -326,6 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | clumsy travel agent | undo my previous action | quickly correct mistakes |
 
 ### Use cases
+(For all use cases below, the **System** is the `Travel Agency Management System` and the **Actor** is the `Travel Agent`, unless specified otherwise)
 
 **Use case: See Usage Instructions**
 
@@ -347,10 +346,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Travel Agent requests to add a new contact with details (name, phone number, email, address, and tag).
+1.  Travel Agent requests to add a new contact with details (name, phone number, email, address, tag and notes).
 2.  System validates the contact details.
 3.  System adds the contact to the contact list.
-4.  System displays a success message: "New contact added: [Name]."
+4.  System displays a success message for adding the contact.
 
     Use case ends.
 
@@ -359,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The contact details are invalid (e.g., invalid phone number or email format).
     * 2a1. System displays an error message: "Invalid command format. Correct format: addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…"
     * 2a2. Use case resumes at step 1.
-* 2b. The contact already exists in the system (same name and phone number).
+* 2b. The contact already exists in the system (same email).
     * 2b1. System displays an error message: "This contact already exists in the system."
     * 2b2. Use case ends.
 
@@ -367,27 +366,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Travel Agent requests to add a new trip with details (date, customer index, accommodation, and itinerary).
+1.  Travel Agent requests to add a new trip with details (trip name, accommodation, itinerary, date, customer names and notes).
 2.  System validates the trip details.
 3.  System adds the trip to the trip list.
-4.  System displays a success message: "New trip added: [Date] for [Customer Name]."
+4.  System displays a success message for adding the trip"
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The trip details are invalid (e.g., invalid date format or customer index).
-    * 2a1. System displays an error message: "Invalid command format. Correct format: addTrip d/DATE c/CUSTOMER_INDEX a/ACCOMMODATION i/ITINERARY."
+    * 2a1. System displays an error message that the add trip format is invalid"
     * 2a2. Use case resumes at step 1.
-* 2b. The trip already exists in the system (same date and customer).
-    * 2b1. System displays an error message: "This trip already exists in the system."
+* 2b. The trip already exists in the system (same trip name).
+    * 2b1. System displays an error message: "This trip already exists in the trip book"
     * 2b2. Use case ends.
 * 2c. The customer index refers to a service contact (not a customer).
     * 2c1. System displays an error message: "Invalid customer index. Only customer contacts can be added as trip members."
     * 2c2. Use case resumes at step 1.
-* 2d. The accommodation refers to a customer contact (not a service).
-    * 2d1. System displays an error message: "Invalid accommodation. Only service contacts can be added as trip location businesses."
-    * 2d2. Use case resumes at step 1.
 
 **Use case: Delete a Contact**
 
@@ -397,17 +393,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System shows a list of contacts.
 3.  Travel Agent requests to delete a specific contact by index.
 4.  System deletes the contact.
-5.  System displays a success message: "Contact deleted: [Name]."
+5.  System displays a success message for deleting the contact"
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The contact list is empty.
-    * 2a1. System displays a message: "No contacts found."
-    * 2a2. Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. System displays an error message: "Invalid index. Please provide a valid index."
+    * 3a1. System displays an error message: "The contact index provided is invalid"
     * 3a2. Use case resumes at step 2.
 
 **Use case: Delete a Trip**
@@ -418,96 +411,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System shows a list of trips.
 3.  Travel Agent requests to delete a specific trip by index.
 4.  System deletes the trip.
-5.  System displays a success message: "Trip deleted: [Date] for [Customer Name]."
+5.  System displays a success message for deleting the trip"
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The trip list is empty.
-    * 2a1. System displays a message: "No trips found."
-    * 2a2. Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. System displays an error message: "Invalid index. Please provide a valid index."
+    * 3a1. System displays an error message: "The trip index provided is invalid."
     * 3a2. Use case resumes at step 2.
 
-**Use case: Mark a Trip as Ongoing**
+**Use case: Find a Contact**
 
 **MSS**
 
-1.  Travel Agent requests to list all trips.
-2.  System shows a list of trips.
-3.  Travel Agent requests to mark a specific trip as ongoing by index.
-4.  System marks the trip as ongoing.
-5.  System displays a success message: "Trip marked as ongoing: [Date] for [Customer Name]."
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The trip list is empty.
-    * 2a1. System displays a message: "No trips found."
-    * 2a2. Use case ends.
-* 3a. The given index is invalid.
-    * 3a1. System displays an error message: "Invalid index. Please provide a valid index."
-    * 3a2. Use case resumes at step 2.
-
-**Use case: Mark a Trip as Completed**
-
-**MSS**
-
-1.  Travel Agent requests to list all trips.
-2.  System shows a list of trips.
-3.  Travel Agent requests to mark a specific trip as completed by index.
-4.  System marks the trip as completed.
-5.  System displays a success message: "Trip marked as completed: [Date] for [Customer Name]."
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The trip list is empty.
-    * 2a1. System displays a message: "No trips found."
-    * 2a2. Use case ends.
-* 3a. The given index is invalid.
-    * 3a1. System displays an error message: "Invalid index. Please provide a valid index."
-    * 3a2. Use case resumes at step 2.
-
-**Use case: Search for Contacts and Trips**
-
-**MSS**
-
-1.  Travel Agent requests to search for contacts or trips using a keyword.
+1.  Travel Agent find for contacts or trips using a keyword.
 2.  System searches for matching contacts and trips.
 3.  System displays a list of matching results.
 
     Use case ends.
-
-**Extensions**
-
-* 2a. No matches are found.
-    * 2a1. System displays a message: "No matches found."
-    * 2a2. Use case ends.
-
-**Use case: Export Customer and Service Information**
-
-**MSS**
-
-1.  Travel Agent requests to export customer and service information.
-2.  System checks for existing data.
-3.  System exports the data to a file (e.g., `contacts.csv`).
-4.  System displays a success message: "Customer and service data exported to contacts.csv."
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. No data exists to export.
-    * 2a1. System displays a message: "No data to export."
-    * 2a2. Use case ends.
-* 3a. The system fails to export the data.
-    * 3a1. System displays an error message: "Failed to export data. Please try again later."
-    * 3a2. Use case ends.
 
 **Use case: Add Notes to Customer Profiles or Trips**
 
@@ -529,59 +451,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. System displays an error message: "Note content cannot be empty."
     * 2b2. Use case resumes at step 1.
 
-**Use case: Restrict Adding Service Contacts as Trip Members**
-
-**MSS**
-
-1.  Travel Agent requests to add a trip and specifies a customer index.
-2.  System checks if the customer index refers to a service contact.
-3.  System prevents the addition of the service contact as a trip member.
-4.  System displays an error message: "Invalid customer index. Only customer contacts can be added as trip members."
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The customer index refers to a valid customer contact.
-    * 2a1. System proceeds to add the trip.
-    * 2a2. Use case ends.
-
-**Use case: Restrict Adding Customer Contacts as Trip Location Businesses**
-
-**MSS**
-
-1.  Travel Agent requests to add a trip and specifies an accommodation.
-2.  System checks if the accommodation refers to a customer contact.
-3.  System prevents the addition of the customer contact as a trip location business.
-4.  System displays an error message: "Invalid accommodation. Only service contacts can be added as trip location businesses."
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The accommodation refers to a valid service contact.
-    * 2a1. System proceeds to add the trip.
-    * 2a2. Use case ends.
-
-**Use case: Sort Contacts by Name**
-
-**MSS**
-
-1.  Travel Agent requests to sort contacts by name.
-2.  System sorts the contacts alphabetically by name.
-3.  System displays the sorted list of contacts.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The contact list is empty.
-    * 2a1. System displays a message: "No contacts found."
-    * 2a2. Use case ends.
-* 2b. The system fails to sort the contacts.
-    * 2b1. System displays an error message: "Failed to sort contacts. Please try again later."
-    * 2b2. Use case ends.
-
 ### Non-Functional Requirements
 
 1.  Compatability: Should work on any _Mainstream OS_ as long as it has Java `17` or above installed.
@@ -593,9 +462,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7.  Data Security: All travel agent and customer data must remain on the local machine and not be transmitted to external services.
 8.  Maintainability: All code must adhere to the coding standard to ensure readability and facilitate future scalability.
 
-
-
-*{More to be added}*
 
 
 ### Glossary
@@ -619,9 +485,9 @@ This section defines key terms used in the user guide to ensure clarity and unde
 | **Parser**              | A component that interprets user input and converts it into commands that the application can execute.                                         |
 | **ObservableList**      | A list that allows external components to observe changes to its contents, typically used in the UI to automatically update when data changes.  |
 | **UserPref**            | User Preferences. Settings or configurations that the user can customize, such as the application's appearance or behavior.                    |
-| **Customer Contact** | A contact tagged as "Customer," representing an individual who is a client of the travel agency.                                                |
-| **Service Contact** | A contact tagged as "Service," representing a business or service provider (e.g., hotels, resorts).                                            |
-| **Trip** | A planned journey or vacation, including details such as dates, customers, accommodations, and itineraries.                                  |
+| **Customer Contact** | A contact tagged as "customer," representing an individual who is a client of the travel agency.                                                |
+| **Service Contact** | A contact tagged as "service," representing a business or service provider (e.g., hotels, resorts, restaurants and attractions).                                            |
+| **Trip** | A planned journey or vacation, including details such as trip name, dates, customers, accommodations, and itineraries and notes                                  |
 | **Ongoing Trip** | A trip that is currently active and being managed by the travel agent.                                                                         |
 | **Completed Trip** | A trip that has been concluded and no longer requires active management.                                                                      |
 | **Note** | Additional information or details added to a customer profile or trip, such as special requests or important reminders.                                 |
@@ -660,15 +526,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   1. Prerequisites: List all contacts using the `listContact` command. Multiple contacts in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `deleteContact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `deleteContact 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `deleteContact`, `deleteContact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
