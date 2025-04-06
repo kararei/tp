@@ -39,7 +39,8 @@ public class AddContactCommand extends Command {
             + PREFIX_NOTE + "Preferred contact method is email";
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "A contact using this email address "
+        + "already exists in the address book.";
 
     private final Contact toAdd;
 
