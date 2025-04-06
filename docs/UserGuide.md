@@ -203,7 +203,7 @@ Format: `listTrip [DATE]`
 
 * Without specifying the optional parameter, all trips will be displayed.
 * By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
-* The date should be in the format of DD/MM/YYYY.
+* The date should be in the format of D/M/YYYY.
 
 ### Adding a trip : `addTrip`
 
@@ -212,7 +212,7 @@ Adds a trip to the trip book.
 Format: `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Adds a trip with the specified details.
-* The date should be in the format of DD/MM/YYYY, signifying the trip's start date.
+* The date should be in the format of D/M/YYYY, signifying the trip's start date.
 * A valid date ranges from 1950 to 2100, as past trips can also be logged.
 * Customer names are optional. You can specify multiple customer names by using the c/ prefix multiple times.
 * You can add optional notes about the trip using the nts/ prefix.
