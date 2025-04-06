@@ -44,9 +44,11 @@ public class Messages {
                 .append("; Email: ")
                 .append(contact.getEmail())
                 .append("; Address: ")
-                .append(contact.getAddress())
-                .append("; Tags: ");
-        contact.getTags().forEach(builder::append);
+                .append(contact.getAddress());
+        if (!contact.getTags().isEmpty()) {
+            builder.append("; Tags: ");
+            contact.getTags().forEach(builder::append);
+        }
         if (!contact.getNote().isEmpty()) {
             builder.append("; Note: ")
                     .append(contact.getNote());
