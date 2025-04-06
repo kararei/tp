@@ -309,6 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | travel agent | tag contacts                                                                    | know whether they are a customer or service                                 |
 | `* * *` | travel agent | add notes to customer profiles or trips                                         | keep track of special requests or important details                         |
 | `* *`   | travel agent | update contact information                                                      | keep up-to-date information when their details change                       |
+| `* *`   | travel agent | update trip information                                                         | keep up-to-date information when trip details change                        |
 | `* *`   | travel agent | search for specific contacts                                                    | quickly locate the information I need                                       |
 | `* *`   | travel agent | change the date of the trip                                                     | accommodate flexibility in plans                                            |
 | `* *`   | travel agent | refer to all possible commands                                                  | refer to instructions when I forget how to use the app                      |
