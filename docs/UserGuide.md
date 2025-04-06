@@ -39,7 +39,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features] below for details of each command.
+1. Refer to the Features below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -66,6 +66,32 @@ TravelHub is a contact management app designed to help travel agents efficiently
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+### Contact Parameters
+A contact consists the following parameters: name, phone, email, address, tags and notes.
+The parameters follow immediately after their corresponding prefixes and are useful for the `addContact` and `editContact` commands.
+
+| Parameter | Prefix | Description |
+|-----------|--------|-------------|
+| `NAME`    | `n/`   | Specifies the name of the contact.<br><br>**Requirements:**<ul><li>Name is a mandatory parameter and cannot be empty.</li><li>Names can only contain alphanumeric characters, spaces, hyphens (-), apostrophes ('), and dots (.)</li></ul> |
+| `PHONE`   | `p/`   | Specifies the phone number of the contact.<br><br>**Requirements:** <ul><li>Phone number is a mandatory parameter and cannot be empty.</li><li>Phone numbers should only contain numbers.</li><li>The `+` sign for country code should be omitted.</li><li>Phone numbers should be 3-17 digits long.</li></ul> |
+| `EMAIL`   | `e/`   | Specifies the email of the contact <br><br>**Requirements:** <ul><li>**Contacts are uniquely identified by their email**</li><li>Email is a mandatory parameter and cannot be empty.</li><li>Emails should be of the format `local-part@domain`.</li><li>Local-part should contain only alphanumeric characters and these special characters, excluding the parentheses, (+_.-).</li><li>The local-part may not start or end with any special characters.</li><li>Special characters can only appear between alphanumeric characters and cannot be placed next to each other.</li><li>The domain should contain only alphanumeric characters, hyphens (-) and dots (.)</li><li>The domain must be at least 2 characters long</li><li>The domain must start and end with alphanumeric characters</li></ul> |
+| `ADDRESS` | `a/`   | Specifies the address of the contact.<br><br> **Requirements:**<ul><li>Address is a mandatory parameter and cannot be empty.</li></ul> |
+| `TAG`     | `t/`   | Specifies the tag of a customer.<br><br> **Requirements:** <ul><li>Tag is an optional parameter and can be omitted when adding a contact.</li><li>Tags can only be specified as `t\customer` or `t/service`</li><li>You may include both by specifying `t/customer t/service`</li></ul> |
+| `NOTE`    | `nts/` | Specifies additional notes related to the contact.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a contact.</li></ul> |
+
+### Trip Parameters
+A trip consists the following parameters: trip name, accommodation, itineraries date, customers, and notes.
+The parameters follow immediately after their corresponding prefixes and are useful for the `addTrip` and `editTrip` commands.
+
+| Parameter       | Prefix | Description |
+|-----------------|--------|-------------|
+| `NAME`          | `n/`   | Specifies the name of the trip.<br><br>**Requirements:**<ul><li>Name is a mandatory parameter and cannot be empty.</li><li>Trip names can only contain alphanumeric characters and spaces.</li></ul> |
+| `ACCOMMODATION` | `acc/` | Specifies the accomodation for the trip.<br><br>**Requirements:**<ul><li>Accomodation is a mandatory parameter and cannot be empty.</li></ul> |
+| `ITINERARY`     | `i/`   | Specifies the itinerary for the trip. <br><br>**Requirements:**<ul><li>Itinerary is a mandatory parameter and cannot be empty.</li></ul> |
+| `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul> |
+| `CUSTOMER_NAME` | `c/`   | Specifies the name of the customers participating in the trip.<br><br> **Requirements:** <ul><li>Customer name is an optional parameter and can be omitted when adding a trip.</li><li>Customer name follows the requirements of the `NAME` parameter in contact.</li><li>You can specify multiple customer names by repeating the c/ prefix separated by a space, e.g., `c/John Doe c/Jane Doe c/Joe Doe`.</li></ul> |
+| `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.</li></ul> |
 
 ### Viewing help : `help`
 

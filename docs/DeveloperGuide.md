@@ -311,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | travel agent | update contact information | keep up-to-date information when their details change |
 | `* *`   | travel agent | mark trips as ongoing | keep track and manage active trips |
 | `* *`   | travel agent | mark trips as completed | keep track of trips that no longer require management |
-| `* *`   | travel agent | search for contacts and trips | quickly locate the information I need |
+| `* *`   | travel agent | search for contacts | quickly locate the information I need |
 | `* *`   | travel agent | be reminded on any upcoming trips | stay informed of the scheduling details |
 | `* *`   | travel agent | mark trips as flexible and change the date of the trip | accommodate flexibility in plans |
 | `* *`   | travel agent | receive feedback from customers after trips | improve my services and address any concerns |
@@ -485,7 +485,7 @@ This section defines key terms used in the user guide to ensure clarity and unde
 | **UserPref**            | User Preferences. Settings or configurations that the user can customize, such as the application's appearance or behavior.                    |
 | **Customer Contact** | A contact tagged as "customer," representing an individual who is a client of the travel agency.                                                |
 | **Service Contact** | A contact tagged as "service," representing a business or service provider (e.g., hotels, resorts, restaurants and attractions).                                            |
-| **Trip** | A planned journey or vacation, including details such as trip name, dates, customers, accommodations, and itineraries and notes                                  |
+| **Trip** | A planned journey or vacation, including details such as trip name, start date, customers, accommodation, itineraries and notes                                  |
 | **Note** | Additional information or details added to a customer profile or trip, such as special requests or important reminders.                                 |
 
 --------------------------------------------------------------------------------------------------------------------
