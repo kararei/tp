@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -44,8 +43,7 @@ public class EditTripCommandParser implements Parser<EditTripCommand> {
         try {
             index = ParserUtil.parseTripIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            String message = pe.getMessage();
-            if (message.equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX) || message.equals(MESSAGE_INVALID_INDEX)) {
+            if (pe.getMessage().equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX)) {
                 throw pe;
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTripCommand.MESSAGE_USAGE), pe);

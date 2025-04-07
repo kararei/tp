@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_TRIP_DISPLAYED_INDEX;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteTripCommand;
@@ -23,8 +22,7 @@ public class DeleteTripCommandParser implements Parser<DeleteTripCommand> {
             Index index = ParserUtil.parseTripIndex(args);
             return new DeleteTripCommand(index);
         } catch (ParseException pe) {
-            String message = pe.getMessage();
-            if (message.equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX) || message.equals(MESSAGE_INVALID_INDEX)) {
+            if (pe.getMessage().equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX)) {
                 throw pe;
             }
             throw new ParseException(

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TRIP_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.ACCOMMODATION_DESC_HOTEL_81;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ACCOMMODATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ITINERARY_DESC;
@@ -61,10 +62,10 @@ public class EditTripCommandParserTest {
 
     @Test public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + TRIP_NAME_DESC_PARIS_2025, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + TRIP_NAME_DESC_PARIS_2025, MESSAGE_INVALID_TRIP_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + TRIP_NAME_DESC_PARIS_2025, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + TRIP_NAME_DESC_PARIS_2025, MESSAGE_INVALID_TRIP_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
