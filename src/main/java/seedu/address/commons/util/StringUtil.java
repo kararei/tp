@@ -65,4 +65,20 @@ public class StringUtil {
             return false;
         }
     }
+    /**
+     * Returns true if the given string represents a valid integer (positive, negative, or zero).
+     *
+     * @param s The string to test.
+     * @return True if {@code s} can be parsed as an integer using {@link Integer#parseInt(String)}, false otherwise.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isInteger(String s) {
+        requireNonNull(s);
+        try {
+            int value = Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }

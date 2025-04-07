@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,6 +11,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Email;
@@ -36,23 +36,26 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+    public void parseTripIndex_validInput_success() throws Exception {
+        assertEquals(Index.fromOneBased(1), ParserUtil.parseTripIndex("1"));
+        assertEquals(Index.fromOneBased(3), ParserUtil.parseTripIndex("  3  "));
     }
 
     @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, "Index is not a non-zero unsigned integer.", ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    public void parseTripIndex_nonInteger_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTripIndex("abc"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTripIndex("1x"));
+    }
+
+
+    @Test
+    public void parseContactIndex_validInput_success() throws Exception {
+        assertEquals(Index.fromOneBased(1), ParserUtil.parseContactIndex("1"));
     }
 
     @Test
-    public void parseIndex_validInput_success() throws Exception {
-        // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
-
-        // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    public void parseContactIndex_nonInteger_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactIndex("xyz"));
     }
 
     @Test
