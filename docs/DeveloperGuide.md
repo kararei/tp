@@ -300,28 +300,25 @@ TravelHub streamlines the travel planning workflow by enabling rapid client and 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *` | travel agent | add contacts along with comprehensive details | profile and contact them |
-| `* * *` | travel agent | delete contacts | remove invalid or non-existent contacts |
-| `* * *` | travel agent | add trips with information like dates, customers, accommodation and itineraries | check all the consolidated information for a trip |
-| `* * *` | travel agent | delete trips | remove outdated or irrelevant information |
-| `* * *` | travel agent | tag contacts | know whether they are a customer or service |
-| `* * *` | travel agent | add notes to customer profiles or trips | keep track of special requests or important details |
-| `* *`   | travel agent | update contact information | keep up-to-date information when their details change |
-| `* *`   | travel agent | mark trips as ongoing | keep track and manage active trips |
-| `* *`   | travel agent | mark trips as completed | keep track of trips that no longer require management |
-| `* *`   | travel agent | search for contacts | quickly locate the information I need |
-| `* *`   | travel agent | be reminded on any upcoming trips | stay informed of the scheduling details |
-| `* *`   | travel agent | mark trips as flexible and change the date of the trip | accommodate flexibility in plans |
-| `* *`   | travel agent | receive feedback from customers after trips | improve my services and address any concerns |
-| `* *`   | travel agent | refer to all possible commands | refer to instructions when I forget how to use the app |
-| `* *`   | travel agent | sort the customer and service list by date | view the information in a organised manner |
-| `*`     | potential travel agent | see the app populated with sample customer profiles and trips | understand how the data is organized and what I can achieve with the system  |
-| `*`     | new travel agent | clear the sample data with a single command  | start with a clean slate for my customer data and trip records |
-| `*`     | travel agent |  export customer and service information | share them with my colleagues |
-| `*`     | long-time travel agent | archive completed trips and inactive customer profiles | keep my workspace uncluttered and focused on current travel plans |
-| `*`     | clumsy travel agent | undo my previous action | quickly correct mistakes |
+| Priority | As a …​                                   | I want to …​                                                                    | So that I can…​                                                             |
+|----------|-------------------------------------------|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *` | travel agent | add contacts along with comprehensive details                                   | profile and contact them                                                    |
+| `* * *` | travel agent | delete contacts                                                                 | remove invalid or non-existent contacts                                     |
+| `* * *` | travel agent | add trips with information like dates, customers, accommodation and itineraries | check all the consolidated information for a trip                           |
+| `* * *` | travel agent | delete trips                                                                    | remove outdated or irrelevant information                                   |
+| `* * *` | travel agent | tag contacts                                                                    | know whether they are a customer or service                                 |
+| `* * *` | travel agent | add notes to customer profiles or trips                                         | keep track of special requests or important details                         |
+| `* *`   | travel agent | update contact information                                                      | keep up-to-date information when their details change                       |
+| `* *`   | travel agent | update trip information                                                         | keep up-to-date information when trip details change                        |
+| `* *`   | travel agent | search for specific contacts                                                    | quickly locate the information I need                                       |
+| `* *`   | travel agent | change the date of the trip                                                     | accommodate flexibility in plans                                            |
+| `* *`   | travel agent | refer to all possible commands                                                  | refer to instructions when I forget how to use the app                      |
+| `* *`   | travel agent | view the list of trips for a specific date                                      | get information in a accesible and organised manner                         |
+| `*`     | potential travel agent | see the app populated with sample customer profiles and trips                   | understand how the data is organized and what I can achieve with the system |
+| `*`     | new travel agent | clear the sample data with a single command                                     | start with a clean slate for my customer data and trip records              |
+| `*`     | long-time travel agent | remove completed trips and inactive customer profiles                           | keep my workspace uncluttered and focused on current travel plans           |
+| `*`     | clumsy travel agent | change my previous actions                                                      | correct my mistakes                                                         |
+| `*`     | travel agent | view my customers by their tags                                                 | easily compare contacts of the same tag with one another                    |
 
 ### Use cases
 (For all use cases below, the **System** is the `Travel Agency Management System` and the **Actor** is the `Travel Agent`, unless specified otherwise)
@@ -456,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Compatability: Should work on any _Mainstream OS_ as long as it has Java `17` or above installed.
 2.  Performance: Should be able to hold up to 1000 contacts and trips without a noticeable sluggishness in performance for typical usage.
 3.  Performance: Should respond within three seconds for any command executed.
-4.  Usability: A user who has above average typing speed for regular text can enter the commands faster than by using a mouse.
+4.  Usability: A typists with at least 70 WPM for regular text can enter the commands faster than by using a mouse.
 5.  Usability: A user with basic understanding of the english language can utilise this application.
 6.  Reliability: The application should automatically save all contact and trip data after each operation to prevent data loss.
 7.  Data Security: All travel agent and customer data must remain on the local machine and not be transmitted to external services.
