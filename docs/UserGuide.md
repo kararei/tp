@@ -20,7 +20,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ContactBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar travelhub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -52,6 +52,9 @@ TravelHub is a contact management app designed to help travel agents efficiently
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
 
+* The parameter `nts/NOTE` is optional for Trip and Contact.<br> 
+  However, if added, it **must** be the final input parameter.
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/customer` or as `n/John Doe`.
 
@@ -78,20 +81,20 @@ The parameters follow immediately after their corresponding prefixes and are use
 | `EMAIL`   | `e/`   | Specifies the email of the contact <br><br>**Requirements:** <ul><li>**Contacts are uniquely identified by their email**</li><li>Email is a mandatory parameter and cannot be empty.</li><li>Emails should be of the format `local-part@domain`.</li><li>Local-part should contain only alphanumeric characters and these special characters, excluding the parentheses, (+_.-).</li><li>The local-part may not start or end with any special characters.</li><li>Special characters can only appear between alphanumeric characters and cannot be placed next to each other.</li><li>The domain should contain only alphanumeric characters, hyphens (-) and dots (.)</li><li>The domain must be at least 2 characters long</li><li>The domain must start and end with alphanumeric characters</li></ul> |
 | `ADDRESS` | `a/`   | Specifies the address of the contact.<br><br> **Requirements:**<ul><li>Address is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `TAG`     | `t/`   | Specifies the tag of a customer.<br><br> **Requirements:** <ul><li>Tag is an optional parameter and can be omitted when adding a contact.</li><li>Tags can only be specified as `t/customer` or `t/service`</li><li>You may include both by specifying `t/customer t/service`</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `NOTE`    | `nts/` | Specifies additional notes related to the contact.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a contact.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `NOTE`    | `nts/` | Specifies additional notes related to the contact.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a contact. However, if added, it must be the last parameter in the users input.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### Trip Parameters
 A trip consists the following parameters: trip name, accommodation, itineraries date, customers, and notes.
 The parameters follow immediately after their corresponding prefixes and are useful for the `addTrip` and `editTrip` commands.
 
-| Parameter       | Prefix | Description |
-|-----------------|--------|-------------|
-| `NAME`          | `n/`   | Specifies the name of the trip.<br><br>**Requirements:**<ul><li>**Trips are uniquely identified by their trip name**</li><li>Name is a mandatory parameter and cannot be empty.</li><li>Trip names can only contain alphanumeric characters and spaces.</li></ul> |
-| `ACCOMMODATION` | `acc/` | Specifies the accomodation for the trip.<br><br>**Requirements:**<ul><li>Accomodation is a mandatory parameter and cannot be empty.</li></ul> |
-| `ITINERARY`     | `i/`   | Specifies the itinerary for the trip. <br><br>**Requirements:**<ul><li>Itinerary is a mandatory parameter and cannot be empty.</li></ul> |
-| `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul> |
+| Parameter       | Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                           |
+|-----------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`          | `n/`   | Specifies the name of the trip.<br><br>**Requirements:**<ul><li>**Trips are uniquely identified by their trip name**</li><li>Name is a mandatory parameter and cannot be empty.</li><li>Trip names can only contain alphanumeric characters and spaces.</li></ul>                                                                                                                                                     |
+| `ACCOMMODATION` | `acc/` | Specifies the accomodation for the trip.<br><br>**Requirements:**<ul><li>Accomodation is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                         |
+| `ITINERARY`     | `i/`   | Specifies the itinerary for the trip. <br><br>**Requirements:**<ul><li>Itinerary is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                              |
+| `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul>                                                                                                                                                                   |
 | `CUSTOMER_NAME` | `c/`   | Specifies the name of the customers participating in the trip.<br><br> **Requirements:** <ul><li>Customer name is an optional parameter and can be omitted when adding a trip.</li><li>Customer name follows the requirements of the `NAME` parameter in contact.</li><li>You can specify multiple customer names by repeating the c/ prefix separated by a space, e.g., `c/John Doe c/Jane Doe c/Joe Doe`.</li></ul> |
-| `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.</li></ul> |
+| `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.  However, if added, it must be the last parameter in the users input.</li></ul>                                                                                                                                                                                |
 
 ### Viewing help : `help`
 
@@ -127,7 +130,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only exact words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contactss matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -267,17 +270,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook and TripBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ContactBook and TripBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Similarly TripBook data are saved automatically as a JSON file `[JAR file location]/data/tripbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ContactBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Similarly TripBook data are saved automatically as a JSON file `[JAR file location]/data/tripbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook and TripBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook and TripBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ContactBook and TripBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ContactBook and TripBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -285,7 +288,7 @@ Furthermore, certain edits can cause the AddressBook and TripBook to behave in u
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook and TripBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactBook and TripBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
