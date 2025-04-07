@@ -42,11 +42,10 @@ public class EditTripCommandParser implements Parser<EditTripCommand> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseTripIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             String message = pe.getMessage();
-            if (message.equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX)
-                    || message.equals(MESSAGE_INVALID_INDEX)) {
+            if (message.equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX) || message.equals(MESSAGE_INVALID_INDEX)) {
                 throw pe;
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTripCommand.MESSAGE_USAGE), pe);

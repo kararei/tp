@@ -20,7 +20,7 @@ public class DeleteTripCommandParser implements Parser<DeleteTripCommand> {
      */
     public DeleteTripCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
+            Index index = ParserUtil.parseTripIndex(args);
             return new DeleteTripCommand(index);
         } catch (ParseException pe) {
             String message = pe.getMessage();

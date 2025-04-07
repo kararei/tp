@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_TRIP_DISPLAYED_INDEX;
 
 import java.util.Collection;
@@ -26,15 +27,28 @@ import seedu.address.model.trip.TripName;
  */
 public class ParserUtil {
 
-    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
+
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseContactIndex(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        int value = Integer.parseInt(trimmedIndex);
+        if (value <= 0) {
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    public static Index parseTripIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -45,6 +59,7 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+
 
     /**
      * Parses a {@code String name} into a {@code Name}.
