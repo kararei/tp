@@ -19,7 +19,7 @@ public class TripBuilder {
     public static final String DEFAULT_NAME = "Paris 2025";
     public static final String DEFAULT_ACCOMMODATION = "Hotel 81";
     public static final String DEFAULT_ITINERARY = "Eat baguettes";
-    public static final String DEFAULT_DATE = "01/01/2205";
+    public static final String DEFAULT_DATE = "01/01/2100";
     public static final String DEFAULT_NOTE = "";
 
     private TripName name;

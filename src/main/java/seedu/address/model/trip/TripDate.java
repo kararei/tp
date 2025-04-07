@@ -18,7 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 public class TripDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Trip date should be in the format of d/M/yyyy and must be a valid date";
+            "Trip date should be in the format of d/M/yyyy and must be a valid date between 1950 and 2100 inclusive.";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
     private static final Logger logger = LogsCenter.getLogger(TripDate.class);
