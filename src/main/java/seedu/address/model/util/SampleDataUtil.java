@@ -18,7 +18,6 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.trip.Accommodation;
 import seedu.address.model.trip.Itinerary;
-import seedu.address.model.trip.Note;
 import seedu.address.model.trip.Trip;
 import seedu.address.model.trip.TripDate;
 import seedu.address.model.trip.TripName;
@@ -68,9 +67,9 @@ public class SampleDataUtil {
         Set<Name> customerNames = new HashSet<>();
         customerNames.add(new Name("John Doe"));
         customerNames.add(new Name("Jane Doe"));
-        Note note = new Note("Customer prefers window seat");
 
-        Trip trip = new Trip(name, accommodation, itinerary, date, customerNames, note);
+        Trip trip = new Trip(name, accommodation, itinerary, date, customerNames,
+                new seedu.address.model.trip.Note("Customer prefers window seat"));
         sampleTb.addTrip(trip);
 
         return sampleTb;
