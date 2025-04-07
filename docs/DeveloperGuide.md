@@ -272,22 +272,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target User Profile:**
 
-* Travel agents who manage multiple clients and trip arrangements
-* Users who frequently coordinate with various service providers (hotels, tour guides, transportation)
-* Users who need to track detailed client preferences and trip specifics
-* Users who need to quickly add and retrieve information during client calls
+* Travel agents who struggle with **problem 1: managing a fragmented workflow involving multiple clients and service providers across various platforms.**
+* Travel agents who face **problem 2: difficulty in rapidly accessing and organizing detailed client preferences and trip specifics, especially during time-sensitive client calls.**
 
-**Value proposition**:
+**Value Proposition:**
 
-TravelHub streamlines the travel planning workflow by enabling rapid client and service provider management, efficient trip organization, and detailed note-keeping in a single application. The system allows travel professionals to:
+TravelHub addresses these challenges by providing:
 
-* Maintain a comprehensive database of clients and service providers with appropriate tagging
-* Create and manage trip itineraries with accommodation details and activities
-* Track special client requests and preferences through a flexible notes system
-* Quickly retrieve client information during consultations
-* Manage upcoming trips chronologically to prioritize immediate arrangements
+* **Solution to problem 1:** A centralized application that streamlines the travel planning workflow, consolidating client and service provider management, trip organization, and note-keeping into a single, efficient system.
+* **Solution to problem 2:** Tools for rapid client information retrieval, detailed preference tracking through a flexible notes system, and chronological trip management, enabling quick and informed responses during client consultations.
 
 **Scope boundaries**:
 * Focuses on contact and trip management, not financial transactions or booking confirmations
