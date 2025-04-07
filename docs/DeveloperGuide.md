@@ -386,37 +386,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Travel Agent requests to list all contacts.
-2.  System shows a list of contacts.
-3.  Travel Agent requests to delete a specific contact by index.
-4.  System deletes the contact.
-5.  System displays a success message for deleting the contact"
+1. Travel Agent requests to delete a specific contact by index.
+2. System deletes the contact.
+3. System displays a success message for deleting the contact
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
-    * 3a1. System displays an error message: "The contact index provided is invalid"
-    * 3a2. Use case resumes at step 2.
+* 1a. The given index is invalid.
+    * 1a1. System displays an error message: "The contact index provided is invalid"
+    * 1a2. Use case resumes at step 2.
 
 **Use case: Delete a Trip**
 
 **MSS**
 
-1.  Travel Agent requests to list all trips.
-2.  System shows a list of trips.
-3.  Travel Agent requests to delete a specific trip by index.
-4.  System deletes the trip.
-5.  System displays a success message for deleting the trip"
+1. Travel Agent requests to delete a specific trip by index.
+2. System deletes the trip.
+3. System displays a success message for deleting the trip"
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
-    * 3a1. System displays an error message: "The trip index provided is invalid."
-    * 3a2. Use case resumes at step 2.
+* 1a. The given index is invalid.
+    * 1a1. System displays an error message: "The trip index provided is invalid."
+    * 1a2. Use case resumes at step 2.
 
 **Use case: Find a Contact**
 
