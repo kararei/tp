@@ -65,7 +65,7 @@ public class TripDate {
             LocalDate parsedDate = LocalDate.parse(test.trim(), DATE_FORMATTER);
             // Additional validation for year range
             int year = parsedDate.getYear();
-            if (year < 1000 || year > 9999) {
+            if (year < 1950 || year > 2100) {
                 logger.fine("Invalid year in date: " + test);
                 return false;
             }

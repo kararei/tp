@@ -52,7 +52,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
 
-* The parameter `nts/NOTE` is optional for Trip and Contact.<br> 
+* The parameter `nts/NOTE` is optional for Trip and Contact.<br>
   However, if added, it **must** be the final input parameter.
 
 * Items in square brackets are optional.<br>

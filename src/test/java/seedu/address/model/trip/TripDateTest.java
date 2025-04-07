@@ -63,8 +63,12 @@ public class TripDateTest {
         assertFalse(TripDate.isValidTripDate("1/1/10000")); // year too large
         assertFalse(TripDate.isValidTripDate("0/1/2023")); // day zero
         assertFalse(TripDate.isValidTripDate("1/0/2023")); // month zero
+        assertFalse(TripDate.isValidTripDate("1/1/2101")); // >2100
+        assertFalse(TripDate.isValidTripDate("1/1/1949")); // <1950
 
         // valid trip dates
+        assertTrue(TripDate.isValidTripDate("1/1/2100")); // minimal format
+        assertTrue(TripDate.isValidTripDate("1/1/1950")); // minimal format
         assertTrue(TripDate.isValidTripDate("1/1/2023")); // minimal format
         assertTrue(TripDate.isValidTripDate("31/12/2023")); // end of year
         assertTrue(TripDate.isValidTripDate("29/2/2024")); // leap year
