@@ -53,7 +53,6 @@ TravelHub is a contact management app designed to help travel agents efficiently
   e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
 
 * The parameter `nts/NOTE` is optional for Trip and Contact.<br> 
-  However, if added, it **must** be the final input parameter.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/customer` or as `n/John Doe`.
@@ -81,7 +80,7 @@ The parameters follow immediately after their corresponding prefixes and are use
 | `EMAIL`   | `e/`   | Specifies the email of the contact <br><br>**Requirements:** <ul><li>**Contacts are uniquely identified by their email**</li><li>Email is a mandatory parameter and cannot be empty.</li><li>Emails should be of the format `local-part@domain`.</li><li>Local-part should contain only alphanumeric characters and these special characters, excluding the parentheses, (+_.-).</li><li>The local-part may not start or end with any special characters.</li><li>Special characters can only appear between alphanumeric characters and cannot be placed next to each other.</li><li>The domain should contain only alphanumeric characters, hyphens (-) and dots (.)</li><li>The domain must be at least 2 characters long</li><li>The domain must start and end with alphanumeric characters</li></ul> |
 | `ADDRESS` | `a/`   | Specifies the address of the contact.<br><br> **Requirements:**<ul><li>Address is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `TAG`     | `t/`   | Specifies the tag of a customer.<br><br> **Requirements:** <ul><li>Tag is an optional parameter and can be omitted when adding a contact.</li><li>Tags can only be specified as `t/customer` or `t/service`</li><li>You may include both by specifying `t/customer t/service`</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `NOTE`    | `nts/` | Specifies additional notes related to the contact.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a contact. However, if added, it must be the last parameter in the users input.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `NOTE`    | `nts/` | Specifies additional notes related to the contact.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a contact.</li><li>Note content can be empty (e.g., `nts/` is valid).</li><li>**Important:** If your note contains any parameter prefixes (e.g., n/, p/, e/, a/, t/), they will be treated as separate parameters rather than part of the note. For example, in `addContact n/John p/12345 e/john@example.com a/123 Main St nts/Contact prefers p/morning calls`, the text "p/morning calls" would not be part of the note - "p/morning" would be treated as a separate phone parameter.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### Trip Parameters
 A trip consists the following parameters: trip name, accommodation, itineraries date, customers, and notes.
@@ -94,7 +93,7 @@ The parameters follow immediately after their corresponding prefixes and are use
 | `ITINERARY`     | `i/`   | Specifies the itinerary for the trip. <br><br>**Requirements:**<ul><li>Itinerary is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                              |
 | `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul>                                                                                                                                                                   |
 | `CUSTOMER_NAME` | `c/`   | Specifies the name of the customers participating in the trip.<br><br> **Requirements:** <ul><li>Customer name is an optional parameter and can be omitted when adding a trip.</li><li>Customer name follows the requirements of the `NAME` parameter in contact.</li><li>You can specify multiple customer names by repeating the c/ prefix separated by a space, e.g., `c/John Doe c/Jane Doe c/Joe Doe`.</li></ul> |
-| `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.  However, if added, it must be the last parameter in the users input.</li></ul>                                                                                                                                                                                |
+| `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.</li><li>Note content can be empty (e.g., `nts/` is valid).</li><li>**Important:** If your note contains any parameter prefixes (e.g., n/, acc/, i/, d/, c/), they will be treated as separate parameters rather than part of the note. For example, in `addTrip n/Europe Trip acc/Grand Hotel i/Sightseeing d/1/6/2024 nts/Remember to book n/train tickets`, the text "n/train tickets" would not be part of the note - "n/train tickets" would be treated as a separate name parameter.</li></ul>                                                                                                 |
 
 ### Adding a contact: `addContact`
 
@@ -106,6 +105,7 @@ Format: `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​`
 * Tags must be 'customer' or 'service' e.g., 't/customer t/service'.
 * A contact can have no tags, 1 tag or both the customer and service tag.
 * You can add optional notes about the contact using the nts/ prefix.
+* Note that if your note contains any parameter prefixes (n/, p/, e/, a/, t/), they will be treated as separate parameters and not as part of the note text.
 
 
 Examples:
@@ -125,9 +125,10 @@ Format: `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]..
 * A valid date ranges from 1950 to 2100, as past trips can also be logged.
 * Customer names are optional. You can specify multiple customer names by using the c/ prefix multiple times.
 * You can add optional notes about the trip using the nts/ prefix.
+* Note that if your note contains any parameter prefixes (n/, acc/, i/, d/, c/), they will be treated as separate parameters and not as part of the note text.
 
 Examples:
-* `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
+* `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Remember to book tickets`
 * `addTrip n/Beach Vacation acc/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
 * `addTrip n/Business Conference acc/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
 
@@ -177,6 +178,7 @@ Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
 * You can remove all the contact's tags by typing `t/` without specifying any tags after it.
 * You can remove all the contact's notes by typing `nts/` without specifying anything after it.
+* Note that if your note contains any parameter prefixes (n/, p/, e/, a/, t/), they will be treated as separate parameters and not as part of the note text.
 
 Examples:
 *  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
@@ -195,6 +197,8 @@ Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/C
 * Existing values will be updated to the input values.
 * When editing customer names, the existing customer names of the trip will be removed and replaced with the new ones.
 * You can remove all customer names by not including any c/ prefixes.
+* You can remove all trip notes by typing `nts/` without specifying anything after it.
+* Note that if your note contains any parameter prefixes (n/, acc/, i/, d/, c/), they will be treated as separate parameters and not as part of the note text.
 * Customer names are optional.
 
 Examples:

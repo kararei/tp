@@ -125,7 +125,7 @@ The `Model` component,
 
 * stores the contact book data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
 * stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -161,6 +161,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ### Trip Management System
 
 The Trip management system allows travel agents to create, edit, delete, and list trips, which are essential for organizing travel plans for customers. Below are the details of its implementation.
+
+#### Notes Parameter Behavior
+
+Both Contact and Trip entities support notes through the `nts/` parameter prefix. When parsing commands like `addContact`, `editContact`, `addTrip`, and `editTrip`, developers should be aware of the following important behavior:
+
+- If any parameter prefixes that is used in either Contact or Trip (e.g., `n/`, `p/`, `e/`, `a/`, `t/`, `acc/`, `i/`, `d/`, `c/`) appear within the note content, they will be interpreted as separate parameters rather than part of the note text.
+- For example, in a command like `addTrip n/Europe Trip acc/Grand Hotel i/Sightseeing d/1/6/2024 nts/Remember to book n/train tickets`, the text "n/train tickets" would not be part of the note - instead, "n/train tickets" would be treated as a separate name parameter.
+- This behavior is by design and is consistent across all commands that accept the note parameter.
 
 #### Adding a Trip to the Trip Book
 
@@ -484,6 +492,47 @@ This section defines key terms used in the user guide to ensure clarity and unde
 | **Note** | Additional information or details added to a customer profile or trip, such as special requests or important reminders.                                 |
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Planned Enhancement
+
+### Escape Character for Notes
+
+Currently, if parameter prefixes (e.g., `n/`, `p/`, `e/`, `a/`, `t/`, `acc/`, `i/`, `d/`, `c/`) appear within note content, they are treated as separate parameters rather than as part of the note. To allow users to include these prefix patterns in their notes, we plan to implement an escape character mechanism.
+
+**Proposed Implementation:**
+- Introduce a special escape character (e.g., backslash `\`) that users can place before parameter prefixes in notes
+- For example, `nts/Remember to call \p/12345678` would include "p/12345678" as part of the note text
+- The parser will detect the escape character and interpret the following prefix as literal text rather than a parameter marker
+
+**Benefits:**
+- Users can include parameter-like text in their notes without causing unexpected parsing behavior
+- Improves flexibility in note content without compromising the existing command structure
+- Maintains backward compatibility with existing commands
+
+**Implementation Challenges:**
+- Need to modify the parser to recognize and handle the escape character
+- Must ensure proper handling of edge cases, such as multiple consecutive escape characters
+
+### Add End Date for Trips
+
+Currently, trips only have a start date. To better support trip planning and tracking, we plan to enhance the Trip model to include an end date.
+
+**Proposed Implementation:**
+- Add a new `TripEndDate` class similar to the existing `TripDate` class
+- Extend the Trip model to include an end date field
+- Update relevant parsers to accept an end date parameter (e.g., `ed/5/6/2024`)
+- Modify the trip display to show both start and end dates
+- Update storage to persist the end date information
+
+**Benefits:**
+- Allows users to track the full duration of trips
+- Enables future enhancements such as trip duration calculations and trip overlap detection
+- Provides more complete trip information at a glance
+
+**Implementation Challenges:**
+- Need to ensure the end date is not earlier than the start date
+- Must update existing trip displays and storage format while maintaining backward compatibility
+- Should modify trip filtering to consider both start and end dates
 
 ## **Appendix: Instructions for manual testing**
 
