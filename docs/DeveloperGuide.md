@@ -242,7 +242,7 @@ The edit trip feature allows users to modify the details of an existing trip by 
 
 The list trip feature allows users to view all trips or filter trips by date.
 
-<puml src="diagrams/ListTripSequenceDiagram.puml" alt="ListTripSequenceDiagram">
+<puml src="diagrams/ListTripSequenceDiagram.puml" alt="ListTripSequenceDiagram" />
 
 1. `AddressBookParser` identifies that the command type is `listTrip` based on the command word and creates an instance of `ListTripCommandParser` to parse the user input.
 
