@@ -15,14 +15,21 @@ TravelHub is a contact management app designed to help travel agents efficiently
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` or above installed in your Computer.<br> 
+   **Windows users:** Download and install JDK 17 from [here](https://www.oracle.com/java/technologies/downloads/#java17)<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   * Open a command terminal (Windows: search for _cmd_ , Mac: use Spotlight to find _Terminal_ )
+   * Verify installation by typing `java -version` in your terminal 
+   
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F09-1/tp/releases).
+2. Download the `TravelHub.jar` file from the latest release [here](https://github.com/AY2425S2-CS2103-F09-1/tp/releases).
+   * The `.jar` file will be listed under the Assets dropdown of the latest version - click on it to begin your download
+   
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ContactBook.
+3. Copy the `TravelHub.jar` file to the folder you want to use as the _home folder_ for TravelHub. Other additional folders (e.g. data folder) will be created within this _home folder_.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar travelhub.jar` command to run the application.<br>
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, type the `java -jar travelhub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -302,7 +309,7 @@ ContactBook and TripBook data are saved in the hard disk automatically after any
 
 ### Editing the data file
 
-ContactBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Similarly TripBook data are saved automatically as a JSON file `[JAR file location]/data/tripbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ContactBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Similarly, TripBook data are saved automatically as a JSON file `[JAR file location]/data/tripbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
