@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -208,11 +210,48 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowConfirmation()) {
+                handleConfirmation(commandResult);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Handles confirmation dialog.
+     */
+    private void handleConfirmation(CommandResult commandResult) {
+        logger.info("Showing confirmation dialog");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText(commandResult.getConfirmationText());
+        alert.getDialogPane().setId(UiManager.ALERT_DIALOG_PANE_FIELD_ID);
+
+        // Handle the user's response
+        alert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try {
+                    // Check if this is related to the clear command based on confirmation text
+                    if (commandResult.getConfirmationText().equals(ClearCommand.MESSAGE_CONFIRMATION)) {
+                        logger.info("User confirmed clear command");
+                        // Execute the confirmed clear command
+                        CommandResult result = logic.execute("clear confirmed");
+                        resultDisplay.setFeedbackToUser(result.getFeedbackToUser());
+                    }
+                } catch (CommandException | ParseException e) {
+                    logger.warning("Error executing confirmed command: " + e.getMessage());
+                    resultDisplay.setFeedbackToUser(e.getMessage());
+                }
+            } else {
+                logger.info("User canceled the operation");
+            }
+        });
     }
 }

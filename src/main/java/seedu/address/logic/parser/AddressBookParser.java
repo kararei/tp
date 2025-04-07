@@ -67,6 +67,9 @@ public class AddressBookParser {
             return new DeleteContactCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            if (arguments.trim().equals("confirmed")) {
+                return new ClearCommand(true);
+            }
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
