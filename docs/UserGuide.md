@@ -57,17 +57,15 @@ TravelHub is a contact management app designed to help travel agents efficiently
 
 <box type="info" seamless>
 
+**IMPORTANT: All commands are case-sensitive**<br>
+
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
 
-<<<<<<< HEAD
 * The parameter `nts/NOTE` is optional for Trip and Contact.<br>
   However, if added, it **must** be the final input parameter.
-=======
-* The parameter `nts/NOTE` is optional for Trip and Contact.<br> 
->>>>>>> a3224e49bbc5dd5d455824f2d2be08a3b9c71289
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/customer` or as `n/John Doe`.
@@ -109,6 +107,9 @@ The parameters follow immediately after their corresponding prefixes and are use
 | `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul>                                                                                                                                                                   |
 | `CUSTOMER_NAME` | `c/`   | Specifies the name of the customers participating in the trip.<br><br> **Requirements:** <ul><li>Customer name is an optional parameter and can be omitted when adding a trip.</li><li>Customer name follows the requirements of the `NAME` parameter in contact.</li><li>You can specify multiple customer names by repeating the c/ prefix separated by a space, e.g., `c/John Doe c/Jane Doe c/Joe Doe`.</li></ul> |
 | `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.</li><li>Note content can be empty (e.g., `nts/` is valid).</li><li>**Important:** If your note contains any parameter prefixes (e.g., n/, acc/, i/, d/, c/), they will be treated as separate parameters rather than part of the note. For example, in `addTrip n/Europe Trip acc/Grand Hotel i/Sightseeing d/1/6/2024 nts/Remember to book n/train tickets`, the text "n/train tickets" would not be part of the note - "n/train tickets" would be treated as a separate name parameter.</li></ul>                                                                                                 |
+
+## Command Descriptions
+All commands are **case-sensitive** and listed in **alphabetical order**. Please follow the specified format for each command carefully
 
 ### Adding a contact: `addContact`
 
@@ -160,8 +161,9 @@ Deletes the specified contact from the address book.
 Format: `deleteContact INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
+* The index refers to the number shown in the currently displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be within the range* of the displayed contact list,
 
 Examples:
 * `listContact` followed by `deleteContact 2` deletes the 2nd contact in the address book.
@@ -174,8 +176,9 @@ Deletes the specified trip from the trip book.
 Format: `deleteTrip INDEX`
 
 * Deletes the trip at the specified `INDEX`.
-* The index refers to the index number shown in the displayed trip list.
+* The index refers to the number shown in the currently displayed trip list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be within the range** of the displayed trip list.
 
 Examples:
 * `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
@@ -186,11 +189,14 @@ Edits an existing contact in the address book.
 
 Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`.
+* The index refers to the number shown in the currently displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be within the range** of the displayed contact list,
 * Email must be unique across all contacts.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
 * You can remove all the contact's tags by typing `t/` without specifying any tags after it.
 * You can remove all the contact's notes by typing `nts/` without specifying anything after it.
 * Note that if your note contains any parameter prefixes (n/, p/, e/, a/, t/), they will be treated as separate parameters and not as part of the note text.
@@ -205,8 +211,10 @@ Edits an existing trip in the trip book.
 
 Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
 
-* Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
+* Edits the trip at the specified `INDEX`. 
+* The index refers to the number shown in the currently displayed trip list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be within the range** of the displayed trip list.
 * Trip name must be unique across all trips.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -320,6 +328,7 @@ Furthermore, certain edits can cause the ContactBook and TripBook to behave in u
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+All commands are **case-sensitive** and are listed in **alphabetical order** below.
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
