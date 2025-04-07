@@ -56,7 +56,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/customer` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/customer`, `t/customer t/service` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/customer`, `t/customer t/service` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -93,57 +93,6 @@ The parameters follow immediately after their corresponding prefixes and are use
 | `CUSTOMER_NAME` | `c/`   | Specifies the name of the customers participating in the trip.<br><br> **Requirements:** <ul><li>Customer name is an optional parameter and can be omitted when adding a trip.</li><li>Customer name follows the requirements of the `NAME` parameter in contact.</li><li>You can specify multiple customer names by repeating the c/ prefix separated by a space, e.g., `c/John Doe c/Jane Doe c/Joe Doe`.</li></ul> |
 | `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.</li></ul> |
 
-### Viewing help : `help`
-
-Shows a list of all available commands.
-
-Format: `help`
-
-Expected output:
-
-```
-Available commands:
-- help: Shows program usage instructions
-- addContact: Adds a new contact
-- addTrip: Adds a new trip with name, accommodation, itinerary, date, optional customer names and optional note
-- deleteContact: Removes a contact at a specified index
-- deleteTrip: Removes a trip at a specified index
-- editContact: Edits a contact at a specified index
-- editTrip: Edits a trip at a specified index
-- listContact: Lists all contacts [can specify tag type]
-- listTrip: Lists all trips [can specify date]
-- find: Find contacts whose names contain any of the given keywords
-- clear: Clear all contacts and trips
-- exit: Exits the program
-```
-
-### Locating contacts by name: `find`
-
-Finds contacts whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only exact words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Listing contacts : `listContact`
-
-Shows a list of contacts in the address book.
-
-Format: `listContact [customer/service]`
-
-* Without specifying the optional parameter, all contacts will be displayed.
-* By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
-
 ### Adding a contact: `addContact`
 
 Adds a contact to the address book.
@@ -160,48 +109,6 @@ Examples:
 * `addContact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addContact n/XYZ Restaurant e/xyz_cuisine@example.com a/XYZ Street p/67654321 t/service nts/Serves western cuisine`
 * `addContact n/Betty's Gift Shop e/betty_biz@example.com a/Sunshine Street 3 p/67654321 t/service t/customer`
-
-### Editing a contact : `editContact`
-
-Edits an existing contact in the address book.
-
-Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
-
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
-* Email must be unique across all contacts.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
-* You can remove all the contact's notes by typing `nts/` without specifying anything after it.
-
-Examples:
-*  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
-
-### Deleting a contact : `deleteContact`
-
-Deletes the specified contact from the address book.
-
-Format: `deleteContact INDEX`
-
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listContact` followed by `deleteContact 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
-
-### Listing all trips : `listTrip`
-
-Shows a list of all trips in the trip book.
-
-Format: `listTrip [DATE]`
-
-* Without specifying the optional parameter, all trips will be displayed.
-* By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
-* The date should be in the format of D/M/YYYY.
 
 ### Adding a trip : `addTrip`
 
@@ -220,6 +127,57 @@ Examples:
 * `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
 * `addTrip n/Beach Vacation acc/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
 * `addTrip n/Business Conference acc/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
+
+### Clearing all entries : `clear`
+
+Clears all contact and trip entries in the application.
+
+Format: `clear`
+
+### Deleting a contact : `deleteContact`
+
+Deletes the specified contact from the address book.
+
+Format: `deleteContact INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listContact` followed by `deleteContact 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
+
+### Deleting a trip : `deleteTrip`
+
+Deletes the specified trip from the trip book.
+
+Format: `deleteTrip INDEX`
+
+* Deletes the trip at the specified `INDEX`.
+* The index refers to the index number shown in the displayed trip list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
+
+### Editing a contact : `editContact`
+
+Edits an existing contact in the address book.
+
+Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Email must be unique across all contacts.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
+* You can remove all the contact's notes by typing `nts/` without specifying anything after it.
+
+Examples:
+*  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Editing a trip : `editTrip`
 
@@ -240,30 +198,73 @@ Examples:
 * `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` Edits the accommodation, itinerary, and adds a note for the 1st trip.
 * `editTrip 2 n/London Trip 2025 c/Jane Doe c/Bob Smith` Edits the name and changes the customer names for the 2nd trip.
 
-### Deleting a trip : `deleteTrip`
-
-Deletes the specified trip from the trip book.
-
-Format: `deleteTrip INDEX`
-
-* Deletes the trip at the specified `INDEX`.
-* The index refers to the index number shown in the displayed trip list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
-
-### Clearing all entries : `clear`
-
-Clears all contact and trip entries in the application.
-
-Format: `clear`
-
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+### Locating contacts by name: `find`
+
+Finds contacts whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only exact words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Viewing help : `help`
+
+Shows a list of all available commands.
+
+Format: `help`
+
+Expected output:
+
+```
+Available commands:
+- addContact: Adds a new contact
+- addTrip: Adds a new trip with name, accommodation, itinerary, date, optional customer names and optional note
+- clear: Clear all contacts and trips
+- deleteContact: Removes a contact at a specified index
+- deleteTrip: Removes a trip at a specified index
+- editContact: Edits a contact at a specified index
+- editTrip: Edits a trip at a specified index
+- exit: Exits the program
+- find: Find contacts whose names contain any of the given keywords
+- help: Shows program usage instructions
+- listContact: Lists all contacts [can specify tag type]
+- listTrip: Lists all trips [can specify date]
+```
+
+
+### Listing contacts : `listContact`
+
+Shows a list of contacts in the address book.
+
+Format: `listContact [customer/service]`
+
+* Without specifying the optional parameter, all contacts will be displayed.
+* By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
+
+### Listing all trips : `listTrip`
+
+Shows a list of all trips in the trip book.
+
+Format: `listTrip [DATE]`
+
+* Without specifying the optional parameter, all trips will be displayed.
+* By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
+* The date should be in the format of D/M/YYYY.
 
 ### Saving the data
 
@@ -300,15 +301,15 @@ Furthermore, certain edits can cause the AddressBook and TripBook to behave in u
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help` |
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
-**Add Contact**    | `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​` <br> e.g., `addContact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/customer`
-**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
-**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
-**List Trip** | `listTrip [dd/MM/YYYY]`<br> e.g., `listTrip 15/12/2023`
+**Add Contact**    | `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​` <br> e.g., `addContact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/customer`
 **Add Trip** | `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
-**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
-**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
 **Clear**  | `clear`
+**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
+**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
+**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
+**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
 **Exit**   | `exit`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Help**   | `help` |
+**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
+**List Trip** | `listTrip [DATE]`<br> e.g., `listTrip 15/12/2023`
