@@ -15,13 +15,13 @@ public class MessagesTest {
                 .withName("Paris 2025")
                 .withAccommodation("Hotel 81")
                 .withItinerary("Eat baguettes")
-                .withDate("1/1/2205")
+                .withDate("1/1/2100")
                 .withCustomerNames("John Doe", "Jane Doe")
                 .withNote("Customer prefers window seat")
                 .build();
 
         String expected = "Paris 2025; Accommodation: Hotel 81; Itinerary: Eat baguettes; "
-                + "Date: 1/1/2205; Customers: John Doe, Jane Doe; Note: Customer prefers window seat";
+                + "Date: 1/1/2100; Customers: John Doe, Jane Doe; Note: Customer prefers window seat";
         assertEquals(expected, Messages.format(trip));
     }
 
@@ -31,12 +31,12 @@ public class MessagesTest {
                 .withName("Paris 2025")
                 .withAccommodation("Hotel 81")
                 .withItinerary("Eat baguettes")
-                .withDate("1/1/2205")
+                .withDate("1/1/2100")
                 .withCustomerNames("John Doe", "Jane Doe")
                 .build();
 
         String expected = "Paris 2025; Accommodation: Hotel 81; Itinerary: Eat baguettes; "
-                + "Date: 1/1/2205; Customers: John Doe, Jane Doe; Note: ";
+                + "Date: 1/1/2100; Customers: John Doe, Jane Doe; Note: ";
         assertEquals(expected, Messages.format(trip));
     }
 
@@ -46,13 +46,13 @@ public class MessagesTest {
                 .withName("Paris 2025")
                 .withAccommodation("Hotel 81")
                 .withItinerary("Eat baguettes")
-                .withDate("1/1/2205")
+                .withDate("1/1/2100")
                 .withCustomerNames("John Doe")
                 .withNote("Customer prefers window seat")
                 .build();
 
         String expected = "Paris 2025; Accommodation: Hotel 81; Itinerary: Eat baguettes; "
-                + "Date: 1/1/2205; Customers: John Doe; Note: Customer prefers window seat";
+                + "Date: 1/1/2100; Customers: John Doe; Note: Customer prefers window seat";
         assertEquals(expected, Messages.format(trip));
     }
 }
