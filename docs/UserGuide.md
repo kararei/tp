@@ -86,7 +86,7 @@ The parameters follow immediately after their corresponding prefixes and are use
 
 | Parameter       | Prefix | Description |
 |-----------------|--------|-------------|
-| `NAME`          | `n/`   | Specifies the name of the trip.<br><br>**Requirements:**<ul><li>Name is a mandatory parameter and cannot be empty.</li><li>Trip names can only contain alphanumeric characters and spaces.</li></ul> |
+| `NAME`          | `n/`   | Specifies the name of the trip.<br><br>**Requirements:**<ul><li>**Trips are uniquely identified by their trip name**</li><li>Name is a mandatory parameter and cannot be empty.</li><li>Trip names can only contain alphanumeric characters and spaces.</li></ul> |
 | `ACCOMMODATION` | `acc/` | Specifies the accomodation for the trip.<br><br>**Requirements:**<ul><li>Accomodation is a mandatory parameter and cannot be empty.</li></ul> |
 | `ITINERARY`     | `i/`   | Specifies the itinerary for the trip. <br><br>**Requirements:**<ul><li>Itinerary is a mandatory parameter and cannot be empty.</li></ul> |
 | `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul> |
@@ -111,7 +111,7 @@ Available commands:
 - editContact: Edits a contact at a specified index
 - editTrip: Edits a trip at a specified index
 - listContact: Lists all contacts [can specify tag type]
-- listTrip: Lists all trips 
+- listTrip: Lists all trips [can specify date]
 - find: Find contacts whose names contain any of the given keywords
 - clear: Clear all contacts and trips
 - exit: Exits the program
@@ -150,14 +150,11 @@ Adds a contact to the address book.
 
 Format: `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​`
 
-<box type="tip" seamless>
+* Email must be unique across all contacts.
+* Tags must be 'customer' or 'service' e.g., 't/customer t/service'.
+* A contact can have no tags, 1 tag or both the customer and service tag.
+* You can add optional notes about the contact using the nts/ prefix.
 
-**Tip:** Tags must be 'customer' or 'service' e.g., 't/customer t/service'.
-
-A contact can have no tags, 1 tag or both the customer and service tag.
-
-**Requirements:** Email must be unique across all contacts
-</box>
 
 Examples:
 * `addContact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -171,6 +168,7 @@ Edits an existing contact in the address book.
 Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Email must be unique across all contacts.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
@@ -212,6 +210,7 @@ Adds a trip to the trip book.
 Format: `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
 
 * Adds a trip with the specified details.
+* Trip name must be unique across all trips.
 * The date should be in the format of D/M/YYYY, signifying the trip's start date.
 * A valid date ranges from 1950 to 2100, as past trips can also be logged.
 * Customer names are optional. You can specify multiple customer names by using the c/ prefix multiple times.
@@ -230,6 +229,7 @@ Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/C
 
 * Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Trip name must be unique across all trips.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing customer names, the existing customer names of the trip will be removed and replaced with the new ones.
