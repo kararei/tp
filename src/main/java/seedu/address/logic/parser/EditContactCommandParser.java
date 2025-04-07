@@ -2,12 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TRIP_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -42,6 +44,11 @@ public class EditContactCommandParser implements Parser<EditContactCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
+            String message = pe.getMessage();
+            if (message.equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX)
+                    || message.equals(MESSAGE_INVALID_INDEX)) {
+                throw pe;
+            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditContactCommand.MESSAGE_USAGE), pe);
         }

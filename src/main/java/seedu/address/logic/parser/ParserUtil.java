@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TRIP_DISPLAYED_INDEX;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ import seedu.address.model.trip.TripName;
 public class ParserUtil {
 
     private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
-    private static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -35,8 +36,12 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        if (!StringUtil.isInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        int value = Integer.parseInt(trimmedIndex);
+        if (value <= 0) {
+            throw new ParseException(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

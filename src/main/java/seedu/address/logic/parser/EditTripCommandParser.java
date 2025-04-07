@@ -2,12 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TRIP_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACCOMMODATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITINERARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -42,6 +44,11 @@ public class EditTripCommandParser implements Parser<EditTripCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
+            String message = pe.getMessage();
+            if (message.equals(MESSAGE_INVALID_TRIP_DISPLAYED_INDEX)
+                    || message.equals(MESSAGE_INVALID_INDEX)) {
+                throw pe;
+            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTripCommand.MESSAGE_USAGE), pe);
         }
 
