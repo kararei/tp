@@ -140,6 +140,8 @@ Format: `clear`
 
 When you execute this command, a confirmation pop-up will appear asking if you really want to clear all contacts and trips. Click "Yes" to proceed with clearing all data, or "No" to cancel the operation.
 
+Any additional text after `clear` (e.g., `clear abc`) will be ignored, and the command will be processed as `clear`.
+
 ### Deleting a contact : `deleteContact`
 
 Deletes the specified contact from the address book.
@@ -236,6 +238,8 @@ Examples:
 Shows a list of all available commands.
 
 Format: `help`
+
+Any additional text after `help` (e.g., `help xyz`) will be ignored, and the command will be processed as `help`.
 
 Expected output:
 

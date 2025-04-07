@@ -351,6 +351,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The system fails to load the instructions.
     * 2a1. System displays an error message: "Unable to load usage instructions. Please try again later."
     * 2a2. Use case ends.
+* 1a. Travel Agent includes additional text after the help command (e.g., "help xyz").
+    * 1a1. System ignores the additional text and processes the command as "help".
+    * 1a2. Use case continues at step 2.
 
 **Use case: Add a Contact**
 
@@ -472,6 +475,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System does not clear any data.
     * 3a2. System returns to the previous state.
     * 3a3. Use case ends.
+* 1a. Travel Agent includes additional text after the clear command (e.g., "clear xyz").
+    * 1a1. System ignores the additional text and processes the command as "clear".
+    * 1a2. Use case continues at step 2.
 
 ### Non-Functional Requirements
 
