@@ -67,7 +67,7 @@ public class DataLoadingUtilTest {
     @Test
     public void loadTripBook_missingFile_returnsEmptyTripBook() throws DataLoadingException {
         ReadOnlyTripBook loaded = DataLoadingUtil.loadTripBook(storage);
-        assertEquals(new TripBook(), loaded);
+        assertEquals(SampleDataUtil.getSampleTripBook(), loaded);
     }
 
     @Test
