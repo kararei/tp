@@ -73,7 +73,8 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listContactCommand = ListContactCommand.COMMAND_WORD;
-        assertCommandSuccess(listContactCommand, String.format(ListContactCommand.MESSAGE_SUCCESS, ""), model);
+        assertCommandSuccess(listContactCommand, String.format(
+            "There are currently no %scontacts in the addressbook.", ""), model);
     }
 
     @Test

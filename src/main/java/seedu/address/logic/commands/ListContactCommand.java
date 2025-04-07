@@ -19,7 +19,7 @@ public class ListContactCommand extends Command {
         + "Parameters: TAGNAME (optional)\n"
         + "Examples: " + COMMAND_WORD + " OR " + COMMAND_WORD + " customer" + " OR " + COMMAND_WORD + " service";
 
-    public static final String MESSAGE_SUCCESS = "Listed all %scontacts";
+    public static final String MESSAGE_SUCCESS = "Listed all %scontacts.";
 
     private final String tagName;
 
@@ -48,6 +48,11 @@ public class ListContactCommand extends Command {
         } else {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             assert model.getFilteredPersonList().size() == model.getAddressBook().getPersonList().size();
+        }
+
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(String.format("There are currently no %scontacts in the addressbook.", (
+                tagName.equals("") ? "" : tagName + " ")));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, (tagName.equals("") ? "" : tagName + " ")));
 

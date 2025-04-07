@@ -10,6 +10,7 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -22,21 +23,21 @@ public class SampleDataUtil {
             new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("customer")),
-            new Contact(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("service")),
+            new Contact(new Name("XYZ Hotel"), new Phone("63451234"), new Email("xyz_hotel@example.com"),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens"),
+                getTagSet("service"), new Note("Fully booked during the holidays")),
             new Contact(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet()),
+                getTagSet(), new Note("Allergic to peanuts")),
             new Contact(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("customer")),
-            new Contact(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
+            new Contact(new Name("Irfan's Cake Shop"), new Phone("92492021"), new Email("irfan@example.com"),
+                new Address("Blk 47 Tampines Street 20, #01-35"),
                 getTagSet("customer", "service")),
-            new Contact(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("service"))
+            new Contact(new Name("Gardens by the Bay"), new Phone("64206848"),
+                new Email("feedback@gardensbythebay.com.sg"), new Address("18 Marina Gardens Drive"),
+                getTagSet("service"), new Note("Opens 9am - 9pm daily"))
         };
     }
 
