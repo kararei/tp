@@ -20,7 +20,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ContactBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar travelhub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -52,11 +52,13 @@ TravelHub is a contact management app designed to help travel agents efficiently
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
 
+* The parameter `nts/NOTE` is optional for Trip and Contact.<br> 
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/customer` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/customer`, `t/customer t/service` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/customer`, `t/customer t/service` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -78,44 +80,136 @@ The parameters follow immediately after their corresponding prefixes and are use
 | `EMAIL`   | `e/`   | Specifies the email of the contact <br><br>**Requirements:** <ul><li>**Contacts are uniquely identified by their email**</li><li>Email is a mandatory parameter and cannot be empty.</li><li>Emails should be of the format `local-part@domain`.</li><li>Local-part should contain only alphanumeric characters and these special characters, excluding the parentheses, (+_.-).</li><li>The local-part may not start or end with any special characters.</li><li>Special characters can only appear between alphanumeric characters and cannot be placed next to each other.</li><li>The domain should contain only alphanumeric characters, hyphens (-) and dots (.)</li><li>The domain must be at least 2 characters long</li><li>The domain must start and end with alphanumeric characters</li></ul> |
 | `ADDRESS` | `a/`   | Specifies the address of the contact.<br><br> **Requirements:**<ul><li>Address is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `TAG`     | `t/`   | Specifies the tag of a customer.<br><br> **Requirements:** <ul><li>Tag is an optional parameter and can be omitted when adding a contact.</li><li>Tags can only be specified as `t/customer` or `t/service`</li><li>You may include both by specifying `t/customer t/service`</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `NOTE`    | `nts/` | Specifies additional notes related to the contact.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a contact.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `NOTE`    | `nts/` | Specifies additional notes related to the contact.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a contact.</li><li>Note content can be empty (e.g., `nts/` is valid).</li><li>**Important:** If your note contains any parameter prefixes (e.g., n/, p/, e/, a/, t/), they will be treated as separate parameters rather than part of the note. For example, in `addContact n/John p/12345 e/john@example.com a/123 Main St nts/Contact prefers p/morning calls`, the text "p/morning calls" would not be part of the note - "p/morning" would be treated as a separate phone parameter.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### Trip Parameters
 A trip consists the following parameters: trip name, accommodation, itineraries date, customers, and notes.
 The parameters follow immediately after their corresponding prefixes and are useful for the `addTrip` and `editTrip` commands.
 
-| Parameter       | Prefix | Description |
-|-----------------|--------|-------------|
-| `NAME`          | `n/`   | Specifies the name of the trip.<br><br>**Requirements:**<ul><li>**Trips are uniquely identified by their trip name**</li><li>Name is a mandatory parameter and cannot be empty.</li><li>Trip names can only contain alphanumeric characters and spaces.</li></ul> |
-| `ACCOMMODATION` | `acc/` | Specifies the accomodation for the trip.<br><br>**Requirements:**<ul><li>Accomodation is a mandatory parameter and cannot be empty.</li></ul> |
-| `ITINERARY`     | `i/`   | Specifies the itinerary for the trip. <br><br>**Requirements:**<ul><li>Itinerary is a mandatory parameter and cannot be empty.</li></ul> |
-| `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul> |
+| Parameter       | Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                           |
+|-----------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`          | `n/`   | Specifies the name of the trip.<br><br>**Requirements:**<ul><li>**Trips are uniquely identified by their trip name**</li><li>Name is a mandatory parameter and cannot be empty.</li><li>Trip names can only contain alphanumeric characters and spaces.</li></ul>                                                                                                                                                     |
+| `ACCOMMODATION` | `acc/` | Specifies the accomodation for the trip.<br><br>**Requirements:**<ul><li>Accomodation is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                         |
+| `ITINERARY`     | `i/`   | Specifies the itinerary for the trip. <br><br>**Requirements:**<ul><li>Itinerary is a mandatory parameter and cannot be empty.</li></ul>                                                                                                                                                                                                                                                                              |
+| `DATE`          | `d/`   | Specifies the date of the trip. <br><br>**Requirements:**<ul><li>Date is a mandatory parameter and cannot be empty.</li><li>Date must follow the format `d/M/yyyy`.</li><li>A valid date allowed is between year 1950 and 2100 inclusive.</li></ul>                                                                                                                                                                   |
 | `CUSTOMER_NAME` | `c/`   | Specifies the name of the customers participating in the trip.<br><br> **Requirements:** <ul><li>Customer name is an optional parameter and can be omitted when adding a trip.</li><li>Customer name follows the requirements of the `NAME` parameter in contact.</li><li>You can specify multiple customer names by repeating the c/ prefix separated by a space, e.g., `c/John Doe c/Jane Doe c/Joe Doe`.</li></ul> |
-| `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.</li></ul> |
+| `NOTE`          | `nts/` | Specifies additional notes related to the trip.<br><br> **Requirements:** <ul><li>Note is an optional parameter and can be omitted when adding a trip.</li><li>Note content can be empty (e.g., `nts/` is valid).</li><li>**Important:** If your note contains any parameter prefixes (e.g., n/, acc/, i/, d/, c/), they will be treated as separate parameters rather than part of the note. For example, in `addTrip n/Europe Trip acc/Grand Hotel i/Sightseeing d/1/6/2024 nts/Remember to book n/train tickets`, the text "n/train tickets" would not be part of the note - "n/train tickets" would be treated as a separate name parameter.</li></ul>                                                                                                 |
 
-### Viewing help : `help`
+### Adding a contact: `addContact`
 
-Shows a list of all available commands.
+Adds a contact to the address book.
 
-Format: `help`
+Format: `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​`
 
-Expected output:
+* Email must be unique across all contacts.
+* Tags must be 'customer' or 'service' e.g., 't/customer t/service'.
+* A contact can have no tags, 1 tag or both the customer and service tag.
+* You can add optional notes about the contact using the nts/ prefix.
+* Note that if your note contains any parameter prefixes (n/, p/, e/, a/, t/), they will be treated as separate parameters and not as part of the note text.
 
-```
-Available commands:
-- help: Shows program usage instructions
-- addContact: Adds a new contact
-- addTrip: Adds a new trip with name, accommodation, itinerary, date, optional customer names and optional note
-- deleteContact: Removes a contact at a specified index
-- deleteTrip: Removes a trip at a specified index
-- editContact: Edits a contact at a specified index
-- editTrip: Edits a trip at a specified index
-- listContact: Lists all contacts [can specify tag type]
-- listTrip: Lists all trips [can specify date]
-- find: Find contacts whose names contain any of the given keywords
-- clear: Clear all contacts and trips
-- exit: Exits the program
-```
+
+Examples:
+* `addContact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addContact n/XYZ Restaurant e/xyz_cuisine@example.com a/XYZ Street p/67654321 t/service nts/Serves western cuisine`
+* `addContact n/Betty's Gift Shop e/betty_biz@example.com a/Sunshine Street 3 p/67654321 t/service t/customer`
+
+### Adding a trip : `addTrip`
+
+Adds a trip to the trip book.
+
+Format: `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
+
+* Adds a trip with the specified details.
+* Trip name must be unique across all trips.
+* The date should be in the format of D/M/YYYY, signifying the trip's start date.
+* A valid date ranges from 1950 to 2100, as past trips can also be logged.
+* Customer names are optional. You can specify multiple customer names by using the c/ prefix multiple times.
+* You can add optional notes about the trip using the nts/ prefix.
+* Note that if your note contains any parameter prefixes (n/, acc/, i/, d/, c/), they will be treated as separate parameters and not as part of the note text.
+
+Examples:
+* `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Remember to book tickets`
+* `addTrip n/Beach Vacation acc/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
+* `addTrip n/Business Conference acc/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
+
+### Clearing all entries : `clear`
+
+Clears all contact and trip entries in the application.
+
+Format: `clear`
+
+### Deleting a contact : `deleteContact`
+
+Deletes the specified contact from the address book.
+
+Format: `deleteContact INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listContact` followed by `deleteContact 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
+
+### Deleting a trip : `deleteTrip`
+
+Deletes the specified trip from the trip book.
+
+Format: `deleteTrip INDEX`
+
+* Deletes the trip at the specified `INDEX`.
+* The index refers to the index number shown in the displayed trip list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
+
+### Editing a contact : `editContact`
+
+Edits an existing contact in the address book.
+
+Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Email must be unique across all contacts.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
+* You can remove all the contact's notes by typing `nts/` without specifying anything after it.
+* Note that if your note contains any parameter prefixes (n/, p/, e/, a/, t/), they will be treated as separate parameters and not as part of the note text.
+
+Examples:
+*  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+
+### Editing a trip : `editTrip`
+
+Edits an existing trip in the trip book.
+
+Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
+
+* Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Trip name must be unique across all trips.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing customer names, the existing customer names of the trip will be removed and replaced with the new ones.
+* You can remove all customer names by not including any c/ prefixes.
+* You can remove all trip notes by typing `nts/` without specifying anything after it.
+* Note that if your note contains any parameter prefixes (n/, acc/, i/, d/, c/), they will be treated as separate parameters and not as part of the note text.
+* Customer names are optional.
+
+Examples:
+* `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` Edits the accommodation, itinerary, and adds a note for the 1st trip.
+* `editTrip 2 n/London Trip 2025 c/Jane Doe c/Bob Smith` Edits the name and changes the customer names for the 2nd trip.
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ### Locating contacts by name: `find`
 
@@ -135,6 +229,31 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Viewing help : `help`
+
+Shows a list of all available commands.
+
+Format: `help`
+
+Expected output:
+
+```
+Available commands:
+- addContact: Adds a new contact
+- addTrip: Adds a new trip with name, accommodation, itinerary, date, optional customer names and optional note
+- clear: Clear all contacts and trips
+- deleteContact: Removes a contact at a specified index
+- deleteTrip: Removes a trip at a specified index
+- editContact: Edits a contact at a specified index
+- editTrip: Edits a trip at a specified index
+- exit: Exits the program
+- find: Find contacts whose names contain any of the given keywords
+- help: Shows program usage instructions
+- listContact: Lists all contacts [can specify tag type]
+- listTrip: Lists all trips [can specify date]
+```
+
+
 ### Listing contacts : `listContact`
 
 Shows a list of contacts in the address book.
@@ -143,55 +262,6 @@ Format: `listContact [customer/service]`
 
 * Without specifying the optional parameter, all contacts will be displayed.
 * By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
-
-### Adding a contact: `addContact`
-
-Adds a contact to the address book.
-
-Format: `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​`
-
-* Email must be unique across all contacts.
-* Tags must be 'customer' or 'service' e.g., 't/customer t/service'.
-* A contact can have no tags, 1 tag or both the customer and service tag.
-* You can add optional notes about the contact using the nts/ prefix.
-
-
-Examples:
-* `addContact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addContact n/XYZ Restaurant e/xyz_cuisine@example.com a/XYZ Street p/67654321 t/service nts/Serves western cuisine`
-* `addContact n/Betty's Gift Shop e/betty_biz@example.com a/Sunshine Street 3 p/67654321 t/service t/customer`
-
-### Editing a contact : `editContact`
-
-Edits an existing contact in the address book.
-
-Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`
-
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
-* Email must be unique across all contacts.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact's tags by typing `t/` without specifying any tags after it.
-* You can remove all the contact's notes by typing `nts/` without specifying anything after it.
-
-Examples:
-*  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
-
-### Deleting a contact : `deleteContact`
-
-Deletes the specified contact from the address book.
-
-Format: `deleteContact INDEX`
-
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listContact` followed by `deleteContact 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
 
 ### Listing all trips : `listTrip`
 
@@ -203,81 +273,19 @@ Format: `listTrip [DATE]`
 * By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
 * The date should be in the format of D/M/YYYY.
 
-### Adding a trip : `addTrip`
-
-Adds a trip to the trip book.
-
-Format: `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`
-
-* Adds a trip with the specified details.
-* Trip name must be unique across all trips.
-* The date should be in the format of D/M/YYYY, signifying the trip's start date.
-* A valid date ranges from 1950 to 2100, as past trips can also be logged.
-* Customer names are optional. You can specify multiple customer names by using the c/ prefix multiple times.
-* You can add optional notes about the trip using the nts/ prefix.
-
-Examples:
-* `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
-* `addTrip n/Beach Vacation acc/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
-* `addTrip n/Business Conference acc/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
-
-### Editing a trip : `editTrip`
-
-Edits an existing trip in the trip book.
-
-Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`
-
-* Edits the trip at the specified `INDEX`. The index refers to the index number shown in the displayed trip list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Trip name must be unique across all trips.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing customer names, the existing customer names of the trip will be removed and replaced with the new ones.
-* You can remove all customer names by not including any c/ prefixes.
-* Customer names are optional.
-
-Examples:
-* `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` Edits the accommodation, itinerary, and adds a note for the 1st trip.
-* `editTrip 2 n/London Trip 2025 c/Jane Doe c/Bob Smith` Edits the name and changes the customer names for the 2nd trip.
-
-### Deleting a trip : `deleteTrip`
-
-Deletes the specified trip from the trip book.
-
-Format: `deleteTrip INDEX`
-
-* Deletes the trip at the specified `INDEX`.
-* The index refers to the index number shown in the displayed trip list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
-
-### Clearing all entries : `clear`
-
-Clears all contact and trip entries in the application.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
 ### Saving the data
 
-AddressBook and TripBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ContactBook and TripBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Similarly TripBook data are saved automatically as a JSON file `[JAR file location]/data/tripbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ContactBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Similarly TripBook data are saved automatically as a JSON file `[JAR file location]/data/tripbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook and TripBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook and TripBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ContactBook and TripBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ContactBook and TripBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -285,7 +293,7 @@ Furthermore, certain edits can cause the AddressBook and TripBook to behave in u
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook and TripBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactBook and TripBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -300,15 +308,15 @@ Furthermore, certain edits can cause the AddressBook and TripBook to behave in u
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help` |
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
-**Add Contact**    | `addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​` <br> e.g., `addContact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/customer`
-**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
-**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
-**List Trip** | `listTrip [dd/MM/YYYY]`<br> e.g., `listTrip 15/12/2023`
+**Add Contact**    | `addContact n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]… [nts/NOTE]​` <br> e.g., `addContact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/customer`
 **Add Trip** | `addTrip n/NAME acc/ACCOMMODATION i/ITINERARY d/DATE [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Customer prefers window seat`
-**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
-**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
 **Clear**  | `clear`
+**Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
+**Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
+**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
+**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
 **Exit**   | `exit`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Help**   | `help` |
+**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
+**List Trip** | `listTrip [DATE]`<br> e.g., `listTrip 15/12/2023`
