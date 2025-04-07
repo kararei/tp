@@ -138,6 +138,8 @@ Clears all contact and trip entries in the application.
 
 Format: `clear`
 
+When you execute this command, a confirmation pop-up will appear asking if you really want to clear all contacts and trips. Click "Yes" to proceed with clearing all data, or "No" to cancel the operation.
+
 ### Deleting a contact : `deleteContact`
 
 Deletes the specified contact from the address book.

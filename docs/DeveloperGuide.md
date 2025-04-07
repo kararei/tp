@@ -454,6 +454,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. System displays an error message: "Note content cannot be empty."
     * 2b2. Use case resumes at step 1.
 
+**Use case: Clear All Data**
+
+**MSS**
+
+1.  Travel Agent enters the clear command to remove all contacts and trips.
+2.  System displays a confirmation pop-up asking if the user really wants to clear all data.
+3.  Travel Agent confirms by clicking "Yes".
+4.  System clears all contact and trip data from the application.
+5.  System displays a success message: "Address book and trip book have been cleared!"
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Travel Agent cancels the operation by clicking "No".
+    * 3a1. System does not clear any data.
+    * 3a2. System returns to the previous state.
+    * 3a3. Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Compatability: Should work on any _Mainstream OS_ as long as it has Java `17` or above installed.
