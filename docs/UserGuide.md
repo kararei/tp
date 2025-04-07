@@ -42,6 +42,16 @@ TravelHub is a contact management app designed to help travel agents efficiently
 1. Refer to the Features below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Graphical User Interface Layout
+
+[Annotated Ui](images/Annotated-Ui.png)
+
+* **Command Box:** For users to enter commands.
+* **Command Output Box:** Display the output/error message of the executed command.
+* **Contact List Panel:** This panel displays the list of contacts.
+* **Contact List Card:** Details of a contact displayed in a card.
+* **Trip List Panel:** This panel displays the list of trips.
+* **Trip List Card:** Details of a trip displayed in a card.
 
 ## Features
 
