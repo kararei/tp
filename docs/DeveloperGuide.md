@@ -378,9 +378,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The trip already exists in the system (same trip name).
     * 2b1. System displays an error message: "This trip already exists in the trip book"
     * 2b2. Use case ends.
-* 2c. The customer index refers to a service contact (not a customer).
-    * 2c1. System displays an error message: "Invalid customer index. Only customer contacts can be added as trip members."
-    * 2c2. Use case resumes at step 1.
 
 **Use case: Delete a Contact**
 
