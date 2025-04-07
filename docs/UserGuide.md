@@ -23,7 +23,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
 1. Copy the file to the folder you want to use as the _home folder_ for your ContactBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar travelhub.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data when loading TravelHub for the first time.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will list all the available commands.<br>
@@ -44,7 +44,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
 --------------------------------------------------------------------------------------------------------------------
 ## Graphical User Interface Layout
 
-[Annotated Ui](images/Annotated-Ui.png)
+![Annotated Ui](images/Annotated-Ui.png)
 
 * **Command Box:** For users to enter commands.
 * **Command Output Box:** Display the output/error message of the executed command.
@@ -62,12 +62,8 @@ TravelHub is a contact management app designed to help travel agents efficiently
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
 
-<<<<<<< HEAD
 * The parameter `nts/NOTE` is optional for Trip and Contact.<br>
   However, if added, it **must** be the final input parameter.
-=======
-* The parameter `nts/NOTE` is optional for Trip and Contact.<br> 
->>>>>>> a3224e49bbc5dd5d455824f2d2be08a3b9c71289
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/customer` or as `n/John Doe`.
@@ -328,10 +324,10 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
 **Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
-**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
-**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
+**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com` or `editContact 5 p/98765432 t/service nts/Allergic to fish`
+**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` or `editTrip 3 n/Batam Trip d/17/12/2025`
 **Exit**   | `exit`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find Alex`
 **Help**   | `help` |
-**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
-**List Trip** | `listTrip [DATE]`<br> e.g., `listTrip 15/12/2023`
+**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact` or `listContact service` or `listContact customer`
+**List Trip** | `listTrip [DATE]`<br> e.g., `listTrip` or `listTrip 15/12/2023`
