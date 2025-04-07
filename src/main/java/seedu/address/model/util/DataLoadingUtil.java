@@ -51,7 +51,7 @@ public class DataLoadingUtil {
                 logger.info("Creating a new data file " + storage.getTripBookFilePath()
                         + " for TripBook.");
             }
-            return tripBookOptional.orElseGet(TripBook::new);
+            return tripBookOptional.orElseGet(SampleDataUtil::getSampleTripBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getTripBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty TripBook.");

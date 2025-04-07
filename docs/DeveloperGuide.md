@@ -125,7 +125,7 @@ The `Model` component,
 
 * stores the contact book data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
 * stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -156,105 +156,118 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+> This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Trip Management System
 
-#### Proposed Implementation
+The Trip management system allows travel agents to create, edit, delete, and list trips, which are essential for organizing travel plans for customers. Below are the details of its implementation.
 
-The proposed undo/redo mechanism is facilitated by `VersionedContactBook`. It extends `ContactBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Notes Parameter Behavior
 
-* `VersionedContactBook#commit()` — Saves the current address book state in its history.
-* `VersionedContactBook#undo()` — Restores the previous address book state from its history.
-* `VersionedContactBook#redo()` — Restores a previously undone address book state from its history.
+Both Contact and Trip entities support notes through the `nts/` parameter prefix. When parsing commands like `addContact`, `editContact`, `addTrip`, and `editTrip`, developers should be aware of the following important behavior:
 
-These operations are exposed in the `Model` interface as `Model#commitContactBook()`, `Model#undoContactBook()` and `Model#redoContactBook()` respectively.
+- If any parameter prefixes that is used in either Contact or Trip (e.g., `n/`, `p/`, `e/`, `a/`, `t/`, `acc/`, `i/`, `d/`, `c/`) appear within the note content, they will be interpreted as separate parameters rather than part of the note text.
+- For example, in a command like `addTrip n/Europe Trip acc/Grand Hotel i/Sightseeing d/1/6/2024 nts/Remember to book n/train tickets`, the text "n/train tickets" would not be part of the note - instead, "n/train tickets" would be treated as a separate name parameter.
+- This behavior is by design and is consistent across all commands that accept the note parameter.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Adding a Trip to the Trip Book
 
-Step 1. The user launches the application for the first time. The `VersionedContactBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+<puml src="diagrams/AddTripSequenceDiagram.puml" alt="AddTripSequenceDiagram" />
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+The implementation follows these steps:
 
-Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitContactBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+1. `AddressBookParser` identifies that the command type is `addTrip` based on the command word and creates an instance of `AddTripCommandParser` to parse the user input.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+2. `AddTripCommandParser` extracts values corresponding to the required prefixes:
+   - The **name prefix** `n/` must contain a non-empty trip name.
+   - The **accommodation prefix** `a/` must contain a non-empty accommodation.
+   - The **itinerary prefix** `i/` must contain a non-empty itinerary.
+   - The **date prefix** `d/` must contain a valid trip date in the format d/M/YYYY.
+   - The **customer name prefix** `cn/` is optional and can be specified multiple times.
+   - The **note prefix** `note/` is optional and contains additional information about the trip.
+kj
+3. If any of the required prefixes are missing or invalid, `AddTripCommandParser` throws a `ParseException`. Otherwise, it creates a new instance of `AddTripCommand` based on the parsed input.
 
-Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitContactBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+4. When executed, `AddTripCommand`:
+   - Checks if the trip already exists in the model by name (case-insensitive)
+   - If it's a duplicate, throws a `CommandException`
+   - Otherwise, adds the trip to the trip book via the model
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+> **_NOTE:_** TravelHub identifies a trip as duplicate if their trip names match (case-insensitive) with an existing trip in the trip book.
 
-<box type="info" seamless>
+#### Deleting a Trip from the Trip Book
 
-**Note:** If a command fails its execution, it will not call `Model#commitContactBook()`, so the address book state will not be saved into the `addressBookStateList`.
+The delete trip feature allows users to remove trips from the trip book by specifying the trip's index in the displayed list.
 
-</box>
+<puml src="diagrams/DeleteTripSequenceDiagram.puml" alt="DeleteTripSequenceDiagram" />
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoContactBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+1. `AddressBookParser` identifies that the command type is `deleteTrip` based on the command word and creates an instance of `DeleteTripCommandParser` to parse the user input.
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+2. `DeleteTripCommandParser` extracts the index from the command arguments and ensures:
+   - The **Index** is a valid positive integer.
 
+3. If the index is invalid, `DeleteTripCommandParser` throws a `ParseException`. Otherwise, it creates a new instance of `DeleteTripCommand` based on the user input.
 
-<box type="info" seamless>
+4. Upon execution, `DeleteTripCommand`:
+   - Checks if the index is within the bounds of the filtered trip list
+   - If the index is invalid, throws a `CommandException`
+   - Retrieves the trip to be deleted from the filtered trip list
+   - Calls `model.deleteTrip(tripToDelete)` to remove the trip from the trip book
+   - Returns a `CommandResult` with a success message
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial ContactBook state, then there are no previous ContactBook states to restore. The `undo` command uses `Model#canUndoContactBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+#### Editing a Trip's Details
 
-</box>
+The edit trip feature allows users to modify the details of an existing trip by specifying the trip's index in the displayed list and the new details.
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+<puml src="diagrams/EditTripSequenceDiagram.puml" alt="EditTripSequenceDiagram" />
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+1. `AddressBookParser` identifies that the command type is `editTrip` based on the command word and creates an instance of `EditTripCommandParser` to parse the user input.
 
-<box type="info" seamless>
+2. `EditTripCommandParser` extracts the index and provided fields from the command arguments and ensures:
+   - The **Index** is a valid positive integer.
+   - At least one field is provided for editing.
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+3. If the input is invalid, `EditTripCommandParser` throws a `ParseException`. Otherwise, it creates a new instance of `EditTripCommand` based on the user input.
 
-</box>
+4. Upon execution, `EditTripCommand`:
+   - Checks if the index is within the bounds of the filtered trip list
+   - If the index is invalid, throws a `CommandException`
+   - Retrieves the trip to be modified from the list
+   - Creates a new `Trip` instance with the updated details
+   - Checks for duplicate trip entries in the system and throws a `CommandException` if a duplicate is found
+   - Updates the model with the modified trip information
+   - Returns a `CommandResult` confirming the successful edit
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+#### Listing Trips
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+The list trip feature allows users to view all trips or filter trips by date.
 
-The `redo` command does the opposite — it calls `Model#redoContactBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+<puml src="diagrams/ListTripSequenceDiagram.puml" alt="ListTripSequenceDiagram">
 
-<box type="info" seamless>
+1. `AddressBookParser` identifies that the command type is `listTrip` based on the command word and creates an instance of `ListTripCommandParser` to parse the user input.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone ContactBook states to restore. The `redo` command uses `Model#canRedoContactBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+2. `ListTripCommandParser` checks if additional arguments are provided:
+   - If no arguments are provided, it creates a `ListTripCommand` that will show all trips
+   - If a date argument is provided, it parses the date and creates a `ListTripCommand` with the filter date
 
-</box>
+3. Upon execution, `ListTripCommand`:
+   - If no filter date is specified, updates the model to show all trips
+   - If a filter date is specified, updates the model to show only trips on that date
+   - Returns a `CommandResult` indicating the trips are listed
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitContactBook()`, `Model#undoContactBook()` or `Model#redoContactBook()`. Thus, the `addressBookStateList` remains unchanged.
+#### Trip Storage System
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+Trips are stored in a JSON format similar to contacts. The `TripBook` class maintains a list of trips in an `UniqueTripList`, which ensures that there are no duplicate trips. The `Storage` component handles saving and loading of trips from disk.
 
-Step 6. The user executes `clear`, which calls `Model#commitContactBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Each `Trip` object contains:
+- A mandatory `TripName` that uniquely identifies the trip
+- A mandatory `Accommodation` specifying where customers will stay
+- A mandatory `Itinerary` describing the planned activities
+- A mandatory `TripDate` in the format d/M/YYYY
+- An optional set of customer names associated with the trip
+- An optional `Note` containing additional information about the trip
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+All trip data is automatically saved when changes are made and loaded when the application starts.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -474,6 +487,47 @@ This section defines key terms used in the user guide to ensure clarity and unde
 | **Note** | Additional information or details added to a customer profile or trip, such as special requests or important reminders.                                 |
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Planned Enhancement
+
+### Escape Character for Notes
+
+Currently, if parameter prefixes (e.g., `n/`, `p/`, `e/`, `a/`, `t/`, `acc/`, `i/`, `d/`, `c/`) appear within note content, they are treated as separate parameters rather than as part of the note. To allow users to include these prefix patterns in their notes, we plan to implement an escape character mechanism.
+
+**Proposed Implementation:**
+- Introduce a special escape character (e.g., backslash `\`) that users can place before parameter prefixes in notes
+- For example, `nts/Remember to call \p/12345678` would include "p/12345678" as part of the note text
+- The parser will detect the escape character and interpret the following prefix as literal text rather than a parameter marker
+
+**Benefits:**
+- Users can include parameter-like text in their notes without causing unexpected parsing behavior
+- Improves flexibility in note content without compromising the existing command structure
+- Maintains backward compatibility with existing commands
+
+**Implementation Challenges:**
+- Need to modify the parser to recognize and handle the escape character
+- Must ensure proper handling of edge cases, such as multiple consecutive escape characters
+
+### Add End Date for Trips
+
+Currently, trips only have a start date. To better support trip planning and tracking, we plan to enhance the Trip model to include an end date.
+
+**Proposed Implementation:**
+- Add a new `TripEndDate` class similar to the existing `TripDate` class
+- Extend the Trip model to include an end date field
+- Update relevant parsers to accept an end date parameter (e.g., `ed/5/6/2024`)
+- Modify the trip display to show both start and end dates
+- Update storage to persist the end date information
+
+**Benefits:**
+- Allows users to track the full duration of trips
+- Enables future enhancements such as trip duration calculations and trip overlap detection
+- Provides more complete trip information at a glance
+
+**Implementation Challenges:**
+- Need to ensure the end date is not earlier than the start date
+- Must update existing trip displays and storage format while maintaining backward compatibility
+- Should modify trip filtering to consider both start and end dates
 
 ## **Appendix: Instructions for manual testing**
 
