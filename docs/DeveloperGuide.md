@@ -360,12 +360,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The contact details are invalid (e.g., invalid phone number or email format).
+* 2a. The contact details are entered in an invalid format
     * 2a1. System displays an error message: "Invalid command format. Correct format: addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…"
     * 2a2. Use case resumes at step 1.
 * 2b. The contact already exists in the system (same email).
     * 2b1. System displays an error message: "This contact already exists in the system."
     * 2b2. Use case ends.
+* 2c. The email entered is invalid (i.e. email does not follow the required standard).
+    * 2c1. System displays an error message: "Emails should be of the format local-part@domain and adhere to the following constraints:" followed by the description of the required email format.
+    * 2c2. Use case resumes at step 1.
 
 **Use case: Add a Trip**
 
