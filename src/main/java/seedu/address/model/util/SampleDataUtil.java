@@ -1,11 +1,14 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTripBook;
+import seedu.address.model.TripBook;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
@@ -13,6 +16,12 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Note;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.trip.Accommodation;
+import seedu.address.model.trip.Itinerary;
+import seedu.address.model.trip.Note;
+import seedu.address.model.trip.Trip;
+import seedu.address.model.trip.TripDate;
+import seedu.address.model.trip.TripName;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -47,6 +56,24 @@ public class SampleDataUtil {
             sampleAb.addPerson(sampleContact);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyTripBook getSampleTripBook() {
+        TripBook sampleTb = new TripBook();
+
+        TripName name = new TripName("Paris 2025");
+        Accommodation accommodation = new Accommodation("Hotel 81");
+        Itinerary itinerary = new Itinerary("Eat baguettes");
+        TripDate date = new TripDate("01/01/2205");
+        Set<Name> customerNames = new HashSet<>();
+        customerNames.add(new Name("John Doe"));
+        customerNames.add(new Name("Jane Doe"));
+        Note note = new Note("Customer prefers window seat");
+
+        Trip trip = new Trip(name, accommodation, itinerary, date, customerNames, note);
+        sampleTb.addTrip(trip);
+
+        return sampleTb;
     }
 
     /**
