@@ -16,6 +16,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.trip.Trip;
 import seedu.address.model.trip.TripDate;
+import seedu.address.testutil.TripBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListTripCommand.
@@ -59,16 +60,27 @@ public class ListTripCommandTest {
     }
 
     @Test
-    public void execute_noTripsEmptyList_messageShown() {
+    public void execute_filterByNonExistentDate_showsNoTripsMessage() {
         LocalDate nonExistentDate = LocalDate.of(2070, 8, 12);
         Predicate<Trip> predicate = trip -> trip.getDate().date.equals(nonExistentDate);
         expectedModel.updateFilteredTripList(predicate);
 
-        String expectedOutput = "Listed trips on " + nonExistentDate.format(TripDate.DATE_FORMATTER);
+        String expectedOutput = "No trips found. Use the addTrip command to create a new trip.";
         assertCommandSuccess(new ListTripCommand(nonExistentDate), model,
                 expectedOutput, expectedModel);
     }
 
+    @Test
+    public void execute_filterByFutureDateWithTrip_successfullyListsTrip() {
+        Trip t = new TripBuilder().withDate("12/8/2070").build();
+        expectedModel.addTrip(t);
+
+        LocalDate nonExistentDate = LocalDate.of(2070, 8, 12);
+        Predicate<Trip> predicate = trip -> trip.getDate().date.equals(nonExistentDate);
+        expectedModel.updateFilteredTripList(predicate);
+
+        String expectedOutput = "Listed trips on 12/8/2070";
+        assertCommandSuccess(new ListTripCommand(nonExistentDate), expectedModel,
+                expectedOutput, expectedModel);
+    }
 }
-
-

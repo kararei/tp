@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRIPS;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
@@ -17,23 +18,21 @@ public class ListTripCommand extends Command {
 
     public static final String COMMAND_WORD = "listTrip";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all the trips\n"
-            + "Parameters: [DATE in d/M/yyyy] (optional)\n"
-            + "Examples: "
-            + COMMAND_WORD + " OR \n"
-            + COMMAND_WORD + " 1/1/2025";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Lists all the trips\n" + "Parameters: [DATE in d/M/yyyy] (optional)\n" + "Examples: "
+                    + COMMAND_WORD + " OR \n" + COMMAND_WORD + " 1/1/2025";
 
     private final LocalDate date;
 
     public ListTripCommand() {
         this.date = null;
     }
+
     public ListTripCommand(LocalDate date) {
         this.date = date;
     }
 
-    @Override
-    public CommandResult execute(Model model) {
+    @Override public CommandResult execute(Model model) {
         requireNonNull(model);
 
         Predicate<Trip> predicate;
@@ -44,16 +43,15 @@ public class ListTripCommand extends Command {
         }
 
         model.updateFilteredTripList(predicate);
+        List<Trip> trips = model.getFilteredTripList();
 
-        String message = (date == null)
-                ? "All trips are listed."
-                : "Listed trips on " + date.format(TripDate.DATE_FORMATTER);
+        String message = (trips.isEmpty()) ? "No trips found. Use the addTrip command to create a new trip."
+                : (date == null) ? "All trips are listed." : "Listed trips on " + date.format(TripDate.DATE_FORMATTER);
 
         return new CommandResult(message);
     }
 
-    @Override
-    public boolean equals(Object other) {
+    @Override public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
@@ -64,8 +62,8 @@ public class ListTripCommand extends Command {
         }
 
         ListTripCommand otherListTripCommand = (ListTripCommand) other;
-        return (date == null && otherListTripCommand.date == null)
-                || (date != null && date.equals(otherListTripCommand.date));
+        return (date == null && otherListTripCommand.date == null) || (date != null && date.equals(
+                otherListTripCommand.date));
     }
 }
 
