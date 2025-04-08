@@ -711,7 +711,7 @@ testers are expected to do more *exploratory* testing.
 1. Simulating a corrupted data file
 
    1. Prerequisites: Have at least 1 contact in the addressbook.
-   1. Navigate to the folder which contains the `Travelhub.jar` file.
+   1. Navigate to the folder which contains the `TravelHub.jar` file.
    1. Navigate into the `data/` folder and open the `addressbook.json` file.
    1. Append any letter to the end of the value in the phone field, e.g., `"phone" : "98765432Z",`
    1. Start up the appplication.
