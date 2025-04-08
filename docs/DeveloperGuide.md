@@ -252,7 +252,7 @@ The edit trip feature allows users to modify the details of an existing trip by 
 
 The list trip feature allows users to view all trips or filter trips by date.
 
-<puml src="diagrams/ListTripSequenceDiagram.puml" alt="ListTripSequenceDiagram">
+<puml src="diagrams/ListTripSequenceDiagram.puml" alt="ListTripSequenceDiagram" />
 
 1. `AddressBookParser` identifies that the command type is `listTrip` based on the command word and creates an instance of `ListTripCommandParser` to parse the user input.
 
@@ -339,7 +339,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | travel agent | view my customers by their tags                                                 | easily compare contacts of the same tag with one another                    |
 
 ### Use cases
-(For all use cases below, the **System** is the `Travel Agency Management System` and the **Actor** is the `Travel Agent`, unless specified otherwise)
+(For all use cases below, the **System** is the `TravelHub` and the **Actor** is the `Travel Agent`, unless specified otherwise)
 
 **Use case: See Usage Instructions**
 
@@ -432,6 +432,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System displays an error message: "The trip index provided is invalid."
     * 1a2. Use case resumes at step 2.
 
+**Use case: Edit a Contact**
+
+**MSS**
+
+1. Travel Agent requests to list all contacts.
+2. InnSync shows a list of contacts.
+3. Travel Agent requests to edit a specific contact via an index.
+4. System validates the index and new contact details.
+5. System updates the contact with the new details.
+6. System displays a success message for editing the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The contact list is empty.
+    * 2a1. System displays a message that there are no contacts in the addressbook.
+    * Use case ends.
+* 3a. The index provided is invalid.
+    * 3a1. System displays an error message that the index provided is invalid.
+    * Use case resumes at step 2.
+* 3b. Input argument(s) provided are invalid.
+    * 3b1. System displays an error messasage for the invalid argument(s).
+    * Use case resumes at step 2.
+* 3c. The contact is a duplicate (same email).
+    * 3c1. System displays an error message that the email already exists in the addressbook.
+    * Use case resumes at step 2.
+
+**Use case: Edit a Trip**
+
+**MSS**
+
+1. Travel Agent requests to list all trips.
+2. InnSync shows a list of trips.
+3. Travel Agent requests to edit a specific trip via an index.
+4. System validates the index and new trip details.
+5. System updates the trip with the new details.
+6. System displays a success message for editing the trip.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The trip list is empty.
+    * 2a1. System displays a message that there are no trips found.
+    * Use case ends.
+* 3a. The index provided is invalid.
+    * 3a1. System displays an error message that the index provided is invalid.
+    * Use case resumes at step 2.
+* 3b. Input argument(s) provided are invalid.
+    * 3b1. System displays an error messasage for the invalid argument(s).
+    * Use case resumes at step 2.
+* 3c. The trip is a duplicate (same name).
+    * 3c1. System displays an error message that the trip name already exists in the tripbook.
+    * Use case resumes at step 2.
+
 **Use case: Find a Contact**
 
 **MSS**
@@ -441,26 +497,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System displays a list of matching results.
 
     Use case ends.
-
-**Use case: Add Notes to Customer Profiles or Trips**
-
-**MSS**
-
-1.  Travel Agent requests to add a note to a customer profile or trip by specifying the index and note content.
-2.  System validates the index and note content.
-3.  System adds the note to the specified customer profile or trip.
-4.  System displays a success message: "Note added: [Note Content]."
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The index is invalid.
-    * 2a1. System displays an error message: "Invalid index. Please provide a valid index."
-    * 2a2. Use case resumes at step 1.
-* 2b. The note content is empty.
-    * 2b1. System displays an error message: "Note content cannot be empty."
-    * 2b2. Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
@@ -590,8 +626,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
@@ -607,12 +641,14 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `deleteContact`, `deleteContact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Simulating a corrupted data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Have at least 1 contact in the addressbook.
+   1. Navigate to the folder which contains the `Travelhub.jar` file.
+   1. Navigate into the `data/` folder and open the `addressbook.json` file.
+   1. Append any letter to the end of the value in the phone field, e.g., `"phone" : "98765432Z",`
+   1. Start up the appplication.
 
-1. _{ more test cases …​ }
+   Expected: Application starts up with an empty address book.
