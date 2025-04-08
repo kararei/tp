@@ -374,13 +374,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The contact details are entered in an invalid format
-    * 2a1. System displays an error message: "Invalid command format. Correct format: addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…"
+    * 2a1. System displays an error message stating the add contact format is invalid.
     * 2a2. Use case resumes at step 1.
 * 2b. The contact already exists in the system (same email).
-    * 2b1. System displays an error message: "This contact already exists in the system."
+    * 2b1. System displays an error message that the email is already in use.
     * 2b2. Use case ends.
 * 2c. The email entered is invalid (i.e. email does not follow the required standard).
-    * 2c1. System displays an error message: "Emails should be of the format local-part@domain and adhere to the following constraints:" followed by the description of the required email format.
+    * 2c1. System displays an error message on the right email format.
     * 2c2. Use case resumes at step 1.
 
 **Use case: Add a Trip**
@@ -390,17 +390,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Travel Agent requests to add a new trip with details (trip name, accommodation, itinerary, date, customer names and notes).
 2.  System validates the trip details.
 3.  System adds the trip to the trip list.
-4.  System displays a success message for adding the trip"
+4.  System displays a success message for adding the trip
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The trip details are invalid (e.g., invalid date format or customer index).
-    * 2a1. System displays an error message that the add trip format is invalid"
+    * 2a1. System displays an error message that the add trip format is invalid.
     * 2a2. Use case resumes at step 1.
 * 2b. The trip already exists in the system (same trip name).
-    * 2b1. System displays an error message: "This trip already exists in the trip book"
+    * 2b1. System displays an error message.
     * 2b2. Use case ends.
 
 **Use case: Delete a Contact**
@@ -409,14 +409,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Travel Agent requests to delete a specific contact by index.
 2. System deletes the contact.
-3. System displays a success message for deleting the contact
+3. System displays a success message for deleting the contact.
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The given index is invalid.
-    * 1a1. System displays an error message: "The contact index provided is invalid"
+    * 1a1. System displays an error message that the index is invalid.
     * 1a2. Use case resumes at step 2.
 
 **Use case: Delete a Trip**
@@ -425,14 +425,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Travel Agent requests to delete a specific trip by index.
 2. System deletes the trip.
-3. System displays a success message for deleting the trip"
+3. System displays a success message for deleting the trip.
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The given index is invalid.
-    * 1a1. System displays an error message: "The trip index provided is invalid."
+    * 1a1. System displays an error message that the index is invalid.
     * 1a2. Use case resumes at step 2.
 
 **Use case: Edit a Contact**
@@ -500,26 +500,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System displays a list of matching results.
 
     Use case ends.
-
-**Use case: Add Notes to Customer Profiles or Trips**
-
-**MSS**
-
-1.  Travel Agent requests to add a note to a customer profile or trip by specifying the index and note content.
-2.  System validates the index and note content.
-3.  System adds the note to the specified customer profile or trip.
-4.  System displays a success message: "Note added: [Note Content]."
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The index is invalid.
-    * 2a1. System displays an error message: "Invalid index. Please provide a valid index."
-    * 2a2. Use case resumes at step 1.
-* 2b. The note content is empty.
-    * 2b1. System displays an error message: "Note content cannot be empty."
-    * 2b2. Use case resumes at step 1.
 
 **Use case: Clear All Data**
 
