@@ -645,6 +645,26 @@ Currently, trips only have a start date. To better support trip planning and tra
 - Must update existing trip displays and storage format while maintaining backward compatibility
 - Should modify trip filtering to consider both start and end dates
 
+### Make Commands Case-Insensitive
+
+Currently, all commands must be entered in exact camelCase format  (e.g., addTrip, editContact, help), which can be error-prone for users. Typing ADDTRIP or Addtrip or addtrip, which hurts usability—especially for new users or CLI users accustomed to case-insensitive input.
+
+**Proposed Implementation:**
+- In the main AddressBook Parser, normalise only the command word to lower case before matching
+- Update all defined command keywords to lowercase for matching
+- Convert all `COMMAND_WORD` constants in command classes to lowercase (e.g., `COMMAND_WORD = "addtrip";`)
+- Keep displaying commands in camelCase (e.g., in help messages) for readability
+- Update unit tests for various case combinations (i.e. `addtrip`, `AddTrip`, `ADDTRIP`, `AdDtRiP` — all should work)
+
+**Benefits:**
+- Allows better usability as users can type commands without worrying about case.
+- Reduces frustration from subtle casing issues.
+- Makes the CLI interface more forgiving and beginner-friendly.
+
+**Implementation Challenges:**
+- Must ensure only the command word is normalized—arguments (e.g., names, places, tags) must remain case-sensitive to preserve user data fidelity.
+- All command recognition logic must adapt to use lowercased comparisons without affecting internal casing conventions elsewhere.
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
