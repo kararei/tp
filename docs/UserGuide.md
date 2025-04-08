@@ -157,13 +157,15 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all contact and trip entries in the application.
+Clears all contact and trip entries stored in the application.
 
 Format: `clear`
 
-When you execute this command, a confirmation pop-up will appear asking if you really want to clear all contacts and trips. Click "Yes" to proceed with clearing all data, or "No" to cancel the operation.
+Upon execution of this command, a confirmation pop-up will appear:
+* Select "OK" to confirm and proceed with clearing all data.
+* Select "Cancel" to abort and retain existing data.
 
-Any additional text after `clear` (e.g., `clear abc`) will be ignored, and the command will be processed as `clear`.
+Any additional text after `clear` (e.g., `clear abc`) will be ignored. The command will still be processed as `clear`.
 
 ### Deleting a contact : `deleteContact`
 
@@ -245,6 +247,8 @@ Exits the program.
 
 Format: `exit`
 
+Any additional text after `exit` (e.g., `exit xyz`) will be ignored. The command will still be processed as `exit`.
+
 ### Locating contacts by name: `find`
 
 Finds contacts whose names contain any of the given keywords.
@@ -269,7 +273,7 @@ Shows a list of all available commands.
 
 Format: `help`
 
-Any additional text after `help` (e.g., `help xyz`) will be ignored, and the command will be processed as `help`.
+Any additional text after `help` (e.g., `help xyz`) will be ignored. The command will still be processed as `help`.
 
 Expected output:
 
@@ -336,7 +340,7 @@ Furthermore, certain edits can cause the ContactBook and TripBook to behave in u
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `User Guide` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
