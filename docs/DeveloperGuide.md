@@ -440,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Travel Agent requests to list all contacts.
-2. InnSync shows a list of contacts.
+2. TravelHub shows a list of contacts.
 3. Travel Agent requests to edit a specific contact via an index.
 4. System validates the index and new contact details.
 5. System updates the contact with the new details.
@@ -468,7 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Travel Agent requests to list all trips.
-2. InnSync shows a list of trips.
+2. TravelHub shows a list of trips.
 3. Travel Agent requests to edit a specific trip via an index.
 4. System validates the index and new trip details.
 5. System updates the trip with the new details.
