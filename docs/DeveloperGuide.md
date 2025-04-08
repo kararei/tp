@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Travel Agent requests to add a new trip with details (trip name, accommodation, itinerary, date, customer names and notes).
 2.  System validates the trip details.
 3.  System adds the trip to the trip list.
-4.  System displays a success message for adding the trip
+4.  System displays a success message for adding the trip.
 
     Use case ends.
 
