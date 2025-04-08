@@ -20,9 +20,6 @@ public class ClearCommand extends Command {
         this.isConfirmed = false;
     }
 
-    /**
-     * Creates a new ClearCommand with confirmation status.
-     */
     public ClearCommand(boolean isConfirmed) {
         this.isConfirmed = isConfirmed;
     }
@@ -32,7 +29,6 @@ public class ClearCommand extends Command {
         requireNonNull(model);
 
         if (!isConfirmed) {
-            // Just request confirmation without claiming the books are cleared
             return new CommandResult("", true, MESSAGE_CONFIRMATION);
         }
 
