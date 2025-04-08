@@ -677,13 +677,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all contacts using the `listContact` command. Multiple contacts in the list.
 
-   1. Test case: `deleteContact 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `deleteContact 1`<br>
+      Expected: First contact is deleted from the list. Command Output Box displays the details of the deleted contact.
 
-   1. Test case: `deleteContact 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `deleteContact 0`<br>
+      Expected: No contact is deleted. Error message shown: The contact index provided is invalid.
 
-   1. Other incorrect delete commands to try: `deleteContact`, `deleteContact x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `deleteContact`, `deleteContact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Saving data
