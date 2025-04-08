@@ -51,7 +51,7 @@ TravelHub is a contact management app designed to help travel agents efficiently
 --------------------------------------------------------------------------------------------------------------------
 ## Graphical User Interface Layout
 
-[Annotated Ui](images/Annotated-Ui.png)
+![Annotated Ui](images/Annotated-Ui.png)
 
 * **Command Box:** For users to enter commands.
 * **Command Output Box:** Display the output/error message of the executed command.
@@ -350,10 +350,10 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete Contact** | `deleteContact INDEX`<br> e.g., `deleteContact 3`
 **Delete Trip** | `deleteTrip INDEX`<br> e.g., `deleteTrip 3`
-**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com`
-**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability`
+**Edit Contact**   | `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [nts/NOTE]​`<br> e.g.,`editContact 2 n/James Lee e/jameslee@example.com` or `editContact 5 p/98765432 t/service nts/Allergic to fish`
+**Edit Trip** | `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/CUSTOMER_NAME]... [nts/NOTE]`<br> e.g., `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` or `editTrip 3 n/Batam Trip d/17/12/2025`
 **Exit**   | `exit`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find Alex`
 **Help**   | `help` |
-**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact service`
-**List Trip** | `listTrip [DATE]`<br> e.g., `listTrip 15/12/2023`
+**List Contact**   | `listContact [customer/service]` <br> e.g., `listContact` or `listContact service` or `listContact customer`
+**List Trip** | `listTrip [DATE]`<br> e.g., `listTrip` or `listTrip 15/12/2023`
