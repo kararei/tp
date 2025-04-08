@@ -31,7 +31,9 @@ public class ParserUtil {
     private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
 
     /**
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * Parses {@code oneBasedIndex} for a contact into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not a non-zero unsigned integer).
      */
     public static Index parseContactIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
