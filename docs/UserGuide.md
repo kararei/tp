@@ -135,6 +135,7 @@ Examples:
 * `addContact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `addContact n/XYZ Restaurant e/xyz_cuisine@example.com a/XYZ Street p/67654321 t/service nts/Serves western cuisine`
 * `addContact n/Betty's Gift Shop e/betty_biz@example.com a/Sunshine Street 3 p/67654321 t/service t/customer`
+  ![result for 'addContactCommand'](images/addContactCommand.PNG)
 
 ### Adding a trip : `addTrip`
 
@@ -154,6 +155,7 @@ Examples:
 * `addTrip n/Paris 2025 acc/Hotel Sunshine i/Visit Eiffel Tower; Eat baguette d/01/1/2025 c/Jane Doe c/John Doe nts/Remember to book tickets`
 * `addTrip n/Beach Vacation acc/Beach Resort i/Relax by the beach; Snorkeling d/15/3/2024 c/Alice Smith nts/All-inclusive package`
 * `addTrip n/Business Conference acc/City Hotel i/Attend presentations; Networking d/10/5/2024 nts/Corporate rate applies`
+  ![result for 'addTripCommand'](images/addTripCommand.PNG)
 
 ### Clearing all entries : `clear`
 
@@ -164,6 +166,8 @@ Format: `clear`
 When you execute this command, a confirmation pop-up will appear asking if you really want to clear all contacts and trips. Click "Yes" to proceed with clearing all data, or "No" to cancel the operation.
 
 Any additional text after `clear` (e.g., `clear abc`) will be ignored, and the command will be processed as `clear`.
+![result for 'clearCommandDialog'](images/clearCommandDialog.PNG)
+![result for 'clearCommand'](images/clearCommand.PNG)
 
 ### Deleting a contact : `deleteContact`
 
@@ -179,6 +183,7 @@ Format: `deleteContact INDEX`
 Examples:
 * `listContact` followed by `deleteContact 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `deleteContact 1` deletes the 1st contact in the results of the `find` command.
+  ![result for 'deleteContactCommand'](images/deleteContactCommand.PNG)
 
 ### Deleting a trip : `deleteTrip`
 
@@ -193,6 +198,7 @@ Format: `deleteTrip INDEX`
 
 Examples:
 * `listTrip` followed by `deleteTrip 2` deletes the 2nd trip in the trip book.
+  ![result for 'deleteTripCommand'](images/deleteTripCommand.PNG)
 
 ### Editing a contact : `editContact`
 
@@ -215,6 +221,7 @@ Format: `editContact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [
 Examples:
 *  `editContact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `editContact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+   ![result for 'editContactCommand'](images/editContactCommand.PNG)
 
 ### Editing a trip : `editTrip`
 
@@ -238,6 +245,7 @@ Format: `editTrip INDEX [n/NAME] [acc/ACCOMMODATION] [i/ITINERARY] [d/DATE] [c/C
 Examples:
 * `editTrip 1 acc/Grand Hotel i/Visit Louvre; Visit Seine River nts/Changed hotel due to availability` Edits the accommodation, itinerary, and adds a note for the 1st trip.
 * `editTrip 2 n/London Trip 2025 c/Jane Doe c/Bob Smith` Edits the name and changes the customer names for the 2nd trip.
+  ![result for 'editTripCommand'](images/editTripCommand.PNG)
 
 ### Exiting the program : `exit`
 
@@ -289,6 +297,7 @@ Available commands:
 - listTrip: Lists all trips [can specify date]
 ```
 
+![result for 'helpCommand'](images/helpCommand.PNG)
 
 ### Listing contacts : `listContact`
 
@@ -298,6 +307,7 @@ Format: `listContact [customer/service]`
 
 * Without specifying the optional parameter, all contacts will be displayed.
 * By specifying the `[customer/service]` parameter, only contacts with the tag will be displayed.
+  ![result for 'listContactCommand'](images/listContactCommand.PNG)
 
 ### Listing all trips : `listTrip`
 
@@ -308,6 +318,7 @@ Format: `listTrip [DATE]`
 * Without specifying the optional parameter, all trips will be displayed.
 * By specifying the `[DATE]` parameter, only trips on that specific date will be displayed.
 * The date should be in the format of D/M/YYYY.
+  ![result for 'listTripCommand'](images/listTripCommand.PNG)
 
 ### Saving the data
 
