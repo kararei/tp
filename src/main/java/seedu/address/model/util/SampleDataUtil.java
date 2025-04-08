@@ -63,7 +63,7 @@ public class SampleDataUtil {
         TripName name = new TripName("Paris 2025");
         Accommodation accommodation = new Accommodation("Hotel 81");
         Itinerary itinerary = new Itinerary("Eat baguettes");
-        TripDate date = new TripDate("01/01/2205");
+        TripDate date = new TripDate("01/01/2100");
         Set<Name> customerNames = new HashSet<>();
         customerNames.add(new Name("John Doe"));
         customerNames.add(new Name("Jane Doe"));

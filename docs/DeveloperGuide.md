@@ -162,6 +162,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 The Trip management system allows travel agents to create, edit, delete, and list trips, which are essential for organizing travel plans for customers. Below are the details of its implementation.
 
+#### Trip and Contact Relationship
+
+In the current implementation, there is intentionally no direct relationship between Trip and Contact entities. This design decision was made to provide:
+
+- **Flexibility**: Allows trips to be created without requiring contacts to exist in the system first
+- **Simplicity**: Reduces implementation complexity by avoiding dependencies between data models
+- **Independent Management**: Enables users to manage trips and contacts independently
+
+This approach supports the current use case where a travel agent might quickly create a trip record with customer names before fully registering those customers as contacts in the system.
+
 #### Notes Parameter Behavior
 
 Both Contact and Trip entities support notes through the `nts/` parameter prefix. When parsing commands like `addContact`, `editContact`, `addTrip`, and `editTrip`, developers should be aware of the following important behavior:
@@ -285,22 +295,17 @@ All trip data is automatically saved when changes are made and loaded when the a
 
 ### Product scope
 
-**Target user profile**:
+**Target User Profile:**
 
-* Travel agents who manage multiple clients and trip arrangements
-* Users who frequently coordinate with various service providers (hotels, tour guides, transportation)
-* Users who need to track detailed client preferences and trip specifics
-* Users who need to quickly add and retrieve information during client calls
+* Travel agents who struggle with **problem 1: managing a fragmented workflow involving multiple clients and service providers across various platforms.**
+* Travel agents who face **problem 2: difficulty in rapidly accessing and organizing detailed client preferences and trip specifics, especially during time-sensitive client calls.**
 
-**Value proposition**:
+**Value Proposition:**
 
-TravelHub streamlines the travel planning workflow by enabling rapid client and service provider management, efficient trip organization, and detailed note-keeping in a single application. The system allows travel professionals to:
+TravelHub addresses these challenges by providing:
 
-* Maintain a comprehensive database of clients and service providers with appropriate tagging
-* Create and manage trip itineraries with accommodation details and activities
-* Track special client requests and preferences through a flexible notes system
-* Quickly retrieve client information during consultations
-* Manage upcoming trips chronologically to prioritize immediate arrangements
+* **Solution to problem 1:** A centralized application that streamlines the travel planning workflow, consolidating client and service provider management, trip organization, and note-keeping into a single, efficient system.
+* **Solution to problem 2:** Tools for rapid client information retrieval, detailed preference tracking through a flexible notes system, and chronological trip management, enabling quick and informed responses during client consultations.
 
 **Scope boundaries**:
 * Focuses on contact and trip management, not financial transactions or booking confirmations
@@ -368,12 +373,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The contact details are invalid (e.g., invalid phone number or email format).
+* 2a. The contact details are entered in an invalid format
     * 2a1. System displays an error message: "Invalid command format. Correct format: addContact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…"
     * 2a2. Use case resumes at step 1.
 * 2b. The contact already exists in the system (same email).
     * 2b1. System displays an error message: "This contact already exists in the system."
     * 2b2. Use case ends.
+* 2c. The email entered is invalid (i.e. email does not follow the required standard).
+    * 2c1. System displays an error message: "Emails should be of the format local-part@domain and adhere to the following constraints:" followed by the description of the required email format.
+    * 2c2. Use case resumes at step 1.
 
 **Use case: Add a Trip**
 
@@ -519,6 +527,28 @@ This section defines key terms used in the user guide to ensure clarity and unde
 --------------------------------------------------------------------------------------------------------------------
 
 ## Planned Enhancement
+
+### Trip and Contact Relationship Implementation
+
+Currently, there is no relationship between Trip and Contact entities. In future iterations, we plan to implement a proper relationship between these entities to enhance data integrity and enable more powerful features.
+
+**Proposed Implementation:**
+- Add a relationship between Trip and Contact entities where trips reference actual Contact objects instead of just customer names
+- Implement validation to ensure customer references in trips point to existing contacts
+- Add UI elements to easily select contacts when creating or editing trips
+- Create a bidirectional relationship allowing users to see all trips associated with a contact
+
+**Benefits:**
+- Improves data integrity by ensuring trips only reference valid contacts
+- Enables powerful queries such as "show all trips for a specific contact"
+- Provides better tracking of customer trip history
+- Facilitates trip planning by leveraging existing contact information
+
+**Implementation Challenges:**
+- Need to handle migration of existing trips that only store customer names
+- Must address UI complexity for selecting multiple contacts from a list
+- Should consider backward compatibility for older data formats
+- Need to handle deletion scenarios (e.g., what happens to trips when a referenced contact is deleted)
 
 ### Escape Character for Notes
 

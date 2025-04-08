@@ -15,7 +15,7 @@ public class TripTest {
     private static final Trip PARIS = new TripBuilder().withName("Paris 2025")
             .withAccommodation("Hotel 81")
             .withItinerary("Eat baguettes")
-            .withDate("01/01/2205")
+            .withDate("01/01/2100")
             .withCustomerNames("John Doe", "Jane Doe")
             .withNote("Customer prefers window seat")
             .build();
@@ -23,7 +23,7 @@ public class TripTest {
     private static final Trip TOKYO = new TripBuilder().withName("Tokyo 2025")
             .withAccommodation("Capsule Inn")
             .withItinerary("Visit Tokyo Tower")
-            .withDate("02/02/2205")
+            .withDate("02/02/2100")
             .withCustomerNames("Alice Smith", "Bob Jones")
             .withNote("Customer prefers aisle seat")
             .build();
@@ -32,7 +32,7 @@ public class TripTest {
     private static final String VALID_NAME_TOKYO = "Tokyo 2025";
     private static final String VALID_ACCOMMODATION_TOKYO = "Capsule Inn";
     private static final String VALID_ITINERARY_TOKYO = "Visit Tokyo Tower";
-    private static final String VALID_DATE_TOKYO = "02/02/2205";
+    private static final String VALID_DATE_TOKYO = "02/02/2100";
     private static final String VALID_CUSTOMER_BOB = "Bob Jones";
     private static final String VALID_NOTE_TOKYO = "Customer prefers aisle seat";
 
@@ -132,7 +132,7 @@ public class TripTest {
         String expectedParis = "Name = 'Paris 2025', "
                 + "Accommodation = 'Hotel 81', "
                 + "Itinerary = 'Eat baguettes', "
-                + "Date = '1/1/2205', "
+                + "Date = '1/1/2100', "
                 + "Customer Names = '[John Doe, Jane Doe]'";
 
 
