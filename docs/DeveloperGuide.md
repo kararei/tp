@@ -50,11 +50,11 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteContact 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the four main components (also shown in the diagram above), 
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteContact 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `deleteContact 1` Command" />
 
 <box type="info" seamless>
 
@@ -697,13 +697,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all contacts using the `listContact` command. Multiple contacts in the list.
 
-   1. Test case: `deleteContact 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `deleteContact 1`<br>
+      Expected: First contact is deleted from the list. Command Output Box displays the details of the deleted contact.
 
-   1. Test case: `deleteContact 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `deleteContact 0`<br>
+      Expected: No contact is deleted. Error message shown: The contact index provided is invalid.
 
-   1. Other incorrect delete commands to try: `deleteContact`, `deleteContact x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `deleteContact`, `deleteContact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Saving data
