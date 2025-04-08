@@ -19,13 +19,22 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** A confirmation dialog should be shown to the user. */
+    private final boolean showConfirmation;
+
+    /** The text to display in the confirmation dialog. */
+    private final String confirmationText;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                           boolean showConfirmation, String confirmationText) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showConfirmation = showConfirmation;
+        this.confirmationText = confirmationText;
     }
 
     /**
@@ -33,7 +42,14 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields for confirmation.
+     */
+    public CommandResult(String feedbackToUser, boolean showConfirmation, String confirmationText) {
+        this(feedbackToUser, false, false, showConfirmation, confirmationText);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +62,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowConfirmation() {
+        return showConfirmation;
+    }
+
+    public String getConfirmationText() {
+        return confirmationText;
     }
 
     @Override
@@ -62,12 +86,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showConfirmation == otherCommandResult.showConfirmation
+                && Objects.equals(confirmationText, otherCommandResult.confirmationText);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showConfirmation, confirmationText);
     }
 
     @Override
@@ -76,6 +102,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showConfirmation", showConfirmation)
+                .add("confirmationText", confirmationText)
                 .toString();
     }
 

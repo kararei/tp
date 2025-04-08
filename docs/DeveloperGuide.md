@@ -356,6 +356,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The system fails to load the instructions.
     * 2a1. System displays an error message: "Unable to load usage instructions. Please try again later."
     * 2a2. Use case ends.
+* 1a. Travel Agent includes additional text after the help command (e.g., "help xyz").
+    * 1a1. System ignores the additional text and processes the command as "help".
+    * 1a2. Use case continues at step 2.
 
 **Use case: Add a Contact**
 
@@ -497,6 +500,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System displays a list of matching results.
 
     Use case ends.
+
+**Use case: Add Notes to Customer Profiles or Trips**
+
+**MSS**
+
+1.  Travel Agent requests to add a note to a customer profile or trip by specifying the index and note content.
+2.  System validates the index and note content.
+3.  System adds the note to the specified customer profile or trip.
+4.  System displays a success message: "Note added: [Note Content]."
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The index is invalid.
+    * 2a1. System displays an error message: "Invalid index. Please provide a valid index."
+    * 2a2. Use case resumes at step 1.
+* 2b. The note content is empty.
+    * 2b1. System displays an error message: "Note content cannot be empty."
+    * 2b2. Use case resumes at step 1.
+
+**Use case: Clear All Data**
+
+**MSS**
+
+1.  Travel Agent enters the clear command to remove all contacts and trips.
+2.  System displays a confirmation pop-up asking if the user really wants to clear all data.
+3.  Travel Agent confirms by clicking "Yes".
+4.  System clears all contact and trip data from the application.
+5.  System displays a success message: "Address book and trip book have been cleared!"
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Travel Agent cancels the operation by clicking "No".
+    * 3a1. System does not clear any data.
+    * 3a2. System returns to the previous state.
+    * 3a3. Use case ends.
+* 1a. Travel Agent includes additional text after the clear command (e.g., "clear xyz").
+    * 1a1. System ignores the additional text and processes the command as "clear".
+    * 1a2. Use case continues at step 2.
 
 ### Non-Functional Requirements
 
