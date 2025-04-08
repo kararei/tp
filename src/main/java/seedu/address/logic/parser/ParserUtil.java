@@ -27,7 +27,6 @@ import seedu.address.model.trip.TripName;
  */
 public class ParserUtil {
 
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
 
